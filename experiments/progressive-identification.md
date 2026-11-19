@@ -38,6 +38,14 @@ See [population-first objective](../theory/population-first-objective.md) and th
 
 **Failure:** inferred plasticity under a fixed kernel due only to exposure drift, inability to detect known changes, or apparent recovery caused by observing simulator-only latent states without a feasible observation model. See [learning core note](../theory/learnable-state-dynamics.md).
 
+## Stage 0A.2 — can affective dynamics generate social regularities?
+
+**Design:** Compare four otherwise matched multi-agent simulated configurations: (A) endogenous affect-to-action coupling, without imposed norms; (B) no affect-to-action coupling, without imposed norms; (C) affect coupling with fixed externally supplied norms; (D) affect coupling with dynamic norm feedback. Hold ecology, social network, access to cues, and opportunities to interact controlled. Distinguish measurable individual state, behavior, expression, population frequencies, and genuine expectations/sanctions.
+
+**Primary test:** Does the affectful minimal model generate persistent population patterns not explained by the affect-ablated behavioral baseline? Do group regularities later alter individual state-transition distributions? Which patterns require externally injected norm information, rather than emerging?
+
+**Failure criteria:** comparable patterns without affect; norm statistics estimated circularly from the target affect; behavior automatically labeled 'injunctive norm' without expectations/sanctions; apparent learning due only to exposure drift; failure on held-out interactions or populations. See [test plan](../theory/affect-social-structure-feedback.md). No simulation result has yet been claimed for this four-way test.
+
 ## Stage 0B — full-information social dynamics in simulation
 
 **Design:** Two to three synthetic agents with known values, relationship weights, histories, initial affect, and contrasting interests. Remove concealment and observational ambiguity without requiring identical goals or responses. Include genuine conflict under perfect mutual knowledge.
