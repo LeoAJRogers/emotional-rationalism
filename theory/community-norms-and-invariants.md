@@ -36,6 +36,12 @@ The common parameters \theta_shared and population-specific parameters \theta_g 
 
 **Dynamic social environment:** Population norms may evolve from interactions, and those norms shape subsequent affect. In a later extension, estimate a reciprocal community update N_{g,t+1}\sim U(N_{g,t}, \{a_{i,t}, y_{i,t}\}_{i\in g}, \text{environment}), with observation and sampling bias modeled explicitly. **Do not assume** observed expressions are direct emotional ground truth.
 
+## Endogenous norms and population feedback
+
+**Norms are not merely static environmental parameters.** A possible social system begins with individual affective response rules and behavioral tendencies; repeated interactions produce recurring distributions of encounters, expressive behavior, affiliations, avoidance, cooperation or sanctions. Such patterns can feed back into future individual emotional transitions. This is a testable *micro-to-macro-to-micro* feedback loop, not a demonstrated mechanism or evidence that emotion is always the principal driver of social structure.
+
+Separate **descriptive regularities** (what often happens) from **injunctive norms** (what is expected or sanctioned), and distinguish public expression from latent affect. Emergence of regular behavior does not itself prove the existence of shared expectations. The reference [affect-social-structure feedback](affect-social-structure-feedback.md) defines contrasting synthetic configurations with affect coupling removed, externally imposed norms, and genuinely updating norms. This comparison protects us from baking the desired emergence into the simulator.
+
 ## What could be universal? (Test, do not presume)
 
 Candidate common *formal mechanisms* (not universal valence meanings):
