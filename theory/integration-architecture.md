@@ -79,12 +79,17 @@ At the start of a staged simulation, full information can force the relevant rec
 \]
 This generalizes the v0.1 minimizer set. Report the reference, weighting, allowed disagreement, sensitivity to q and \phi, and which aspects are being evaluated (factual appraisal, proportionality, ethics, present obligations, etc.). One emotion can be understandable given evidence available at the time while misrepresenting a newly known fact. A person may validly choose a boundary without forcing the corresponding feeling.
 
-**C. Reachability.** Retain the finite-horizon probability concept from v0.1:
+**C. Reachability.** Retain the finite-horizon probability concept from v0.1. For a **prespecified** target region A, define
 \[
-\mathcal R_{h,\alpha}(s)=\{E:\sup_{\pi\in\Pi_h}
-P^\pi(e_{t+h}\in E\mid s)\ge\alpha\}.
+p_h^*(A\mid s)=\sup_{\pi\in\Pi_h}
+P^\pi(e_{t+h}\in A\mid s).
 \]
-Target E can be a region or distributional criterion; policies must use only accessible information and feasible actions. \mathcal F\cap\mathcal R may be empty at a given horizon. An unreachable evaluated response does not by itself imply deficient reasoning, and a reachable response is not necessarily justified.
+For a declared family of target regions \mathscr A, define
+\[
+\mathcal R^{\mathscr A}_{h,\alpha}(s)=
+\{A\in\mathscr A:p_h^*(A\mid s)\ge\alpha\}.
+\]
+Restrict \mathscr A to meaningful prespecified candidates (otherwise the entire state space is trivially attainable). For fittingness, directly evaluate p_h^*(\mathcal F\mid s) if \mathcal F is a measurable region. Policies must use only accessible information and feasible actions. \mathcal F\cap\mathcal R may be empty at a given horizon. An unreachable evaluated response does not by itself imply deficient reasoning, and a reachable response is not necessarily justified.
 
 **Keep a fourth separate object:** a *mathematical selector* S mapping a context/standpoint and stated constraints to a set or distribution of hypothetical emotional trajectories. It selects possibilities *for analysis*; it is not an emotion induction technique. A proposal to reweight trajectories based on a revised appraisal distribution is exploratory. If several appraisals change, test joint constraint satisfaction and order dependence rather than sequentially overwriting previous updates. Do not silently identify S with the descriptive p_\theta or with evaluated \mathcal F.
 
