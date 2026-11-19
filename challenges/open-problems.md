@@ -14,6 +14,7 @@
 - **Normative reference sensitivity.** An evidential reference distribution and declared values define a conditional evaluative exercise, not an objective single best feeling; compare reasonable alternative references and criteria.
 - **Trajectory selection.** Selecting hypothetical distributions for analysis is distinct from inducing affect. Joint constraints on revised appraisals can conflict; document consistency, reference dependence, and update-order effects.
 - **Information regimes.** Honest missing information, inaccurate inference, concealment, and deception are different interventions. Test whether each needs additional model structure or can be handled by a shared transition kernel.
+- **Fallible evaluators.** Distinguishing descriptive emotion from evidence-based evaluation does not require participants to evaluate accurately, or to evaluate at all. The researcher-side reference q and criteria are themselves fallible; test the consequences of inaccurate assessments without conflating these mistakes with absence of social dynamics.
 - **Felt versus reported.** A change in explicit judgment, urgency, or choice does not alone demonstrate change in felt emotional response. Multiple temporal and behavioral measures remain imperfect.
 
 See the [candidate integration architecture](../theory/integration-architecture.md) and the [progressive identification roadmap](../experiments/progressive-identification.md).
