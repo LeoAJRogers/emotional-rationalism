@@ -2,9 +2,9 @@
 
 **Research draft v0.1**
 
-How do emotions change after a person revises an interpretation, and under what conditions does an emotional response they judge fitting become attainable?
+**Primary question (candidate v0.2):** Can we identify a compact set of dynamical principles describing how affective states change with context, perception, and social interaction while accommodating variation among individuals, communities, and populations? This is a predictive framework for state changes, **not an attempt to infer private thoughts**. The original v0.1 question of how emotions change after reinterpretation, and when fitting responses are reachable, remains a useful subproblem.
 
-We propose representing emotion as a multidimensional state whose evolution depends on context, interpretation, prior experience, and available regulatory actions. The model asks three separate questions.
+We propose representing emotion as a multidimensional state whose evolution depends on context, interpretation, prior experience, and available regulatory actions. The original v0.1 model asks three separate questions. Under the candidate v0.2 program, predictive affective dynamics is primary; judgment, fittingness and reachability are optional analytical overlays rather than requirements for social dynamics to exist.
 
 | Question | Model component |
 | --- | --- |
