@@ -6,7 +6,7 @@
 
 ## Research question
 
-What minimum *observable and identifiable* state, parameter, and transition complexity is necessary to predict social-affective dynamics? Can additional disagreement, error, uncertainty, and deception be explained primarily by observation/belief mechanisms without changing the affect transition kernel?
+What minimum *observable and identifiable* state, parameter, and transition complexity is necessary to predict population-conditioned social-affective change? Which dynamic features, if any, transfer between different social systems? Only secondarily: can changes under uncertainty, interpretive errors, and deception be explained with contextual observation mechanisms without changing the affect transition kernel? **Private thought inference is not an objective.**
 
 This is a **hypothesis**, not a premise. If it fails, identify the smallest counterexample and augment the model.
 
@@ -20,7 +20,17 @@ This is a **hypothesis**, not a premise. If it fails, identify the smallest coun
 
 Latent coordinate systems can be nonunique up to transformations. State recovery and parameter recovery require interventions, constraints, or identifiable measurement models; low observed rank alone cannot establish a unique underlying psychology.
 
-## Stage 0 — full-information social dynamics in simulation
+## Stage 0A — diverse simulated social populations (primary comparative baseline)
+
+**Design:** Compare at least two deliberately different social ecologies/communities: e.g. frequent affiliation/coordination versus solitary/territorial encounters. Assign different cue relevance, relationship structure, persistence and response strengths. Give each population its own observation function and state semantics where necessary; no claims about actual species.
+
+**Fit:** pooled universal transition parameters versus a shared dynamical architecture with population-specific parameters versus fully separate population models. Compare held-out trajectories, uncertainty calibration, effective complexity, and what remains invariant under context-preserving transformations.
+
+**Failure condition:** if a common kernel loses predictive adequacy across populations, keep the divergent models and document the failed generalization rather than forcing human-style social categories.
+
+See [population-first objective](../theory/population-first-objective.md).
+
+## Stage 0B — full-information social dynamics in simulation
 
 **Design:** Two to three synthetic agents with known values, relationship weights, histories, initial affect, and contrasting interests. Remove concealment and observational ambiguity without requiring identical goals or responses. Include genuine conflict under perfect mutual knowledge.
 
@@ -32,7 +42,7 @@ Latent coordinate systems can be nonunique up to transformations. State recovery
 
 **Caveat:** The synthetic model defines ground truth. Recovering it validates the procedure under those assumptions, not a claim about human emotion.
 
-## Stage 1 — partial information without deception
+## Stage 1 — partial information without deception (inside each population)
 
 **Design:** Randomly hide or delay facts while requiring truthful communications. Distinguish unknown intent from known conflict; model uncertain appraisals and confidence. Cross two manipulations: hold world state fixed while changing evidence available, and hold reported beliefs approximately fixed while changing observed cues.
 
@@ -44,7 +54,7 @@ Latent coordinate systems can be nonunique up to transformations. State recovery
 
 **Decisive result:** If a fixed T plus G consistently predicts held-out regimes with fewer identifiable parameters, evidence favors factorization. If uncertainty remains affectively predictive after conditioning on inferred context, a purely factual G is insufficient.
 
-## Stage 2 — systematic interpretive error
+## Stage 2 — systematic interpretation error (optional mechanism)
 
 **Design:** Add stable priors, overconfidence, attribution bias, and incorrect beliefs. Keep errors distinct from deception. Test whether changing only the inference layer recovers the observed transitions.
 
@@ -58,9 +68,9 @@ Latent coordinate systems can be nonunique up to transformations. State recovery
 
 **Warning:** Information hiding is not identical to deception, nor is misunderstanding. Equal revealed data need not imply equal emotion if an agent learns that it was intentionally manipulated.
 
-## Stage 4 — human evidence and transfer
+## Stage 4 — population-appropriate empirical evidence and transfer
 
-**Design:** Use the established low-stakes intent × present-obligation fictional scenarios from the earlier November 18 research note as inspiration; do not treat synthetic actors as observed people. A [related Observatory inquiry](https://github.com/LeoAJRogers/the-observatory/commit/fa5ff93c6ab74d5b6a7b8d4c7e4d4578622bc5ab) concerns judgment calibration. Independently randomize verified intent, present responsibility, and (in a separate factor if feasible) whether/how information was withheld. Balance cue order. Pre-register and secure consent/ethics review as appropriate.
+**Design:** For initial humans, use the established low-stakes intent × present-obligation fictional scenarios from the earlier November 18 research note as inspiration; do not treat synthetic actors as observed people. A [related Observatory inquiry](https://github.com/LeoAJRogers/the-observatory/commit/fa5ff93c6ab74d5b6a7b8d4c7e4d4578622bc5ab) concerns judgment calibration. Independently randomize verified intent, present responsibility, and (in a separate factor if feasible) whether/how information was withheld. Balance cue order. Pre-register and secure consent/ethics review as appropriate.
 
 **Separate measures:** affect toward a target (anger, warmth, sympathy, guilt as appropriate); task urgency/salience; explicit appraisal of motive and harm; confidence; delayed spontaneous response on re-exposure; chosen actions and memory. Self-report is evidence of reported experience, not transparent access to a latent state.
 
