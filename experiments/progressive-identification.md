@@ -58,7 +58,7 @@ Latent coordinate systems can be nonunique up to transformations. State recovery
 
 ## Stage 4 — human evidence and transfer
 
-**Design:** Use the established low-stakes intent × present-obligation fictional scenarios from [the research note](https://github.com/LeoAJRogers/the-observatory/commit/fa5ff93c6ab74d5b6a7b8d4c7e4d4578622bc5ab) as inspiration; do not treat synthetic actors as observed people. Independently randomize verified intent, present responsibility, and (in a separate factor if feasible) whether/how information was withheld. Balance cue order. Pre-register and secure consent/ethics review as appropriate.
+**Design:** Use the established low-stakes intent × present-obligation fictional scenarios from the earlier November 18 research note as inspiration; do not treat synthetic actors as observed people. A [related Observatory inquiry](https://github.com/LeoAJRogers/the-observatory/commit/fa5ff93c6ab74d5b6a7b8d4c7e4d4578622bc5ab) concerns judgment calibration. Independently randomize verified intent, present responsibility, and (in a separate factor if feasible) whether/how information was withheld. Balance cue order. Pre-register and secure consent/ethics review as appropriate.
 
 **Separate measures:** affect toward a target (anger, warmth, sympathy, guilt as appropriate); task urgency/salience; explicit appraisal of motive and harm; confidence; delayed spontaneous response on re-exposure; chosen actions and memory. Self-report is evidence of reported experience, not transparent access to a latent state.
 
