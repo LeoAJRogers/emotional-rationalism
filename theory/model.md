@@ -36,16 +36,16 @@ Let $\Pi_h$ contain admissible policies over the next $h$ steps. A policy choose
 
 $$
 \mathcal R_{h,\alpha}(s_t)=
-\left\{e\in\mathcal E:
+\left\lbracee\in\mathcal E:
 \sup_{\pi\in\Pi_h}\Pr^\pi(e_{t+h}=e\mid s_t)\ge\alpha
-\right\}.
+\right\rbrace.
 $$
 
 For finite observation and action spaces and a finite horizon, the maximum is attained. Different states in this set may require different policies. On a fine grid or with continuous affect, use an explicit target region or tolerance. To ask whether *any* fitting response is attainable, maximize the probability of the event $e_{t+h}\in\mathcal E^*$ directly. Here the target is held fixed at the evaluation time.
 
 ## Worked counterexample
 
-Take $\mathcal E=\{A,S\}$, where $A$ denotes high alarm and $S$ low alarm. Start at $A$. After a credible benign cue, fix $q$ on the benign interpretation and set $J_\phi(A)=1$ and $J_\phi(S)=0$ for that interpretation. The only feasible action has probability $0.1$ of moving from $A$ to $S$ per step. State $S$ is absorbing.
+Take $\mathcal E=\lbraceA,S\rbrace$, where $A$ denotes high alarm and $S$ low alarm. Start at $A$. After a credible benign cue, fix $q$ on the benign interpretation and set $J_\phi(A)=1$ and $J_\phi(S)=0$ for that interpretation. The only feasible action has probability $0.1$ of moving from $A$ to $S$ per step. State $S$ is absorbing.
 
 Remaining at $A$ for $h$ steps has probability $0.9^h$ by the transition rule, so
 
@@ -53,4 +53,4 @@ $$
 \Pr(e_{t+h}=S\mid e_t=A)=1-0.9^h.
 $$
 
-At $h=3$ and $\alpha=0.5$, the probability is $0.271$, giving $\mathcal E^*=\{S\}$ and $\mathcal R_{3,0.5}=\{A\}$. At $h=7$ the probability is about $0.522$, so $S$ becomes reachable at the same threshold. These probabilities are illustrative model inputs and deductions.
+At $h=3$ and $\alpha=0.5$, the probability is $0.271$, giving $\mathcal E^*=\lbraceS\rbrace$ and $\mathcal R_{3,0.5}=\lbraceA\rbrace$. At $h=7$ the probability is about $0.522$, so $S$ becomes reachable at the same threshold. These probabilities are illustrative model inputs and deductions.
