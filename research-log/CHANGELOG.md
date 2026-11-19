@@ -1,5 +1,12 @@
 # Research log
 
+## 2026-11-19 · bounded micro–macro integration pass (proposal)
+
+- Elevated population-level social dynamics from a purely external conditioning variable to a potentially endogenous process: context-conditioned affect → individual action → community patterns/expectations → subsequent context and affect.
+- Distinguished emergent descriptive regularities from enforceable/injunctive norms, spontaneous responses from innate ones, public expression from experience, and affective coupling from alternative non-affective social mechanisms.
+- Added four matched synthetic experiment conditions (endogenous affect, affect ablation, imposed norms, dynamic norm feedback), with predeclared failure criteria. This test was proposed, **not run**, in this integration pass.
+- Maintained the primary goal of forecasting state-transition distributions, not reading thoughts or selecting an optimum emotion. Saved the integration as a draft for review; no new empirical findings.
+
 ## 2026-11-19 · emergent and learnable dynamics clarification (proposal)
 
 - Shifted the central object from selecting/evaluating emotional states to predicting how affective and broad functional cognitive states emerge and change under perceived context, social dynamics and history.
