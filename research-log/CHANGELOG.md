@@ -1,5 +1,13 @@
 # Research log
 
+## 2026-11-19 · emergent and learnable dynamics clarification (proposal)
+
+- Shifted the central object from selecting/evaluating emotional states to predicting how affective and broad functional cognitive states emerge and change under perceived context, social dynamics and history.
+- Proposed an individual-level evolving transition kernel: learning can change response parameters, while feasible regulation actions change distributions but cannot choose a realized feeling.
+- Separated actual thoughts from changes in coarse cognition such as attention, vigilance, flexibility or processing mode. Content-level mind reading is outside the objective.
+- Proposed a synthetic discrimination test separating changed exposures, changed action policies, and genuine transition-kernel plasticity. No new execution or empirical confirmation in this scope clarification.
+- Preserved v0.1 fittingness/reachability as optional research lenses; removed normative state selection from the central scientific objective.
+
 ## 2026-11-19 · norms and invariants checkpoint
 
 - Introduced community-level descriptive and injunctive emotional norms as different explanatory variables, separate from researcher-side ethical evaluation, individual variation, and social expression measurement.
