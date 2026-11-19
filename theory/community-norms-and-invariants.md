@@ -72,6 +72,10 @@ Test held-out individuals, events, time periods, relationships, subgroups, and p
 - Anderson & Adolphs (2014), [*A Framework for Studying Emotions Across Phylogeny*](https://pmc.ncbi.nlm.nih.gov/articles/PMC4098837/), proposes operational cross-species features such as persistence and scalability.
 - [*Norms for experiencing emotions in different cultures*](https://pubmed.ncbi.nlm.nih.gov/11708563/), reports both shared and culture-specific patterns; not a demonstration that emotional contents are universal.
 
+## First executed synthetic checkpoint
+
+The [executed norm-conditioned synthetic experiment](../experiments/norms-identification-results.md) shows a fixed transition kernel recovering its known coefficients across two deliberately norm-divergent populations, while failing on a third population with genuinely different invented dynamics. This is an implementation/methodology result only, not empirical evidence of universal human or animal emotional norms. Source: [norms_identification.py](../experiments/norms_identification.py).
+
 ## Research priority
 
 Next synthetic benchmark must **factorially manipulate contextual cue meaning, descriptive/injunctive group norms, and affective transition parameters**. Ask which mechanisms survive context mapping, and how much empirical evidence is required to identify a common kernel. Prefer this test to further elaboration of private belief reconstruction. Existing first simulator remains a narrow engineering check, not the main substantive theory.
