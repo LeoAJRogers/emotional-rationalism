@@ -20,6 +20,10 @@ Preserve **five distinct analytical questions**, of which the first is the proje
 
 Distinguish **definition / assumption / mathematical consequence / testable prediction / empirical finding / speculative application** in every project artifact. Descriptive typicality does not imply rationality, ethical propriety, or desirable behavior. Nor does a rationally assessed response guarantee control over affect.
 
+### Micro–macro feedback as an explicit candidate mechanism
+
+The research should not assume social norms are only external inputs that shape individual emotions. An equally important hypothesis is that context-dependent affective states influence behavior and relationships, which can generate population-level patterns; those patterns can then change what subsequent events mean to members. Model the minimal loop **context/perception → affective/functional state → behavior → population social structure/norms → future context** as a candidate generative system. It does not require individuals to optimize, reason accurately, or choose emotions. Social organization may also be produced without emotion by environment, habits, institutions or other processes—use those as explicit ablations. A stable group pattern is not automatically an injunctive norm. "Natural" emotional responses can be learned rather than innate. See [affect and social-structure feedback](affect-social-structure-feedback.md).
+
 ## 1. Foundational status registry
 
 - **F0 — methodological constraints:** separations above; explicit perspective and uncertainty; honest provenance; falsifiable comparisons; no fixed taxonomy or universal optimum asserted.
