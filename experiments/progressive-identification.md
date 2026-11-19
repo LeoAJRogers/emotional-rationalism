@@ -28,6 +28,8 @@ Latent coordinate systems can be nonunique up to transformations. State recovery
 
 **Failure conditions:** distinct parameter sets fit equally; target dynamics cannot be recovered under the proposed measurements; conflict vanishes merely because beliefs are accurate; or a compressed model predicts only its training trajectories.
 
+**Agents need not infer correctly.** Explicitly include a branch in which an individual's beliefs are systematically wrong and test whether the *other* agent's actions and affect change through reciprocal coupling. Modeling and evaluating these errors is our scientific activity; it is not a cognitive prerequisite for the simulated agents. A poorly calibrated observer-side evaluation should never be allowed to stop the simulation.
+
 **Caveat:** The synthetic model defines ground truth. Recovering it validates the procedure under those assumptions, not a claim about human emotion.
 
 ## Stage 1 — partial information without deception
