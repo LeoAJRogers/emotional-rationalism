@@ -1,5 +1,12 @@
 # Research log
 
+## 2026-11-19 · population-first scope clarification (proposal)
+
+- Recast the primary prediction target as population-conditioned distributions of affective/altered-state trajectories based on context, perceptual access, relationships and social ecology—not private-thought reconstruction.
+- Configurable populations are now a mathematical architecture requirement; cross-population universality is a tested hypothesis, not a requirement.
+- Keep ethical/evidential appraisal and reachability optional overlays. Add comparison of distinct social ecologies as Stage 0A before intensive cognitive-layer identification.
+- Prior art: cross-species functional emotion-state properties (Anderson & Adolphs, 2014); no claims of universal findings.
+
 ## 2026-11-19 · candidate v0.2 integration (proposal, pending review)
 
 - Added a layered F0-F5 foundational-status architecture without changing the v0.1 baseline results.
