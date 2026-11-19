@@ -2,16 +2,16 @@
 
 **Date:** 2026-11-19  
 **Status:** Proposed framework integration, not an empirical result. This supplements—not silently replaces—the finite-state v0.1 model in [model.md](model.md).  
-**Scope:** Human social-affective dynamics first. Extend to other populations only after specifying observation and state semantics.
+**Scope:** Population-conditioned social-affective dynamics, with human evidence as an accessible early empirical domain and a comparative population architecture from the outset. See [population-first objective](population-first-objective.md).
 
 ## 0. Research objective and commitments (F0)
 
-Investigate how affective states and trajectories are distributed, selected for consideration, evaluated, and changed as social context, interpretation, history, and interactions evolve. In particular, investigate *changes in feeling*, not just verbal judgments, action choice, or optimization scores. Whether any specific latent computational state corresponds to felt experience must be independently established.
+Investigate the general dynamics of affective/altered-state transitions as a function of perceived context, social interaction, community/population organization, relevant history, and current state. The primary prediction target is a **population-conditioned distribution of affective trajectories or their operational indicators**, not a reconstruction of private thought, nor selection of a uniquely rational emotion. Where felt states are meaningful and measurable, study changes in feeling rather than conflating them with verbal judgments or behavior; cross-population experience equivalence is not presumed. See [population-first scope correction](population-first-objective.md).
 
-Preserve **five distinct questions**:
+Preserve **five distinct analytical questions**, of which the first is the project's primary scientific target and the others are optional explanatory or evaluative analyses:
 
 1. **Description:** Given an individual and context, which affective trajectories are likely? This is an empirical/statistical question and can faithfully capture biases.
-2. **Inference:** What does an individual believe, perceive, or appraise, and with what accuracy or uncertainty?
+2. **Perceptual mechanism (optional):** How do cues available to an individual, without requiring reconstruction of private thought, shape the socially relevant context and ensuing affective dynamics? Beliefs and appraisals are hypotheses to include only when necessary.
 3. **Evaluation:** Which features of a response fit the available evidence, values, roles, and legitimate expectations **under explicitly specified criteria**? This is observer- and criterion-relative; no unique universal 'right emotion' is assumed.
 4. **Reachability:** Which responses can an individual actually attain, at what horizon and probability, under feasible information and actions?
 5. **Intervention/agency:** What decisions, communications, and regulatory attempts are available, and what do they change? Selection of a mathematical profile is not induction of a felt state.
@@ -23,10 +23,10 @@ Distinguish **definition / assumption / mathematical consequence / testable pred
 ## 1. Foundational status registry
 
 - **F0 — methodological constraints:** separations above; explicit perspective and uncertainty; honest provenance; falsifiable comparisons; no fixed taxonomy or universal optimum asserted.
-- **F1 — mathematical scaffolding:** indexed agents, latent states, a shared world, differing observations, stochastic transitions, time/history, measurement, interactions, and the possibility of multiple simultaneous emotions. A finite state space is a computational convenience, not a metaphysical claim.
+- **F1 — mathematical scaffolding:** indexed agents, population/community membership and social structure, latent or operationally measured affect-relevant states, shared context, differing observations, stochastic transitions, time/history, measurement, interactions, and the possibility of multiple simultaneous affective components. A finite state space is a computational convenience, not a metaphysical claim.
 - **F2 — candidate mechanisms:** appraisal and belief-updating maps; bodily/attentional/memory covariates; interpersonal/relational state; action and regulation policies; emotion-to-cognition feedback; person-specific persistence and accessibility. Include only when needed for the specific study.
-- **F3 — empirical structural hypotheses:** low effective dimension; separable interpretation and affect-transition operators; differing appraisal/affect timescales; stability across information regimes; person-to-person parameter sharing; independent pathways for different emotional components.
-- **F4 — contingent scope expansion:** configurable population-specific observation/state/transition models for animals, human cultures, AI behavior, or unfamiliar agents. Similar external function does not prove similar phenomenology.
+- **F3 — empirical structural hypotheses:** shared population-general dynamic primitives (e.g. persistence, scalability, generalization, reciprocity); low effective dimension; separable interpretation and affect-transition operators; differing timescales; cross-context and cross-population parameter transfer; independent pathways for different affective components.
+- **F4 — contingent empirical generalization:** applying appropriately configured and validated models to increasingly different species, communities, AI behavior, or unfamiliar systems. **Configurability itself belongs in F1; successful transfer and common mechanisms are hypotheses to test.** Similar external function does not prove similar phenomenology.
 - **F5 — applications:** counterfactual emotional perspectives, interaction support, or suggested plausible states for multiple participants. Not a measure of objective emotional correctness; avoid presenting it as mind-reading.
 
 The ordering is about dependence, not prestige. An F3 proposition may graduate if supported; F2 mechanisms should remain replaceable.
@@ -142,7 +142,7 @@ See [progressive-identification.md](../experiments/progressive-identification.md
 3. Add stable interpretation bias and confidence calibration errors; see whether extra latent dynamics are identifiable.
 4. Add selective disclosure and intentional deception; test whether signaling, trust, and recursive beliefs explain new variance without new affect dimensions.
 5. Only then apply human longitudinal evidence, with human self-reports and behavioral measures. Synthetic success proves recoverability under assumptions, not biological truth.
-6. Revisit cross-population generality only after the human base can make distinguishable, calibrated predictions.
+6. Test structurally different simulated populations early and compare shared-kernel, hierarchical, and population-specific models. Apply to real animal or human populations only using population-appropriate measurements and sufficient calibration; cross-population transfer is never assumed.
 
 ## 9. Immediate criteria for success
 
