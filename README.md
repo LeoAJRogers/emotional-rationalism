@@ -18,6 +18,8 @@ For example, someone may learn that a delayed reply had an ordinary explanation 
 - **Derived:** A toy model in which the fitting state falls outside the reachable set at a specified horizon and probability threshold.
 - **Empirical status:** This repository contains proposed tests. The model's predictive value, measurability, and relationship to existing theories remain open.
 
+The original **v0.1 finite-state model remains intact**. A [candidate v0.2 integration architecture](theory/integration-architecture.md) now proposes a layered multi-agent framework and explicitly classifies methodological commitments, mathematical scaffolding, candidate mechanisms, testable hypotheses, broader generalizations, and speculative applications. Its [progressive identification roadmap](experiments/progressive-identification.md) starts with fully observable, nondeceptive interactions and introduces honest uncertainty, interpretive errors, and intentional deception in separate stages. These additions are research proposals, not validated findings.
+
 Start with the [symbolic model](theory/model.md), then read the [proposed experiments](experiments/protocol.md) and [open problems and literature](challenges/open-problems.md). See [contribution notes](CONTRIBUTIONS.md) and the [research log](research-log/CHANGELOG.md) for how to challenge or extend the draft.
 
 Original research text and mathematical exposition are licensed under [CC BY 4.0](LICENSE).
