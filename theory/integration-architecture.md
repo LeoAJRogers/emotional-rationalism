@@ -16,6 +16,8 @@ Preserve **five distinct questions**:
 4. **Reachability:** Which responses can an individual actually attain, at what horizon and probability, under feasible information and actions?
 5. **Intervention/agency:** What decisions, communications, and regulatory attempts are available, and what do they change? Selection of a mathematical profile is not induction of a felt state.
 
+**Analytical separations are not required competencies of the participants.** Social-emotional dynamics occur whether agents reason accurately, infer motives badly, conceal intentions, behave inconsistently, or never explicitly evaluate whether their feelings fit the evidence. The fittingness functional is an optional, fallible *researcher/observer-side overlay*; poor construction of its evidence reference or value criteria does not disable the descriptive process. Similarly, the modeler's own observations and evaluations can be mistaken. An individual is not required to compute a Bayesian belief, represent an objective world state, achieve rational appraisal, or even introspect clearly for the dynamics to exist. Explicit variables are our representation, not necessarily the agent's conscious mental operations.
+
 Distinguish **definition / assumption / mathematical consequence / testable prediction / empirical finding / speculative application** in every project artifact. Descriptive typicality does not imply rationality, ethical propriety, or desirable behavior. Nor does a rationally assessed response guarantee control over affect.
 
 ## 1. Foundational status registry
