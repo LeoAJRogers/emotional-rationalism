@@ -89,7 +89,7 @@ For a declared family of target regions \mathscr A, define
 \mathcal R^{\mathscr A}_{h,\alpha}(s)=
 \{A\in\mathscr A:p_h^*(A\mid s)\ge\alpha\}.
 \]
-Restrict \mathscr A to meaningful prespecified candidates (otherwise the entire state space is trivially attainable). For fittingness, directly evaluate p_h^*(\mathcal F\mid s) if \mathcal F is a measurable region. Policies must use only accessible information and feasible actions. \mathcal F\cap\mathcal R may be empty at a given horizon. An unreachable evaluated response does not by itself imply deficient reasoning, and a reachable response is not necessarily justified.
+Restrict \mathscr A to meaningful prespecified candidates (otherwise the entire state space is trivially attainable). For fittingness, directly evaluate p_h^*(\mathcal F\mid s) if \mathcal F is a measurable region. Policies must use only accessible information and feasible actions. For a chosen threshold, the fitting region may have p_h^*(\mathcal F\mid s)<\alpha at a given horizon. An unreachable evaluated response does not by itself imply deficient reasoning, and a reachable response is not necessarily justified.
 
 **Keep a fourth separate object:** a *mathematical selector* S mapping a context/standpoint and stated constraints to a set or distribution of hypothetical emotional trajectories. It selects possibilities *for analysis*; it is not an emotion induction technique. A proposal to reweight trajectories based on a revised appraisal distribution is exploratory. If several appraisals change, test joint constraint satisfaction and order dependence rather than sequentially overwriting previous updates. Do not silently identify S with the descriptive p_\theta or with evaluated \mathcal F.
 
