@@ -28,7 +28,15 @@ Latent coordinate systems can be nonunique up to transformations. State recovery
 
 **Failure condition:** if a common kernel loses predictive adequacy across populations, keep the divergent models and document the failed generalization rather than forcing human-style social categories.
 
-See [population-first objective](../theory/population-first-objective.md).
+See [population-first objective](../theory/population-first-objective.md) and the [learnable transition program](../theory/learnable-state-dynamics.md). The primary output remains trajectories, not reconstructed thought contents.
+
+## Stage 0A.1 — distinguish changing exposures from changing response laws
+
+**Design:** Simulate two agents across repeated contexts, first with a fixed transition kernel but changing exposures, relationships, or strategies; then with known changes to individual response parameters under stable controlled contexts.
+
+**Question:** Can estimation avoid confusing changed marginal emotion frequencies with a genuinely changed response law? Can it recover parameter learning when present, and test models that treat regulation as bounded influence rather than exact emotional selection?
+
+**Failure:** inferred plasticity under a fixed kernel due only to exposure drift, inability to detect known changes, or apparent recovery caused by observing simulator-only latent states without a feasible observation model. See [learning core note](../theory/learnable-state-dynamics.md).
 
 ## Stage 0B — full-information social dynamics in simulation
 
@@ -117,7 +125,7 @@ Implement no deceptive agent until Stage 0–2 are debugged. Avoid reifying synt
 
 1. Do the affect and belief transition operators admit a uniquely recoverable decomposition?
 2. Can apparent emotion inertia be explained by observation lag, appraisal lag, rating artifacts, or external context drift?
-3. How should trajectory selection be defined so sequential appraisal updates do not arbitrarily undo previous constraints?
+3. If trajectory-selection analysis is ever attempted, how can it remain an explicitly optional researcher-side counterfactual exercise rather than an assumed agent mechanism or framework objective?
 4. Which dimensions are portable across individuals without erasing roles, targets, and subjective report semantics?
 5. What experimentally discriminates felt change from judgment updating, demand compliance, and action policy change?
 6. When does uncertainty itself act as a relevant affective cause, invalidating an overly simple G/T split?
