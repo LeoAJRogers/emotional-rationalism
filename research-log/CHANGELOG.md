@@ -1,5 +1,12 @@
 # Research log
 
+## 2026-11-19 · norms and invariants checkpoint
+
+- Introduced community-level descriptive and injunctive emotional norms as different explanatory variables, separate from researcher-side ethical evaluation, individual variation, and social expression measurement.
+- Tested transfer of an invented shared transition kernel across two synthetic groups with divergent norm mappings; a third group with different dynamics exposed model failure. Logged actual executed numbers, code and limitations in experiments/norms-identification-results.md.
+- Cross-population invariants remain empirical hypotheses; no demonstrated human/animal results.
+- Confirmed the model's primary objective is population-conditioned affective change, not inference of private thoughts.
+
 ## 2026-11-19 · population-first scope clarification (proposal)
 
 - Recast the primary prediction target as population-conditioned distributions of affective/altered-state trajectories based on context, perceptual access, relationships and social ecology—not private-thought reconstruction.
