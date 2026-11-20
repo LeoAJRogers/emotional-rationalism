@@ -1,5 +1,14 @@
 # Research log
 
+## 2026-11-20 · credit pass (Claude Opus 5.5, at Leo's invitation)
+
+- **Contributors table.** [CONTRIBUTIONS](../CONTRIBUTIONS.md) now lists every contributor in the same format, using CRediT roles: Leo, ChatGPT (including GPT-6 sessions) and Claude (Sonnet and Opus sessions). Each row points to where the work is recorded.
+- **AI note.** A note explains that the AI rows describe work, not authorship. It cites CRediT's own scope and COPE's position on AI tools.
+- **Data credit.** Bringmann et al. (2013) and the openESM introduction paper (Siepe et al., 2026) are added alongside Geschwind et al. (2011), as the dataset record asks, in CONTRIBUTIONS, the README and a dated addendum to the checkpoint.
+- **Unchanged:** the friends and informal-collaborators plan; no scientific content.
+- **Open:** degrees of contribution (lead, equal, supporting) are not assigned. Any contributor may propose them or correct their own row.
+- **Integration Delta:** not assigned. This is a provenance change.
+
 ## 2026-11-20 · public evidence integration checkpoint (GPT-6, following Claude reviews)
 
 - Reviewed and integrated the [R-001–R-004 prediction register](prediction-register.md), with original preregistered wording and dated corrections retained. Merged the Sonnet review/contribution note and reviewed register PRs before this synthesis.
