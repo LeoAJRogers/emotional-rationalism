@@ -297,3 +297,43 @@ In synthetic worlds calibrated to R-003's B1 and B2, rivals (a)–(c) and their 
 - **Code fix:** `arm_test.py` previously compared the arm as text, so the stored value "1.0" would not have matched "1". Research-commons `abed451`, ahead of any run, makes it read the non-NA row and compare numerically. Nothing else changes.
 
 The static file was shown to me in full when it was attached, so I saw `therapy` and `neuroticism` per id. It contains no affect values. `neuroticism` is not used.
+
+**Outcome (appended 2026-11-20, after the run; the prediction text, R-004a and everything above are unchanged).**
+
+- **Run:** 13:54–13:55 local, research-commons `abed451`.
+- **Data:** the same 10,926 forecast rows and folds as R-003. Of these, 5,519 are in period 0 and 1,201 are first-of-day rows.
+- **Results:** `experiments/2026-11-20-slow-component-rivals/r004_stages12.json` and `r004_stage3.json`. Aggregates only; no raw data committed.
+
+Log score per observation, 95% person-bootstrap CIs, PA / NA:
+
+| | Result | Verdict |
+| --- | --- | --- |
+| **Stage 1** B2 | +0.0202 / +0.0309 (as R-003) | |
+| `R_per` (EWMA gain left after a period-specific mean) | +0.0068 [0.0030, 0.0110] / +0.0146 [0.0099, 0.0195] | |
+| `R_per / B2` | **0.34 / 0.47** | S1 **held** (< 0.5 for both) |
+| B2 in period 0 vs period 1 | 0.0081 vs 0.0357 / 0.0155 vs 0.0496 | S2 **held** |
+| **Stage 2** (period-0 rows) `L_day` | +0.0018 [−0.0003, 0.0040] / +0.0031 [0.0009, 0.0055] | below 0.0075: no day flag; D1 **failed** |
+| `G_cross` | −0.0001 [−0.0024, 0.0021] / +0.0018 [−0.0017, 0.0051] | CI includes 0: no carry flag; D2 did not occur |
+| `N_hist` (first-of-day rows) | +0.0005 [−0.011, 0.012] / +0.013 [−0.007, 0.033] | inconclusive |
+| `G_short` (lags 2–3) as share of period-0 B2 | 87% / 95% | |
+| **Stage 3** (57 MBCT, 62 waiting list) T1 change in mean PA, MBCT − control | **+0.55** [0.30, 0.82]; permutation p < 0.0001 | T1 **held** |
+| T2 change in raw PA event reactivity | +0.033 [−0.091, 0.148]; p = 0.59 | T2 **failed** |
+| T3 standardized reactivity (descriptive only, since T2 failed) | +0.060 [−0.062, 0.178]; p = 0.35 | not applicable |
+
+**Decisions applied:**
+
+- **Stage 1: "both".**
+  - The EWMAs keep 34% (PA) and 47% (NA) of their gain once a period-specific person mean is present. So roughly two-thirds (PA) and half (NA) of R-003's history gain is a **person-level change between the two study periods**, which are about two months apart.
+  - The rest is within-period history.
+- **Stage 2: neither flag.**
+  - In the pre-randomization period, history beyond lag 1 is almost entirely short-lag (lags 2–3).
+  - That is consistent with **one persistent process plus non-persistent variance** (rating error or momentary fluctuation). Neither day-level structure nor carry-over across nights was detected.
+  - I retire the "two-timescale" reading for this dataset, as preregistered.
+  - Caveat: period-0 B2 is smaller than in the synthetic calibration, so small components could be missed. For NA, the point estimates lean towards carry-over (`G_cross`, `N_hist`), but every CI includes 0.
+- **The preregistered "counts against" criterion was not triggered.** Stage 1 fell in the middle band, not below 0.25. So R-003's slow-component reading is **narrowed, not retired**. Whatever is slow in 0010 shows up as change between periods two months apart. No within-period slow state was detected.
+- **Stage 3:**
+  - T1 reproduces the trial's published direction: MBCT +0.48 against control −0.07 on the 1–7 scale. The pipeline and arm coding therefore pass their benchmark.
+  - T2 failed, meaning no detectable effect of MBCT on raw PA event reactivity at this power. That is not evidence of no effect. The trial's own estimate (b* = .08) used a different item and estimator.
+  - The pooled drop in reactivity between periods appears in *both* arms: MBCT −0.074 and control −0.107 in raw slope. It is therefore not an artefact of mixing arms. This answers the concern I raised before the run.
+
+**Exploratory, after the results:** the between-period gain (`G_per`) is not larger in the MBCT arm: PA 0.011 vs 0.016, NA 0.010 vs 0.023, with CIs including 0. See `explore_r004.json`. The pooled period term absorbs the average arm shift, so person-level deviations around it arise in both arms.
