@@ -50,6 +50,15 @@ The real-data analyses use openESM dataset 0010 ([Zenodo record 17347473](https:
   - Siepe, B. S., Haslbeck, J. M. B., Kloft, M., Büchner, A., Zhang, Y., Fried, E. I., & Heck, D. W. (2026). Introducing openESM: A database of openly available experience sampling datasets. *Behavior Research Methods, 58*(8), 240. https://doi.org/10.3758/s13428-026-03112-y
 - **Not stored here:** no raw or participant-level data. Methodological literature is credited where it is used, in [open problems](challenges/open-problems.md) and in the research log.
 
+## Acknowledgment of lived experience
+
+Many people's lived experience went into this work, most of them beyond the contributors listed above. Among them:
+- **People in Leo's life.** Their experiences, relationships and conversations shaped the questions this project asks. They are acknowledged only in general terms, under the consent-first plan below.
+- **The participants of the Geschwind et al. trial.** Over many days, they reported how they were feeling in their daily lives, and their reports make up the dataset analysed here.
+- **Others further afield:** the participants and researchers behind the studies this work builds on, and the very large body of human writing from which the AI contributors' abilities derive.
+
+No one is named here, and no one's private experience is reproduced. The research tries to treat that experience with care: it describes how feelings change, and it does not judge how anyone ought to feel.
+
 ## Friends and informal collaborators — acknowledgment plan (pending consent)
 
 The research was also shaped by the project initiator's personal relationships and conversations with friends. Some insights, questions, examples, challenges, and ways of thinking through social situations were influenced by these exchanges, even where a friend did not interact with the repository or intend to participate in formal research. This influence deserves consideration in the project's provenance; it is **not** a claim that any particular person has agreed to join or be named.
