@@ -1,5 +1,11 @@
 # Research log
 
+## 2026-11-20 · Informal collaborators and consent-first attribution
+
+- Documented that friendships and personal conversations helped shape some research ideas, questions, and conceptual development.
+- Added a [plan for acknowledging informal collaborators](../CONTRIBUTIONS.md): seek individual permission before names or specific attributed contributions appear; allow pseudonymous or anonymous acknowledgment; distinguish contributions, scholarly authorship, and GitHub access.
+- No people were identified, presumed to consent, or granted repository access. This is a provenance and collaboration-policy update, not a revision of the scientific model.
+
 ## 2026-11-19 · v0.2 — scope and provenance clarification
 
 - Clarified that the formal affect model is a narrow starting case of a broader proposed program on context, interaction, history, and persistent state.
