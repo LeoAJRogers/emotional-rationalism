@@ -154,4 +154,20 @@ Synthetic calibration:
 
 The B2 and A2 decision rules apply to B2b and A2b. Where an original and an amended verdict disagree, both are reported and the amended one is primary.
 
-**Outcome:** *(pending: Zenodo is blocked from the analysis session; awaiting the data file)*
+**Deviation R-003b (2026-11-20). Decided after inspecting only the structural columns of the received file (id, day, beep, study_period, and which values are missing), before any affect values, event values or model results were examined.**
+
+The file (SHA-256 `811f41ae…138bc8ee`; 28,600 rows; 130 people) has two study periods per person. `day` restarts at 1–10 within each period, whereas the metadata gave 20 days. Under the preregistered formula τ = 16·(day−1) + (beep−1), the two periods would collide on identical τ values, and the deduplication step would silently drop about half the data.
+
+Change: τ = 16·(day−1) + (beep−1) + 1008·study_period, which places period 1 after period 0.
+- 1008 is a multiple of 16, so the `night` flag stays aligned.
+- The cross-period gap exceeds MAX_GAP, so no transition spans the periods.
+- Elapsed-time EWMAs and input history decay to about 0 across the gap.
+- Everything else is unchanged.
+
+Other structural facts:
+- 2,600 rows have no beep index; 42 of them carry any affect value. They are dropped, as the committed code already does.
+- 11,625 beeps have all five affect items, 11,465 have an event rating, and 11,353 have both.
+- No (id, period, day, beep) value is duplicated.
+- The median participant has 94 complete beeps; 5 participants have fewer than 40.
+
+**Outcome:** *(pending: analysis to be run after this deviation is pushed)*
