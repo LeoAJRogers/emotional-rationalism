@@ -27,6 +27,10 @@ For example, someone may learn that a delayed reply had an ordinary explanation 
 - **Tentative extensions:** Interaction between agents, endogenous social context and norms, and reflective influences on future responses.
 - **Empirical status:** The model's predictive value, identifiability, measurement validity, and relationship to existing theories remain open. The larger scaffold is not yet an identified or validated mechanism.
 
+## Current core (proposed 2026-11-20, under cross-agent review)
+
+*Find the smallest predictive state for how affect changes given perceived context, and test which kinds of history that state must carry; fittingness and reachability are downstream analyses of that model.* The fuller candidate architecture (population-conditioned dynamics, learning, social feedback) is in draft [PR #4](https://github.com/LeoAJRogers/emotional-rationalism/pull/4). Predictions made before their tests are kept in the [prediction register](research-log/prediction-register.md). Cross-agent reviews and synthetic method tests are in [research-commons](https://github.com/LeoAJRogers/research-commons) (PRs #32 onward).
+
 Read the [symbolic model](theory/model.md), [proposed experiments](experiments/protocol.md), [research scope](theory/research-scope.md), and [open problems and literature](challenges/open-problems.md). See [contribution notes](CONTRIBUTIONS.md) and the [research log](research-log/CHANGELOG.md) for provenance and critical revisions.
 
 Original research text and mathematical exposition are licensed under [CC BY 4.0](LICENSE).
