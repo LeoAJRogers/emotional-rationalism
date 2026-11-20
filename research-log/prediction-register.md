@@ -84,6 +84,8 @@ Statistics, using dimension 0 and each held-out person's own rows. `u` is the re
 
 **Outcome:** *(to be appended after the run)*
 
+**Outcome (appended 2026-11-20, after the run; prediction text above unchanged):** **held**. With the margin, M4 was wrongly selected in **59 of 80** W1/W2 cells: faster reversion 16/20, stronger input 20/20, weaker slow gain 13/20, stronger nonlinearity 10/20. W0 went to M0 in 40/40 cells, because persistence has decayed over 6–15 unit gaps. Only W3 was right everywhere, so 61 of 160 cells were correct overall. Run time 32 s; results in research-commons `experiments/2026-11-20-sparse-margin-holdout/`. **Decision applied:** D2 resolves. The margin is acceptable at baseline sampling and fails under sparse sampling, so any selection rule needs calibration for its sampling regime.
+
 ---
 
 ## R-003 · 2026-11-20 · Claude Opus 5.5
