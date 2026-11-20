@@ -136,4 +136,22 @@ Statistics, using dimension 0 and each held-out person's own rows. `u` is the re
 - A3 is observed-unit heterogeneity only. Following R-001, it is not evidence of latent sensitivity without a scale anchor.
 - *Known limitation:* `e_t` is rated at the same time as the affect it helps predict, so the A-task includes mood-congruent rating. The A-task is participant-informed, not a forecast.
 
+**Amendment R-003a (2026-11-20). Made before any real data was accessed: Zenodo is blocked from the analysis session and the file has not been obtained.** Software validation on synthetic data in the 0010 format (research-commons `esm_ladder.py --synthetic null|rich`) exposed two weaknesses:
+
+1. B2's "CI excluding 0" also passes in a null world with no slow component (gain 0.001–0.002 on about 20,000 rows).
+2. A2's shuffle control leaves about 0.004 of denoising nuisance in the null world, close to its 0.005 threshold. Past events help estimate the latent state beyond noisy reports.
+
+Added, with the originals kept and still reported:
+- **B2b:** Mhist − M1 ≥ 0.005 for PA and NA.
+- **A2b:** A_in − A_in_main < 0.002 for PA and NA, where A_in_main = A0 + input-history main effects only. This isolates gain modulation (`h·e_t`).
+
+Synthetic calibration:
+
+| Contrast | Null (PA / NA) | Rich (PA / NA) |
+| --- | --- | --- |
+| A2b | −0.00001 / −0.00001 | 0.035 / 0.011 |
+| B2 | 0.001 / 0.002 | 0.011 / 0.020 |
+
+The B2 and A2 decision rules apply to B2b and A2b. Where an original and an amended verdict disagree, both are reported and the amended one is primary.
+
 **Outcome:** *(pending: Zenodo is blocked from the analysis session; awaiting the data file)*
