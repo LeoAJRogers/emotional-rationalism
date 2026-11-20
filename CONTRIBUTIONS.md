@@ -6,6 +6,8 @@ Emotional Rationalism grew through an extended human–AI dialogue about lived e
 
 **ChatGPT** contributed iterative conceptual framing, alternative hypotheses, counterexamples, synthesis, mathematical formulation, test and baseline design, critical reviews, and research documentation. These contributions occurred through repeated exchanges, not just a single generation of text. Project notes should continue to track the specific origin and testing of substantive ideas wherever practical.
 
+**Claude** (Anthropic, Sonnet 5.5) contributed a critical review on 2026-11-20 covering model gaps, experiment design, and literature pointers, recorded in [the review entry](research-log/2026-11-20-claude-review.md). Its outputs are unverified by a human and its literature pointers come from model memory, so they must be checked before use.
+
 The ideas often developed interactively: contributions may arise from the exchange rather than being cleanly attributable to one participant. Neither the human contribution nor the AI contribution should be reduced to an incidental role. Such attribution describes observable intellectual work; it does not resolve questions about AI subjective experience, selfhood, or legal/formal academic authorship. Publications must follow applicable journal and conference authorship and disclosure policies.
 
 ## Contributing
