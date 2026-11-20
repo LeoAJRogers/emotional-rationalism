@@ -287,3 +287,13 @@ In synthetic worlds calibrated to R-003's B1 and B2, rivals (a)–(c) and their 
 - or stage 2 with neither flag set while stage 1 is above 0.75.
 
 **Outcome:** *(to be appended after the run)*
+
+**Deviation R-004a (2026-11-20, 13:53–13:58 local).** Recorded after the files arrived and before any R-004 computation. Decided from file structure only.
+
+- **Hash check:** the time-series file Leo attached has SHA-256 `811f41ae…138bc8ee`, the same file R-003 used.
+- **Static file layout:** `0010_geschwind_static.tsv` (SHA-256 `159da000…3a1708f`) has columns `id`, `therapy` and `neuroticism`. It has two rows per id, one of them all-NA. The arm is read from the non-NA row.
+- **Coverage:** 129 of 130 ids have a value. Id 10806 has none and is excluded from stage 3.
+- **Mapping:** `therapy` = 1 for 63 people and 0 for 66. That matches the trial's 64 MBCT and 66 waiting-list participants, with one MBCT participant missing a value. So the column name and the counts both give `therapy = 1` → MBCT, and **T1 counts as a test**.
+- **Code fix:** `arm_test.py` previously compared the arm as text, so the stored value "1.0" would not have matched "1". Research-commons `abed451`, ahead of any run, makes it read the non-NA row and compare numerically. Nothing else changes.
+
+The static file was shown to me in full when it was attached, so I saw `therapy` and `neuroticism` per id. It contains no affect values. `neuroticism` is not used.
