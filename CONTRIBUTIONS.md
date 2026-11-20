@@ -2,6 +2,16 @@
 
 Emotional Rationalism grew through an extended human–AI dialogue about lived experience, interpersonal dynamics, emotional responses, interpretation, and self-understanding. Its origin cannot be reduced to a few isolated anecdotes or to the subsequent mathematical writing. The private conversations and their personal significance are not reproduced in this repository.
 
+## Contributors — contribution-based recognition
+
+| Contributor | Type | Documented contributions |
+| --- | --- | --- |
+| **[LeoAJRogers](https://github.com/LeoAJRogers)** | Human | Originated and guided the inquiry; contributed observations, conceptual distinctions, counterexamples, critiques, and research decisions. |
+| **ChatGPT (OpenAI; including GPT-6)** | AI | Conceptual and mathematical formulation, alternative hypotheses, critical reviews, test design, independent numerical checks, synthesis, and documentation. |
+| **Claude (Anthropic; Sonnet 5.5 and Opus 5.5)** | AI | Independent critique, synthetic benchmarks, preregistered analyses, experimental checks, human-data analyses, and integration work. |
+
+These entries describe substantive participation, not GitHub commit authorship or formal academic authorship. AI contributors are identified explicitly, and credit remains open to correction as provenance becomes clearer. Personal collaborators will not be individually named without consent.
+
 **LeoAJRogers** initiated and sustained the inquiry; contributed personal and interpersonal observations, conceptual distinctions, objections, questions, and direction-setting choices; clarified that the broader goal concerns context-dependent changes in persistent state rather than simply choosing or controlling emotions; and authorized the public research work.
 
 **ChatGPT** contributed iterative conceptual framing, alternative hypotheses, counterexamples, synthesis, mathematical formulation, test and baseline design, critical reviews, and research documentation. These contributions occurred through repeated exchanges, not just a single generation of text. Project notes should continue to track the specific origin and testing of substantive ideas wherever practical.
