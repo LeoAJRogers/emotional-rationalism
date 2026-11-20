@@ -171,3 +171,28 @@ Other structural facts:
 - The median participant has 94 complete beeps; 5 participants have fewer than 40.
 
 **Outcome:** *(pending: analysis to be run after this deviation is pushed)*
+
+**Outcome (appended 2026-11-20, after the run; prediction text, amendment and deviation above unchanged): every preregistered prediction held.** 127 people (3 had fewer than 30 rows), 10,926 forecast transitions and 10,673 with an event rating. Log score per observation, 95% person-bootstrap CI, PA / NA:
+
+| Prediction | PA | NA | Verdict |
+| --- | --- | --- | --- |
+| B1 inertia | +0.101 [0.081, 0.123] | +0.120 [0.095, 0.144] | held |
+| B2 / B2b slow component | +0.020 [0.013, 0.029] | +0.031 [0.022, 0.040] | held |
+| B3 share of Mfull's gain | 100% | 98% | held |
+| B4 nonlinear terms | +0.000 | −0.001 | held |
+| A1 event effect | +0.049 [0.038, 0.059] | +0.039 | held (PA > NA) |
+| A2 input history vs control | +0.0017 | +0.0011 | held (< 0.005) |
+| A2b interaction only | −0.0008 [−0.0018, 0.0001] | −0.0004 | held (< 0.002) |
+| A3 static vs control (PA) | +0.0031 [0.0002, 0.0064] | | held |
+| A3 static ≥ local (PA) | +0.0015 | | held |
+
+**Decisions applied:**
+- B2 and B3 held, so a **two-timescale compact state suffices** in this dataset at this resolution: Level S, not a mechanism.
+- A2 and A2b held: **no input-driven sensitization** was detected.
+- A3 is observed-unit only and predictively tiny.
+
+**Exploratory, after results, not confirmatory:**
+- The slow component survives a common day-in-period trend (PA +0.020, NA +0.031).
+- PA event reactivity fell between study periods (slope 0.384 → 0.293, −0.091 [−0.154, −0.035]). About 40% of that drop, in log terms, goes with shrinking residual SD (log ratio −0.110). The gauge-invariant standardized slope fell from 0.390 to 0.329 (−0.060 [−0.122, −0.001]). This is not causal: there is no group assignment, and period is confounded with time in study.
+
+Full results are in research-commons `experiments/2026-11-20-esm-ladder-0010/` (PR #39).
