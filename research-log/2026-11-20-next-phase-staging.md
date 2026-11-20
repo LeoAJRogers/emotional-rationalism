@@ -63,3 +63,28 @@ Preserve unstructured conversations, anecdotes, thought experiments, competing i
 5. Preserve a dated result record regardless of outcome; update the public checkpoint only when supported evidence changes.
 
 **Scope of this staging pass:** documentation and prioritization only. No dataset was rerun, no code validated, no human experiment authorized, and no pending architecture PR merged.
+
+---
+
+## Amendments proposed by Claude Opus 5.5 (2026-11-20)
+
+These are appended to GPT-6's plan above, which is left unchanged. Reasons and evidence are in the [staging review](2026-11-20-claude-staging-review.md).
+
+1. **Handoff step 1 (overlap check).** No R-006 branch or PR existed before this review. The only overlapping work is the preregistered synthetic feasibility screen, run as part of this review (Research Commons `experiments/2026-11-20-r006-feasibility/`).
+2. **Add Workstream A′: external replication, in parallel with A.** Checkpoint §5.2 lists it, but this plan has no workstream for it. Every empirical result so far comes from one dataset.
+   - **Rule:** apply R-003's own preregistered selection rule to the openESM metadata (public on GitHub at `openesm-project/openesm`). Then preregister the R-003/R-004 decision rules for the selected dataset before any data access.
+   - **Candidate:** a metadata-only scan run on 2026-11-20 found **0073 (Sicorello et al.)** to be the next dataset by N × T that has event ratings. It has 227 people, 10 days × 6 beeps, positive and negative event ratings, raw timestamps, and a CC BY-NC 4.0 licence. Its affect items still need checking against the "same items at every beep" rule.
+   - **Why larger datasets appear to drop out** (from item names only; confirm before relying on it):
+     - 0056 and 0057 seem to rate emotions under situation-dependent stems (`int_…` vs `occup_…` items), so the item set would change from beep to beep.
+     - 0076's only event-like rating is `interaction_pleasant`, which seems conditional on an interaction having occurred.
+   - **Access:** the data are on Zenodo, which analysis sessions cannot reach, so a human data handoff is needed. That request goes in the queue once the replication prereg exists.
+3. **Gate A: add decision relevance.** Alongside one-step scores, report how much the leading families disagree on h-step target-region probabilities at the horizons Workstream C will use.
+   - If they agree at every horizon ER needs, the distinction is psychometrics: record it and park it.
+   - If they diverge, that is where new data must discriminate.
+4. **Workstream A: person-level heterogeneity is a declared rival, not a refinement.** The screen's nuisance worlds test it: person-specific inertia and loadings were tested against the R-006 ladder. R-006 should not run without these terms, or without evidence that they do not matter at the magnitudes plausible for 0010. See the amendments to the R-006 candidate.
+5. **Workstream D: add anchors to the cue protocol.**
+   - Anchoring vignettes (fixed described scenarios rated on the same scale at each wave) separate changes in scale use from changes in reported affect.
+   - Without them, a cue or regulation effect on reports cannot be told apart from response shift. The randomized MBCT contrast has the same limitation.
+6. **Interpretation discipline: one addition.** Measurement identification also constrains the *evaluative* layer.
+   - A fittingness criterion or reachability target stated in latent units is not identified from reports alone.
+   - One stated in report units is identified, but a pure change in reporting can satisfy it. This is the "anchor dilemma" in the review.

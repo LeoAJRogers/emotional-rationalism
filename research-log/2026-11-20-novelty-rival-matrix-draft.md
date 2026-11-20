@@ -30,3 +30,25 @@ The near-term **strongest falsifiable contribution** is not 'emotion has dynamic
 - Partially observed stochastic control and appraisal/decision-theoretic emotion models: select exact strongest comparators before claiming priority.
 
 **Interpretation discipline:** predictive compression, statistical identification, mechanistic interpretation, normative justification and causal intervention success are five separate evidentiary achievements. No one result automatically establishes the next.
+
+---
+
+## Amendments proposed by Claude Opus 5.5 (2026-11-20)
+
+These are appended to GPT-6's draft above, which is left unchanged. The citations below were checked against publisher or index records this session. See the [staging review](2026-11-20-claude-staging-review.md) for the reasoning.
+
+**Nearest established families, named precisely**
+
+| Matrix row | Closest established work | What it means for novelty claims |
+| --- | --- | --- |
+| Context/history-conditioned transitions; predictive vs persistent state | **DSEM**, which combines multilevel time-series and structural equation models with person-specific parameters and measurement error ([Asparouhov, Hamaker & Muthén, 2018](https://doi.org/10.1080/10705511.2017.1406803)). **DynAffect**, which models individual differences in affective home base, variability and attractor strength with a diffusion (OU) process ([Kuppens, Oravecz & Tuerlinckx, 2010](https://doi.org/10.1037/a0020962)). | R-006's F1/F1+R/F2 comparison sits squarely inside DSEM-class modeling. Its result would be a measurement finding about this dataset, and a prerequisite for ER rather than evidence of ER's novelty. |
+| Person-specific persistence | Individual differences in emotional inertia, linked to maladjustment ([Kuppens, Allen & Sheeber, 2010](https://doi.org/10.1177/0956797610372634)). Aggregating AR(1) units with heterogeneous coefficients produces long memory ([Granger, 1980](https://doi.org/10.1016/0304-4076(80)90092-5)). | A pooled model with one inertia can mistake person differences for a slow component. Person-specific inertia is a declared rival, not a nuisance to ignore. |
+| Policy/information/horizon-dependent reachability | Finite-horizon probabilistic reachability for controlled discrete-time stochastic systems, solved by dynamic programming ([Abate, Prandini, Lygeros & Sastry, 2008, *Automatica* 44(11)](https://ptolemy.berkeley.edu/projects/chess/pubs/435.html)). | `R_{h,α}` in `theory/model.md` is the standard terminal-time form. Novelty cannot rest on the definition, only on how targets and feasible actions are specified and measured for affect. |
+| Measurement: reporting scale, person-period shifts, MBCT contrast | **Response shift**: change in internal standards, values or conceptualization ([Sprangers & Schwartz, 1999](https://doi.org/10.1016/S0277-9536(99)00045-3)). **Anchoring vignettes**, for respondent-specific use of response scales ([King, Murray, Salomon & Tandon, 2004, *APSR* 98(1)](https://www.cambridge.org/core/journals/american-political-science-review/article/enhancing-the-validity-and-crosscultural-comparability-of-measurement-in-survey-research/220C13F13BA152E91A53F794BE3575ED)). | These are the established names, and an established tool, for R-001's gauge freedom and #42's reporting-intercept equivalence. A therapy-induced response shift is the declared rival to "MBCT raised latent PA". |
+| Minimal-model challenge (Gate B) | Dynamic measures add little beyond mean levels and variability when predicting well-being ([Dejonckheere et al., 2019](https://doi.org/10.1038/s41562-019-0555-0)). | That estimand is between-person prediction, not within-person forecasting, so it is not a direct test of ER. It is still the right prior: expect complex dynamics to add little until shown otherwise. |
+
+**One candidate row to add**
+
+| Candidate ER contribution | Nearest established families | What overlaps | What would genuinely discriminate? | Present evidence |
+| --- | --- | --- | --- | --- |
+| Fittingness and reachability targets stated in **gauge-invariant** (identified) coordinates | Anchoring vignettes; response-shift methods; reachability with specified target sets | Scale use can differ by person and change with treatment | Whether a target defined in anchored or person-relative units predicts outcomes that report-unit targets miss, especially under interventions that change reporting | Proposal only (staging review, "anchor dilemma"); no comparator found yet, so search before claiming |
