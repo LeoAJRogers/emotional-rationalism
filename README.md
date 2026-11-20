@@ -1,10 +1,16 @@
 # Emotional Rationalism
 
-**Research draft v0.1**
+**Research draft v0.2 — broader scope; initial formal model remains provisional**
+
+**Broad research question:** How do a system's current state, history, context, and interactions influence its subsequent state and future response tendencies?
+
+The project grew from sustained inquiry into lived experience, relationships, and self-understanding. The current mathematical formulation is a **narrow, testable starting point** within a wider research program—not an assertion that all state changes are emotional or that the objective is to control feelings. See [research scope](theory/research-scope.md) for the broader conceptual scaffold, its limitations, and candidate extensions.
+
+## First formal case: emotional dynamics
 
 How do emotions change after a person revises an interpretation, and under what conditions does an emotional response they judge fitting become attainable?
 
-We propose representing emotion as a multidimensional state whose evolution depends on context, interpretation, prior experience, and available regulatory actions. The model asks three separate questions.
+We propose representing emotion as a multidimensional state whose evolution depends on context, interpretation, prior experience, and available actions. For this initial case, the model separates three questions:
 
 | Question | Model component |
 | --- | --- |
@@ -12,12 +18,15 @@ We propose representing emotion as a multidimensional state whose evolution depe
 | Which responses fit the available evidence and stated values? | An explicit evaluative loss |
 | Which responses can a person reach within a specified time and with what probability? | Reachability under feasible actions |
 
-For example, someone may learn that a delayed reply had an ordinary explanation and revise their estimate of rejection while still feeling alarm. The model lets us ask how fast each quantity changes and whether the lag depends on the person, situation, or actions available.
+For example, someone may learn that a delayed reply had an ordinary explanation and revise their estimate of rejection while still feeling alarm. The model lets us ask how fast each quantity changes and whether the lag depends on the person, situation, or actions available. **Descriptive prediction, evaluative judgment, and achievable change are distinct.** The evaluated response need not be unique, and the evaluation is conditional on chosen criteria.
 
-- **Proposed:** A formal separation of emotional dynamics, fittingness, and reachability.
+## Research status
+
+- **Proposed:** A formal separation of affect dynamics, fittingness, and reachability, nested within a wider context–interaction–state research direction.
 - **Derived:** A toy model in which the fitting state falls outside the reachable set at a specified horizon and probability threshold.
-- **Empirical status:** This repository contains proposed tests. The model's predictive value, measurability, and relationship to existing theories remain open.
+- **Tentative extensions:** Interaction between agents, endogenous social context and norms, and reflective influences on future responses.
+- **Empirical status:** The model's predictive value, identifiability, measurement validity, and relationship to existing theories remain open. The larger scaffold is not yet an identified or validated mechanism.
 
-Start with the [symbolic model](theory/model.md), then read the [proposed experiments](experiments/protocol.md) and [open problems and literature](challenges/open-problems.md). See [contribution notes](CONTRIBUTIONS.md) and the [research log](research-log/CHANGELOG.md) for how to challenge or extend the draft.
+Read the [symbolic model](theory/model.md), [proposed experiments](experiments/protocol.md), [research scope](theory/research-scope.md), and [open problems and literature](challenges/open-problems.md). See [contribution notes](CONTRIBUTIONS.md) and the [research log](research-log/CHANGELOG.md) for provenance and critical revisions.
 
 Original research text and mathematical exposition are licensed under [CC BY 4.0](LICENSE).
