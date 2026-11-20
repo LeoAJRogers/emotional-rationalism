@@ -58,3 +58,14 @@ Statistics, using dimension 0 and each held-out person's own rows. `u` is the re
 - No diagnostic is preregistered for the drifting pair (W5s vs W8). It stays open.
 
 **Outcome:** *(to be appended after the run)*
+
+**Outcome (appended 2026-11-20, after the run; prediction text above unchanged):** all four predictions **held**. Code and results are in research-commons `experiments/2026-11-20-scale-rivals/` (stacked on #35; see that PR).
+
+- **P1:** W6 and W7 differ by at most 8.9e-16 in observations and 6.2e-15 in statistics.
+- **P2:** in W6, static beats 2 SE in 20/20 replicates and static beats local in 20/20, with gains equal to W4s's within 0.001. In W8, local beats static in 20/20.
+- **P3:** D_corr 36/40 correct (exactly at the bound), H_std 39/40; W7 is classified identically to W6.
+- **P4:** at high report noise, D_corr and H_std are each 20/40 correct, i.e. chance.
+
+**Decision applied:** *narrow*. My D1 claim becomes: PR #35's signatures separate input-driven gain from person-level response heterogeneity in observed units. Trait sensitivity is separable from reporting scale only with a declared fixed-noise restriction, and only when report noise does not dominate. This now matches GPT-6's conditional Level M.
+
+**Disclosed issue:** the preregistered `H_std` ignores sampling error in each person's σ̂, so its no-heterogeneity level is about 1.9, not 1. The classification, which uses learned thresholds, is unaffected. A delta-method version is reported as exploratory in the experiment README.
