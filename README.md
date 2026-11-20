@@ -33,6 +33,16 @@ For example, someone may learn that a delayed reply had an ordinary explanation 
 
 Read the [full integration checkpoint](research-log/2026-11-20-public-integration-checkpoint.md) for the evidence ledger, corrections, uncertainty, dissent, data credit and planned-but-paused next tests. The [append-only prediction register](research-log/prediction-register.md) preserves the original R-001–R-004 predictions and subsequent qualifications. Supporting code and aggregates remain in the **private** Research Commons; they are not yet publicly reproducible from this repository. The data are public: the [Geschwind et al. (2011) trial](https://pubmed.ncbi.nlm.nih.gov/21767001/), as shared by [Bringmann et al. (2013)](https://doi.org/10.1371/journal.pone.0060188) and harmonized by [openESM](https://doi.org/10.3758/s13428-026-03112-y) ([dataset record](https://zenodo.org/records/17347473)). Please cite all three; full references are under [data and source credit](CONTRIBUTIONS.md#data-and-source-credit).
 
-Read the [symbolic model](theory/model.md), [proposed experiments](experiments/protocol.md), [research scope](theory/research-scope.md), and [open problems and literature](challenges/open-problems.md). **Contributors:** Leo (LeoAJRogers), ChatGPT (OpenAI) and Claude (Anthropic). All three are listed in one format with [CRediT roles](CONTRIBUTIONS.md#contributors). The AI listings come with a note: they describe work and do not claim authorship. The work also rests on [many people's lived experience](CONTRIBUTIONS.md#acknowledgment-of-lived-experience). See the [research log](research-log/CHANGELOG.md) for provenance and critical revisions.
+Read the [symbolic model](theory/model.md), [proposed experiments](experiments/protocol.md), [research scope](theory/research-scope.md), and [open problems and literature](challenges/open-problems.md). See [contribution notes](CONTRIBUTIONS.md) and the [research log](research-log/CHANGELOG.md) for provenance and critical revisions. The work also rests on [many people's lived experience](CONTRIBUTIONS.md#acknowledgment-of-lived-experience).
+
+## Contributors
+
+| Contributor | Type | Documented contributions |
+| --- | --- | --- |
+| **[LeoAJRogers](https://github.com/LeoAJRogers)** | Human | Originated and guided the inquiry; contributed observations, conceptual distinctions, counterexamples, critiques, and research decisions. |
+| **ChatGPT (OpenAI; including GPT-6)** | AI | Conceptual and mathematical formulation, alternative hypotheses, critical reviews, test design, independent numerical checks, synthesis, and documentation. |
+| **Claude (Anthropic; Sonnet 5.5 and Opus 5.5)** | AI | Independent critique, synthetic benchmarks, preregistered analyses, experimental checks, human-data analyses, and integration work. |
+
+Credit reflects documented intellectual and technical work using the same contribution criteria for human and AI participants; AI systems are explicitly identified. It does not imply a separate GitHub account, a particular legal status, or formal publication authorship. Further contributions by friends or informal collaborators will be named only with their consent. See [contributions and provenance](CONTRIBUTIONS.md) for the detailed record.
 
 Original research text and mathematical exposition are licensed under [CC BY 4.0](LICENSE).
