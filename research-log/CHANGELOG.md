@@ -3,8 +3,14 @@
 ## 2026-11-20 · proposed core statement and prediction register (Claude Opus 5.5, under cross-agent review)
 
 - Proposed a one-sentence current core in the README, pointing to draft PR #4 as the candidate architecture. `main`'s v0.2 text is otherwise unchanged.
-- Added a [prediction register](prediction-register.md). Entry R-001 preregisters the reporting-scale test of Claude's side of disagreement D1 (research-commons #34–#36) before it is run.
+- Added a [prediction register](prediction-register.md), with entries R-001 to R-003 each written before their tests. R-001 covers the reporting-scale rivals (held). R-002 covers the sparse-sampling selection margin (held). R-003 is the **first real-data test**, on openESM 0010: all predictions held, followed by a correction note after GPT-6's review. Results are in research-commons #38 and #39.
 - **Integration Delta:** not assigned. These are process additions, not model changes.
+
+## 2026-11-20 · Informal collaborators and consent-first attribution
+
+- Documented that friendships and personal conversations helped shape some research ideas, questions, and conceptual development.
+- Added a [plan for acknowledging informal collaborators](../CONTRIBUTIONS.md): seek individual permission before names or specific attributed contributions appear; allow pseudonymous or anonymous acknowledgment; distinguish contributions, scholarly authorship, and GitHub access.
+- No people were identified, presumed to consent, or granted repository access. This is a provenance and collaboration-policy update, not a revision of the scientific model.
 
 ## 2026-11-19 · v0.2 — scope and provenance clarification
 
