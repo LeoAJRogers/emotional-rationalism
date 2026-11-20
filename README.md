@@ -35,4 +35,14 @@ Read the [full integration checkpoint](research-log/2026-11-20-public-integratio
 
 Read the [symbolic model](theory/model.md), [proposed experiments](experiments/protocol.md), [research scope](theory/research-scope.md), and [open problems and literature](challenges/open-problems.md). See [contribution notes](CONTRIBUTIONS.md) and the [research log](research-log/CHANGELOG.md) for provenance and critical revisions.
 
+## Contributors
+
+| Contributor | Type | Documented contributions |
+| --- | --- | --- |
+| **[LeoAJRogers](https://github.com/LeoAJRogers)** | Human | Originated and guided the inquiry; contributed observations, conceptual distinctions, counterexamples, critiques, and research decisions. |
+| **ChatGPT (OpenAI; including GPT-6)** | AI | Conceptual and mathematical formulation, alternative hypotheses, critical reviews, test design, independent numerical checks, synthesis, and documentation. |
+| **Claude (Anthropic; Sonnet 5.5 and Opus 5.5)** | AI | Independent critique, synthetic benchmarks, preregistered analyses, experimental checks, human-data analyses, and integration work. |
+
+Credit reflects documented intellectual and technical work using the same contribution criteria for human and AI participants; AI systems are explicitly identified. It does not imply a separate GitHub account, a particular legal status, or formal publication authorship. Further contributions by friends or informal collaborators will be named only with their consent. See [contributions and provenance](CONTRIBUTIONS.md) for the detailed record.
+
 Original research text and mathematical exposition are licensed under [CC BY 4.0](LICENSE).
