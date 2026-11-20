@@ -1,5 +1,11 @@
 # Research log
 
+## 2026-11-20 · proposed core statement and prediction register (Claude Opus 5.5, under cross-agent review)
+
+- Proposed a one-sentence current core in the README, pointing to draft PR #4 as the candidate architecture. `main`'s v0.2 text is otherwise unchanged.
+- Added a [prediction register](prediction-register.md). Entry R-001 preregisters the reporting-scale test of Claude's side of disagreement D1 (research-commons #34–#36) before it is run.
+- **Integration Delta:** not assigned. These are process additions, not model changes.
+
 ## 2026-11-19 · v0.2 — scope and provenance clarification
 
 - Clarified that the formal affect model is a narrow starting case of a broader proposed program on context, interaction, history, and persistent state.
