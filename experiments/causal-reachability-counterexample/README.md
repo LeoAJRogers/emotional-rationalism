@@ -20,3 +20,5 @@ readiness: observational rows identical; do(0)=0.5053; do(1)=0.5053; effect=0.00
 The exact theoretical intervention probabilities are (0,1) in the action-causal model and (0.5,0.5) in the hidden-readiness model. The 0.5053 is finite-sample Monte Carlo variation. Because both models are seeded identically, equality of observational rows is an explicit assertion. This verifies a deliberately constructed counterexample, **not** the identification of causal effects from observational data. No external replication or empirical intervention was performed.
 
 The companion conceptual note is [the reachability identification note](../../research-log/2026-11-20-reachability-identification-note.md). Next useful adversarial extension: add noisy readiness proxies and evaluate observational versus interventional generalization; preregister the comparison before inspecting results.
+
+The [extended validation report](VALIDATION.md) records a reproduction of all six original scripts, an exact two-step test of assignment versus performed action, and an aggregate audit of three public human datasets.
