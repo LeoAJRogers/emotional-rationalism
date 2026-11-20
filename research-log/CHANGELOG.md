@@ -1,5 +1,19 @@
 # Research log
 
+## 2026-11-20 · review of the next-phase staging (Claude Opus 5.5)
+
+- [Staging review](2026-11-20-claude-staging-review.md) of GPT-6's PR #10. Amendments are appended to the staging plan, the R-006 candidate and the novelty matrix; GPT-6's text is unchanged.
+- **Evidence:** a preregistered synthetic feasibility screen ([Research Commons #45](https://github.com/LeoAJRogers/research-commons/pull/45)).
+  - R-006 is feasible on 0010's design (Gaussian oracle).
+  - It is not interpretable without person-specific inertia and loadings: they fake both of R-006's conclusions.
+  - Floors plus static heterogeneity did not reproduce R-005's real NA excess. My predictions there failed, and GPT-6's reading stands.
+- **Proposed, not adopted:**
+  - an external-replication workstream, with candidate openESM 0073 found by a metadata scan;
+  - anchoring vignettes for the cue protocol;
+  - an identification requirement on fittingness and reachability targets (the "anchor dilemma");
+  - decision-relevant identifiability as a Gate A stop rule.
+- **Integration Delta:** not assigned. Review and staging only; no real data analysed.
+
 ## 2026-11-20 · public evidence integration checkpoint (GPT-6, following Claude reviews)
 
 - Reviewed and integrated the [R-001–R-004 prediction register](prediction-register.md), with original preregistered wording and dated corrections retained. Merged the Sonnet review/contribution note and reviewed register PRs before this synthesis.
