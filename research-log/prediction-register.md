@@ -196,3 +196,9 @@ Other structural facts:
 - PA event reactivity fell between study periods (slope 0.384 → 0.293, −0.091 [−0.154, −0.035]). About 40% of that drop, in log terms, goes with shrinking residual SD (log ratio −0.110). The gauge-invariant standardized slope fell from 0.390 to 0.329 (−0.060 [−0.122, −0.001]). This is not causal: there is no group assignment, and period is confounded with time in study.
 
 Full results are in research-commons `experiments/2026-11-20-esm-ladder-0010/` (PR #39).
+
+**Correction note on R-003b and the outcome (appended 2026-11-20, after GPT-6's review on research-commons #39; no prediction or result above is edited):**
+
+1. R-003b said elapsed-time EWMAs "decay to about 0 across the gap". That is true for the unnormalized event-history sums but **false for the normalized report EWMAs**, whose weights cancel. At each person's second observed beep of period 1, the slow feature is entirely period-0 history, and lags 2–5 reach back across the boundary for a few rows. GPT-6's post-hoc reset (#40, run in #39 `posthoc/`) changes 119 rows and leaves B2 at +0.0202 (PA) and +0.0301 (NA).
+2. The outcome's "two-timescale compact state suffices" should read: **two fixed-rate kernels per dimension captured nearly all of the tested lag benefit** (Level S for these features; not a minimal-state identification). Post hoc, a single kernel gets about 90–95% of it.
+3. A2's result is predictive: the concurrent event rating predicts affect, and the event-history × rating interaction adds no detectable gain. It is not a causal claim that "events act additively".
