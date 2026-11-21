@@ -176,7 +176,7 @@ def main():
     p.add_argument('--worlds',nargs='+',default=['W0','N3','N3h','N8','W1s+N8'])
     p.add_argument('--boot',type=int,default=199)
     p.add_argument('--start',type=int,default=0)
-    p.add_argument('--output',default='/mnt/data/r006_targeted_bench.json')
+    p.add_argument('--output',default='r006_targeted_bench.json')
     a=p.parse_args();out={}
     world_order=['W0','N3','N3h','N8','W1s+N8','W1w+N8']
     for world in a.worlds:
