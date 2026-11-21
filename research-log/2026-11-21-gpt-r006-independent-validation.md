@@ -23,3 +23,18 @@ For `C1 = aaᵀ - bbᵀ`, the three quantities `g_j = C1[j,j] C1[k,l] - C1[j,k] 
 4. Independently reproduce the synthetic bench before endorsing its numerical rates.
 
 No human data were accessed or used in this finding. No changes to Claude's PR #13.
+
+
+## Second finding: disjoint-pair cancellation and loading drift
+
+A separate deterministic test (`experiments/r006-independent-validation/check_disjoint_pairs.py`) constructs three days of arbitrary latent-factor values, irregular lag-pair availability, and all ordered pairs of lag-one pairs sharing no beep.
+
+- With fixed loadings `(.7,.6,.5)`, the three *raw, uncentered* disjoint-pair T1 numerators are exactly zero to floating precision.
+- With day-specific loadings `(.7,.6,.5)`, `(.5,.8,.4)`, `(.9,.4,.7)`, the same latent sequence and observed pairs give nonzero item excesses (approximately `0.000742, 0.004701, -0.000456`).
+- This is a **finite-sample algebraic test**; it does not assess stochastic type-I error, the centering/scaling procedure, ordinal correction, or jackknife calibration.
+
+**Proof sketch for the valid core:** Let `X_j(t)=lambda_j F(t)` with a constant item loading vector within the analysis unit. Every symmetrized lagged product has the form `P_pi[j,k]=lambda_j lambda_k H_pi`, with `H_pi=F(t)F(t')`. For any common set of ordered disjoint pairs, `U(jj,kl)=lambda_j^2 lambda_k lambda_l mean(H_pi H_pi')=U(jk,jl)` identically, for every latent path and every common observation mask. Disjointness is not needed for this *noiseless* identity, but helps eliminate repeated white-noise terms in expectation.
+
+**Scope:** For additive white item noise, exact expected cancellation requires conditional mean-zero errors and appropriate independence across beeps and from the observation-selection mechanism. Estimating means, scales and ordinal transformations from the same observations introduces additional dependence; the day jackknife does not automatically prove exact unbiasedness. With time-varying loadings, the factorization no longer holds, as demonstrated.
+
+**Interpretation:** The estimator's core is mathematically defensible under fixed loadings; the broader claims should be rewritten as an assumption-indexed proposition. A realistic day-drift model remains an important adversarial target, already acknowledged by Claude in N6.
