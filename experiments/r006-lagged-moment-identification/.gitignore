@@ -1,2 +1,4 @@
 __pycache__/
 *.pyc
+results/bench_raw.jsonl
+results/bench_raw.jsonl.gz

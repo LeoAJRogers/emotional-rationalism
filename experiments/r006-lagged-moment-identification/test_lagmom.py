@@ -115,9 +115,38 @@ def test_jackknife_linear():
     check("jackknife of a constant estimate is the constant", np.allclose(jk, np.arange(M)))
 
 
+def test_real_loader():
+    """real_data.load() on a fake TSV in the documented 0010 layout reproduces the array."""
+    import csv
+    import os
+    import tempfile
+
+    import real_data
+    import simulate as sim
+    Y, person = sim.simulate(sim.WORLDS["N3"], seed=4, n_persons=6)
+    rows = []
+    for m in range(Y.shape[0]):
+        pid, per = 1000 + person[m], m % 2
+        for d in range(10):                                  # padded to 10 days like 0010
+            for b in range(10):
+                vals = Y[m, d, b] if d < 6 else np.full(5, np.nan)
+                rows.append([pid, d + 1, b + 1, per] + ["NA" if np.isnan(x) else str(int(x)) for x in vals])
+        rows.append([pid, 1, "NA", per, "3", "NA", "NA", "NA", "NA"])   # row without beep index
+    path = os.path.join(tempfile.mkdtemp(), "fake.tsv")
+    with open(path, "w", newline="") as fh:
+        w = csv.writer(fh, delimiter="\t")
+        w.writerow(["id", "day", "beep", "study_period", "cheerful", "relaxed", "worried", "fearful", "sad"])
+        w.writerows(rows)
+    Y2, person2, info = real_data.load(path)
+    same = np.array_equal(np.isnan(Y2[:, :6]), np.isnan(Y)) and np.allclose(np.nan_to_num(Y2[:, :6]), np.nan_to_num(Y))
+    check("real-data loader reproduces array; padded days empty", same and np.isnan(Y2[:, 6:]).all()
+          and info["rows_without_beep"] == Y.shape[0] and np.array_equal(person2, person), str(info["day_range"]))
+
+
 if __name__ == "__main__":
     test_ustat()
     test_hermite()
     test_jackknife_linear()
+    test_real_loader()
     print("FAILURES:", FAIL if FAIL else "none")
     sys.exit(1 if FAIL else 0)

@@ -67,7 +67,8 @@ class LagMoments:
     set, for the full data (version 0) and every leave-one-day-out version (1..D)."""
 
     def __init__(self, Y, items, discrete, lags=(0, 1, 2, 3), min_beeps=15,
-                 min_pairs=8, min_days=3, correct=True):
+                 min_pairs=8, min_days=3, correct=True, jk=True):
+        self.use_jk = jk
         X = np.asarray(Y, float)[..., list(items)]
         M, D, B, J = X.shape
         self.M, self.D, self.B, self.J = M, D, B, J
@@ -195,6 +196,9 @@ class LagMoments:
         """Day jackknife of a (V,M) estimate -> (M,). Falls back to the full-data
         estimate where any leave-one-day-out version is undefined."""
         full = est[0]
+        if not self.use_jk:
+            self.jk_fallback = np.zeros(self.M, bool)
+            return full
         loo = est[1:]                                                # (D,M)
         dob = self.dayobs.T                                          # (D,M)
         okv = (self.version_ok[1:] | ~dob) & (np.isfinite(loo) | ~dob)
@@ -389,7 +393,7 @@ ALL_IDX = (0, 1, 2, 3, 4)
 
 
 def analyse(Y, person, discrete, n_boot=499, seed=0, variants=("all", "day"),
-            pooled=True, linear_too=True):
+            pooled=True, linear_too=True, jk=True):
     """Run every R-006 statistic on one dataset. Returns a flat dict of results."""
     person = np.asarray(person)
     n_persons = int(person.max()) + 1
@@ -400,7 +404,7 @@ def analyse(Y, person, discrete, n_boot=499, seed=0, variants=("all", "day"),
     if discrete:
         modes = [("cor", True)] + ([("lin", False)] if linear_too else [])
     for tag, correct in modes:
-        LMna = LagMoments(Y, NA_IDX, discrete, lags=(0, 1, 2, 3), correct=correct)
+        LMna = LagMoments(Y, NA_IDX, discrete, lags=(0, 1, 2, 3), correct=correct, jk=jk)
         cache = {}
         groups = {
             "T1": t1_stats("all"),
@@ -420,10 +424,10 @@ def analyse(Y, person, discrete, n_boot=499, seed=0, variants=("all", "day"),
             pst = groups["T1"] + groups["T2"] + groups["T20"] + groups["T3"]
             pest, pdraws = compute_pooled(LMna, pst, person, n_persons, counts, cache)
             _store(res, f"{tag}_p", pest, pdraws, pst)
-        LMpa = LagMoments(Y, PA_IDX, discrete, lags=(1,), correct=correct)
+        LMpa = LagMoments(Y, PA_IDX, discrete, lags=(1,), correct=correct, jk=jk)
         est, draws = compute_within(LMpa, pa_det_stats(), person, n_persons, counts, {})
         _store(res, f"{tag}_w", est, draws, pa_det_stats())
-        LMall = LagMoments(Y, ALL_IDX, discrete, lags=(1,), correct=correct)
+        LMall = LagMoments(Y, ALL_IDX, discrete, lags=(1,), correct=correct, jk=jk)
         est, draws = compute_within(LMall, bipolar_stats(), person, n_persons, counts, {})
         _store(res, f"{tag}_w", est, draws, bipolar_stats())
     return res
@@ -436,6 +440,10 @@ def _store(res, prefix, est, draws, stats):
         res[f"{prefix}_{st.name}"] = float(est[st.name])
         res[f"{prefix}_{st.name}_lo"] = lo
         res[f"{prefix}_{st.name}_hi"] = hi
+        if st.name.startswith("T1_"):                   # Bonferroni over 3 items (Part B sign test)
+            lo3, hi3 = ci(draws[st.name], level=1 - 0.05 / 3)
+            res[f"{prefix}_{st.name}_lo3"] = lo3
+            res[f"{prefix}_{st.name}_hi3"] = hi3
         for pre in ("T2_", "T20_"):
             if st.name.startswith(pre):
                 t2_names.setdefault(pre[:-1], []).append(st.name)

@@ -1,0 +1,58 @@
+{
+ "N8": {
+  "cor_anyneg3": 0.03,
+  "cor_anyneg95": 0.08,
+  "cor_T1fire": 0.03,
+  "cor_T1": -0.008573517448487215,
+  "lin_anyneg3": 0.02,
+  "lin_anyneg95": 0.05,
+  "lin_T1fire": 0.1,
+  "lin_T1": 0.032645344877863164,
+  "n": 100
+ },
+ "N9": {
+  "cor_anyneg3": 0.04,
+  "cor_anyneg95": 0.11,
+  "cor_T1fire": 0.04,
+  "cor_T1": -0.013251065376646593,
+  "lin_anyneg3": 0.01,
+  "lin_anyneg95": 0.03,
+  "lin_T1fire": 0.07,
+  "lin_T1": 0.027432983952986843,
+  "n": 100
+ },
+ "W1s+N8": {
+  "cor_anyneg3": 0.0,
+  "cor_anyneg95": 0.0,
+  "cor_T1fire": 0.95,
+  "cor_T1": 0.2714036966462095,
+  "lin_anyneg3": 0.0,
+  "lin_anyneg95": 0.0,
+  "lin_T1fire": 1.0,
+  "lin_T1": 0.3162006775123751,
+  "n": 100
+ },
+ "W2s+N8": {
+  "cor_anyneg3": 0.57,
+  "cor_anyneg95": 0.68,
+  "cor_T1fire": 0.99,
+  "cor_T1": 0.42323779462005623,
+  "lin_anyneg3": 0.49,
+  "lin_anyneg95": 0.64,
+  "lin_T1fire": 1.0,
+  "lin_T1": 0.4585940673477693,
+  "n": 100
+ },
+ "W2e+N8": {
+  "cor_anyneg3": 0.3,
+  "cor_anyneg95": 0.46,
+  "cor_T1fire": 0.93,
+  "cor_T1": 0.27606533380666454,
+  "lin_anyneg3": 0.21,
+  "lin_anyneg95": 0.35,
+  "lin_T1fire": 0.99,
+  "lin_T1": 0.307582603356855,
+  "n": 100
+ },
+ "_meta": "exploratory; fresh seeds 7,000,000+; Bonferroni 98.33% per-item intervals"
+}

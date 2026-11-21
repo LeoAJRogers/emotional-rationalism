@@ -422,3 +422,153 @@ These restrictions are immune by construction to the person-level heterogeneity 
 - Failed predictions about magnitudes (A6, A7, A11) narrow what Part B can claim. They do not stop it unless A8 also fails.
 
 **Outcome:** *(to be appended after the run)*
+
+**Outcome, Part A (appended 2026-11-21, after the run; prediction text above unchanged).**
+
+- **Run:** `bench.py` at commit `6c88b7c`. 22 worlds × 200 replicates, B = 499, 2,365 s on 2 cores.
+- **Scoring:** mechanical, by `evaluate.py`, which was written before the results were seen. Output in `results/partA_verdicts.json`; full tables in `results/bench_summary.json`.
+- **9 of 11 predictions held.**
+
+| Prediction | Result | Verdict |
+| --- | --- | --- |
+| A1 | Unit tests pass. E1, E2, E3 (degenerate), E3b and E4 exact to ≤ 1e-15; E3a identity to 4e-11; 0/20,000 random rank-2 matrices with all excesses positive | held |
+| A2 | N1: within T1 fires in **3%** (mean −0.003). Pooled T1 fires in **99%** (mean +0.090; E1 implies +0.094) | **held** |
+| A3 | N2: within T1 4%, pooled T1 4.5%, within T2 5.5%, pooled T2 5% | held |
+| A4 | N4: T1 1.5%, T2 6.5%, T2₀ 100%. N5: T1 2%, T2 5% | held |
+| A5 | N3h: **linear** within T1 mean +0.014, fires in 2.5% (I predicted ≥ +0.03 and > 10%). Corrected: −0.026, 1% | **failed** |
+| A6 | W1s T1 100%, W1w T1 99.5%, W2f T2 4.5%, W1s T2 4.5% all held. **W2s: T2 fires in 27.5%** (I predicted ≥ 60%) | **failed** (one part) |
+| A7 | W2e: T2 6.5%; T1_fearful interval below 0 in 97.5% | held |
+| A8 | N8: corrected within T1 fires in **1.5%**. W1s+N8: **98%** | **held; gate passed** |
+| A9 | N6: `all` variant 95%, `day` variant 6%. N7: 100% | held |
+| A10 | W3: T3 25.5%. N2: pooled T3 4.5% ≥ within T3 2% | held |
+| A11 | W0: 100%. W0b: 2% | held |
+
+**Decisions applied:**
+
+- **A2 and A8 held**, so Part B runs as a confirmatory test.
+- **A5 failed in the benign direction.**
+  - The floor artefact in *within-person* T1 is small. Across the ordinal null worlds (N3, N3h, N8, N9), the linear mean is at most +0.03 and the false-positive rate is 3–9%.
+  - So the preregistered fallback (restrict to low-floor person-periods) is not triggered. It is kept as a sensitivity analysis.
+  - The Hermite correction is conservative (means −0.01 to −0.03; false positives 1–4%). But it is unstable under heavy floors (SD 0.34 against 0.11 for linear in N3h), and it costs power: 29% against 56% in W1w+N8.
+- **A6's failed part.**
+  - T2 has little power against a second NA factor of this size in 0010's design: 27.5% Gaussian, 1% in W2s+N8.
+  - The per-item sign test (E3a) detects it instead: 100% in W2s, 73% in W2s+N8, 51% in W2e+N8.
+  - So Part B reads "a second shared persistent dimension" from the sign pattern, with T2 secondary.
+- **A9 held.** Any real T1 > 0 is reported as "item-specific persistence, *or* between-day loading drift, *or* response anchoring".
+  - Drift of log-SD 0.3 between days produced T1 ≈ +0.09, about the size of W1w's effect.
+  - The `day` variant resists drift, but has only 29% power at T1 = 0.25 under realistic nuisance. It also cannot separate anchoring, which happens within the day.
+- **A10 held.** Two timescales within NA are declared untestable in 0010 by these statistics. T3₀ fires in W3 (93%) but also in W0b (95%) and N4 (26%), so it is not specific.
+
+**Unpredicted findings (exploratory):**
+
+1. **Pooled item excess with no item persistence.** In the realistic ordinal null worlds, which have no item-specific persistence, the *pooled* T1 is large and fires in 100%: N3 +0.27, N3h +0.69, N8 +0.39, N9 +0.48.
+   - Mechanism: floors plus person-specific means give each person a different *observed-metric* loading. Pooling then turns that into item excess (E1).
+   - A pooled excess of the size R-005 reported (0.23–0.27; its statistic was not seen here) can arise with no item-specific persistence at all. R-005's pooled excess does not, by itself, favour item dynamics.
+2. **Within-person T1 is precise.** Its SD is 0.023 in Gaussian worlds (I had guessed 0.063) and 0.065 in N8.
+3. **T2₀ is not specific.** It fires in 85–98% of F2 worlds, and also in 100% of N4.
+
+**Addendum R-006 Part B: real-data test on openESM 0010 (appended 2026-11-21, after Part A's outcome and before any 0010 item data were accessed; nothing above is edited).**
+
+**Known before writing:**
+
+- Part A's outcome (above).
+- Three **exploratory** post-Part-A checks, run on synthetic data only, which set the estimator and the guards below:
+  - **No day jackknife** (`explore_variants.py`, same datasets as the bench). The corrected T1 is then biased by −0.12 (N8) to −0.23 (N3h), with little gain in variance. The jackknifed estimator is kept.
+  - **Bonferroni per-item sign test, fresh seeds** (`check_signtest.py`).
+    - Familywise rate 3–4% in N8 and N9 (98.33% intervals), against 8–11% for 95% intervals.
+    - Power 57% in W2s+N8 and 30% in W2e+N8.
+    - The corrected T1 interval rule replicated the gate: 3–4% false positives, 95% power in W1s+N8.
+  - **Marginal-matched null** (`check_matched_null.py`, matched to synthetic N8-like and N3h-like sources).
+    - Corrected within T1: 0–2% false positives at φ = 0.40, 0.55 and 0.70.
+    - Linear within T1: up to 18%.
+    - The sign test: 6–18% under heavy floors.
+- **No 0010 data have been in this session.** Zenodo is blocked here, so the file has to be attached.
+
+**Data and handling:**
+
+- **File:** `0010_geschwind_ts.tsv`, SHA-256 `811f41ae…138bc8ee`, the R-003/R-004 file. `real_data.py` refuses any other file.
+- **Handling (as in R-003, R-003b and R-004):**
+  - rows without a beep index are dropped;
+  - person-periods are id × `study_period`;
+  - lags are within-day differences of the nominal beep index;
+  - padded days are empty.
+- **Inclusion:** at least 15 complete beeps, 8 lag-1 pairs and 3 days per person-period.
+
+**Order of operations** (code in `experiments/r006-lagged-moment-identification/`):
+
+1. `python real_data.py --ts FILE --structure-only`. Hash, structure and missingness counts only.
+2. `python real_data.py --ts FILE`. One run covering:
+   - all Part B statistics;
+   - the marginal-matched F1 null: each person-period keeps its own missingness mask and item category distribution; φ ∈ {0.40, 0.55, 0.70}; 100 replicates each; heterogeneity as in N8;
+   - the sensitivity analyses.
+
+   The output, `results/real_0010_partB.json`, records the code commit and run time.
+3. `python decide_part_b.py`. Applies the rules below mechanically and writes `results/real_0010_partB_verdicts.json`.
+
+**Primary estimand:** within-person item excess T1 for worried, fearful and sad (`all` variant, day-jackknifed).
+
+- **Version.**
+  - The Hermite-corrected statistic is primary.
+  - Exception: if, in the matched null, its largest SD over φ exceeds 1.5 × the linear statistic's, the linear statistic is primary. This is the heavy-floor regime in which Part A found the correction unstable.
+  - Decided from the matched null alone.
+- **Fires if both hold:**
+  - the 95% person-bootstrap interval excludes 0;
+  - the estimate exceeds the largest (over φ) 97.5th percentile of its matched-null distribution.
+- **Uncalibrated if** the matched null fires the interval rule in more than 10% of replicates at any φ. The primary result is then not interpreted.
+- **Smallest effect of interest:** T1 = 0.10, meaning item-specific lag-1 persistence at least a tenth of the shared part.
+- **Power** (Part A, corrected, N8-like): 0.98 at T1 = 0.25 and 0.29 at T1 = 0.10. A null result excludes large item-specific persistence, not small.
+
+**Secondary rules:**
+
+- **Sign test (E3a).**
+  - Fires if, for any NA item, the Bonferroni 98.33% interval for T1_j lies below 0, *and* the estimate lies below the matched null's 2.5% quantile for that item.
+  - Declared uncalibrated if the matched null fires it in more than 10% at any φ.
+- **T2:** Wald > 5.991 and above the matched null's 95th percentile. Low power (Part A).
+- **T2₀:** same rule. Not specific (A4).
+- **T1day:** 95% interval > 0. Resists between-day loading drift; low power.
+- **PA determinant:** 95% interval > 0 and above the matched null's 97.5th percentile.
+- **Bipolar tetrad (BIP):** 95% interval > 0.
+- **Heterogeneity:** pooled − within T1, primary version.
+- **Pooled T1 against the matched null's 95% range:** descriptive, because it depends on the null's assumed heterogeneity.
+- **Sensitivity analyses** (reported, not decisive):
+  - period 0 only and period 1 only;
+  - population item × beep-of-day centering (linear);
+  - person-periods with every NA floor rate below 0.5.
+
+**Predictions** (my probability):
+
+- **B1:** pooled − within T1 ≥ +0.10. *0.85*: every realistic Part A world gave +0.40 to +0.60.
+- **B2:** the primary within T1 fires. *0.40.*
+- **B3:** the sign test fires (rank-2 shared NA persistence). *0.20.*
+- **B4:** T2 fires. *0.10.*
+- **B5:** T2₀ fires. *0.50.*
+- **B6:** BIP fires, so persistence across PA and NA is not one bipolar dimension. *0.85.*
+- **B7:** the PA determinant fires. *0.45.*
+- **B8:** the real pooled T1 lies inside the matched null's 95% range. *0.45.*
+
+**Rival forecasts** (from Part A; full table in `results/rival_forecasts.md`):
+
+| World | within T1 mean (SD) | fires | any T1_j < 0 | T1day fires | pooled − within |
+| --- | --- | --- | --- | --- | --- |
+| N8 (realistic F1 null) | −0.014 (0.065) | 0.01 | 0.075* | 0.01 | +0.40 |
+| W1w+N8 (item persistence 0.10) | +0.093 (0.066) | 0.29 | 0.02* | 0.07 | +0.44 |
+| W1s+N8 (item persistence 0.25) | +0.282 (0.077) | 0.98 | 0.00* | 0.29 | +0.47 |
+| W2s+N8 (second factor, slower) | +0.452 (0.123) | 0.99 | 0.74* | 0.30 | +0.60 |
+| W2e+N8 (second factor, same rate) | +0.282 (0.109) | 0.91 | 0.51* | 0.21 | +0.52 |
+| N6 (between-day loading drift) | +0.090 (0.026) | 0.95 | 0.01* | 0.06 | +0.01 |
+| N7 (anchoring) | +0.247 (0.021) | 1.00 | 0.00* | 1.00 | −0.01 |
+
+\* 95% per-item intervals, as stored in the bench. With the Bonferroni rule on fresh seeds: N8 0.03, W2s+N8 0.57, W2e+N8 0.30.
+
+**Readings fixed in advance** (`decide_part_b.py`):
+
+- **Primary uncalibrated:** not interpreted.
+- **Sign test fires:** rank-2 shared persistence in NA. F1+R is excluded for that configuration, and T1 > 0 is not read as item persistence.
+- **B2 fires, sign test does not, T1day fires:** item-specific persistence *or* response anchoring.
+- **B2 fires, sign test does not, T1day does not:** item-specific persistence, anchoring *or* between-day loading drift. These are not separable here.
+- **B2 does not fire:** no detectable within-person item-specific persistence at this power. If B1 holds, R-005's pooled excess is then attributable to between-person heterogeneity, floors included. B8 strengthens that reading.
+- **In every case:**
+  - no claim about latent emotional mechanisms, or about content versus response style (E4, E5);
+  - no claim about two timescales (A10).
+
+**Outcome:** *(to be appended after the run)*
