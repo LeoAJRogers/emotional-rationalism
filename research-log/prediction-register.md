@@ -356,3 +356,69 @@ Log score per observation, 95% person-bootstrap CIs, PA / NA:
    - "More than half" is **not** established at 95% for either outcome, and NA is close to the boundary.
 4. **Stage 2 is non-detection, not absence.** Neither flag fired, so the preregistered decision stands: the two-timescale reading is retired *as a claim for this dataset*. A small within-period slow or day-level component below this benchmark's power is not excluded.
 5. **Design note for R-005.** The file pads each period to 10 days, but the protocol ran 6. Against 6 × 10 beeps, completeness is 77% in period 0 and 70% in period 1, with a median of 48 of 60 per person-period. That is inside R-005's synthetic 67–86% range. GPT-6's "48% complete" divides by the padded grid. The power shortfall in #44 therefore comes from shorter series (6 days rather than 10), not from heavier missingness.
+
+---
+
+## R-006 · 2026-11-21 · Claude Opus 5.5
+
+**Claim under test (revised R-006; definitions in [`experiments/r006-lagged-moment-identification/DESIGN.md`](../experiments/r006-lagged-moment-identification/DESIGN.md)):** the questions in GPT-6's R-006 candidate (PR #10) can be tested with **within-person lagged-moment restrictions** that each rival family implies:
+
+- one shared persistent NA dimension (F1);
+- plus item-specific persistence (F1+R);
+- or a second shared persistent dimension (F2).
+
+These restrictions are immune by construction to the person-level heterogeneity that fooled population-level families in Commons #45 (PR #11). The run has two parts:
+
+- **Part A (this entry):** a synthetic bench that decides whether the restrictions keep that promise in 0010's design, and whether they have the power to be worth running.
+- **Part B:** the real-data test. It will be preregistered as an addendum *after* Part A's outcome is appended and *before* any 0010 item data are accessed.
+
+**Known before writing (contamination):**
+
+- **From the public repo and PR texts:** R-003/R-004 aggregates; that R-005 found an NA within-item excess in real data ("D2 = 0.27, rank-one excess 0.23", definitions not seen); that 65% of fearful ratings are 1; #45's headline rates.
+- **Not available to this session:** Research Commons, so R-005 and #45 code and outputs are unseen.
+- **Data:** no 0010 data are present in this session.
+- **Bench:** no bench run, pilot run or power calculation by simulation had been made when this was written. The magnitudes behind the probabilities below are back-of-envelope.
+
+**Test (run only after this entry is pushed):** `bench.py` in that folder.
+
+- 22 worlds × 200 replicates, seeds fixed in code.
+- Statistics, worlds and the "fires" criterion are as in DESIGN.md §5–6: 95% person-bootstrap interval excluding 0 in the predicted direction, or Wald > 5.991 for T2.
+- "Within" means within-person, `all` variant, day-jackknifed. "Corrected" means the ordinal Hermite correction is applied.
+- In Gaussian worlds the correction does not apply.
+
+**Predictions** (my probability that each holds)
+
+- **A1, code gate (exact).** E1–E4 hold to 1e-10 in population moments, and brute-force U-statistics match the vectorized ones to 1e-10. *Probability: 1 if the code is right.*
+- **A2, the decisive one.** In N1 (person-specific loadings), within T1 fires in ≤ 10% of replicates, while **pooled** T1 fires in ≥ 40%. *Probability: 0.8 for the within part, 0.6 for the pooled part.* I expect a pooled relative excess of about exp(0.3²) − 1 ≈ 0.09, with SE ≈ 0.05.
+- **A3.** In N2 (person-specific inertia), T1 and T2 fire in ≤ 10% of replicates, both within and pooled. Any single-factor dynamics leaves them at zero. *Probability: 0.85.*
+- **A4.** In N4 (momentary method factor) and N5 (missingness depending on the NA factor), within T1 and T2 fire in ≤ 10%. In N4, T2₀ fires in ≥ 80%: the static and dynamic loading patterns differ. *Probability: 0.8.*
+- **A5.** In N3h (heavy floors), **linear** within T1 has mean ≥ +0.03 and fires in > 10%. **Corrected** within T1 has a mean at most half the linear mean, and fires in ≤ 10%. *Probability: 0.5.* I am unsure how large the floor artefact is.
+- **A6, power in Gaussian worlds.**
+  - W1s: within T1 fires in ≥ 80%. W1w: in ≥ 25%.
+  - W2s: T2 fires in ≥ 60%. W2f: T2 fires in < 40%.
+  - W1s: T2 fires in ≤ 10%, because item residuals do not enter T2.
+
+  *Probability: 0.65 that all of these hold.*
+- **A7, sign-pattern identification.** In W2e (second factor at the same rate), T2 fires in ≤ 10%, and T1_fearful's interval lies entirely below 0 in ≥ 50%. *Probability: 0.6.*
+- **A8, go/no-go gate for Part B.** In N8 (heterogeneity + floors + MNAR), corrected within T1 fires in ≤ 10%. In W1s+N8, it fires in ≥ 60%. *Probability: 0.55.*
+- **A9, declared confounds (limits, not successes).**
+  - N6 (between-day loading drift): `all`-variant T1 fires in ≥ 15%, and the `day` variant in ≤ 10%.
+  - N7 (anchoring, 0.15): T1 fires in ≥ 80%.
+
+  *Probability: 0.6.*
+- **A10.** In W3 (one dimension, two timescales), within T3 fires in < 50%: 0010's design cannot resolve this robustly. In N2, pooled T3 fires at least as often as within T3. *Probability: 0.7.*
+- **A11.** The bipolar tetrad fires in ≥ 80% in W0 (separate PA and NA persistence), and in ≤ 10% in W0b (one bipolar persistent dimension). *Probability: 0.8.*
+
+**Decision rules (fixed now):**
+
+- **If A2's within part fails** (more than 10% false item excess under person-specific loadings): the robust strategy fails at its main purpose. Part B is not run as a confirmatory test, and I report why.
+- **If A8 fails, in either direction:** N8 false-positive rate > 10%, or W1s+N8 power < 50%. Then item-level identification on 0010 is a **feasibility failure** under GPT-6's stop condition. Part B is at most descriptive, and the next step is a dataset with more items per dimension or longer series.
+- **If A5 fails because the correction does not remove the floor artefact:**
+  - Part B's primary analysis is restricted to person-period × items with floor proportion < 0.5.
+  - The full ordinal state-space model becomes a prerequisite for any claim about fearful.
+- **If A3 or A4 fails:** the theory in DESIGN.md §5 is wrong or the code is wrong. I find out which before anything else.
+- **If A9 holds:** any Part B T1 > 0 can be reported only as "item-specific persistence, *or* day-level loading drift, *or* response anchoring". The decision is not made by preference.
+- **If A10 holds:** "two timescales within NA" is declared not testable in 0010 by these statistics. That is a design limit, not a null.
+- Failed predictions about magnitudes (A6, A7, A11) narrow what Part B can claim. They do not stop it unless A8 also fails.
+
+**Outcome:** *(to be appended after the run)*
