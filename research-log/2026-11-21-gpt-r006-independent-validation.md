@@ -54,3 +54,33 @@ This verifies the *numerical examples*, not the full R-006 synthetic bench or th
 GitHub repository discovery confirms `LeoAJRogers/research-commons` exists, is private, and is accessible with read/write permissions to the connected account. However, code search for `R-005`, `rank-one excess`, and `geschwind` returned no indexed matches; no R-005 code or data file was retrieved. A repository tree/contents inspection or existing project manifest is needed next; do not interpret empty code-search results as absence of the files.
 
 **Gate:** PR #14 remains draft; PR #13 should remain unmerged until cross-review. Human-data Part B has not been run.
+
+
+## Cycle-2 continuation: R-005 recovered and a direct synthetic comparison (2026-11-21)
+
+**Source recovery.** R-005 was never missing from GitHub. Its main implementation is [Research Commons PR #44](https://github.com/LeoAJRogers/research-commons/pull/44), on an *unmerged branch*: \`experiments/2026-11-20-cross-item-fingerprint/cross_item.py\` (commit \`4e898e1\`). The preceding design is in Research Commons PR #43; Claude's synthetic R-006 feasibility code is [Research Commons PR #45](https://github.com/LeoAJRogers/research-commons/pull/45). Earlier empty code search looked only at default-branch indexed content. The historical R-005 fingerprint uses \`D2 = (C2_same - C2_cross)/C1_cross\`, aggregating across items and persons; R-006's T1 instead forms within-person products of lag-one elements to cancel fixed loading differences.
+
+**Population-level R-005 non-identification under unequal item loadings (exact).** Let \`Y_j(t)=lambda_j F(t)+epsilon_j(t)\`, with a stationary AR(1) factor \`Cov(F_t,F_(t-k))=phi^k\` and independent, temporally white errors. For three items,
+
+\`\`\`
+D2_population = phi * (mean_j lambda_j^2 / mean_(j != k)(lambda_j lambda_k) - 1).
+mean_j lambda_j^2 - mean_(j != k)(lambda_j lambda_k)
+    = [(lambda_1-lambda_2)^2 + (lambda_1-lambda_3)^2 +
+       (lambda_2-lambda_3)^2] / 6 >= 0.
+\`\`\`
+
+Thus **unequal item loadings alone produce positive D2 even without item-specific temporal persistence**, and this confound is already present *within an individual*; between-person variation is not required. If each person's loadings vary independently lognormally, \`lambda_j = base_j exp(sigma Z_j)\`, then \`E[lambda_j^2]=base_j^2 exp(2 sigma^2)\` and \`E[lambda_j lambda_k]=base_j base_k exp(sigma^2)\` for \`j!=k\`. With \`base=(.70,.70,.65)\`, \`phi=.55\`, population D2 is approximately \`0.00098\` at \`sigma=0\`, \`0.05287\` at \`sigma=.3\`, and \`0.15748\` at \`sigma=.5\`.
+
+**Independent exploratory finite-sample test.** Reproducible synthetic-only scripts added in this PR: \`compare_r005_r006.py\` (48-replicate unjackknifed screen) and \`check_jackknife.py\` (12-replicate day-jackknife screen, plus an 8-replicate stronger heterogeneity check). Design: 127 people × 2 periods × 6 days × 10 scheduled beeps, AR(1) \`phi=.55\`, white item error, all-three-item joint missingness with beta-distributed completeness averaging .77/.70 by period, person-level loading log-SD 0/.3/.5. Each period centered independently. This is **not** Claude's full bench: only continuous linear reports, no 7-point floor/ordinal Hermite correction, bootstrap calibration, anchoring, matched null or complete bench replication.
+
+| Loading log-SD | Replicates | Mean R-005 D2 | Mean R-006 raw T1 | Mean R-006 T1 with day JK |
+| --- | ---: | ---: | ---: | ---: |
+| 0 | 12 | -0.0476 | -0.0634 | +0.00024 |
+| 0.3 | 12 | +0.00363 | -0.0637 | -0.00925 |
+| 0.5 | 8 | +0.10099 | -0.0525 | -0.00462 |
+
+Finite-sample R-005 D2 is substantially more negative than its population counterpart in these short noisy series, so **the observed positive R-005 value cannot be explained by substituting the population formula without accounting for centering, missingness and ordinal floors**. The R-006 raw T1 also shows negative centering bias; day jackknife materially reduces this bias in these small samples. Reps are too few for reliable interval coverage/type-I error claims. In a separate 48-replicate raw-only screen, mean raw T1 was -0.0607 at sigma=0, -0.0545 at sigma=.3; mean D2 -0.0519 and +0.00033, consistent with the smaller screens. A proposed 36-replicate jackknife run exceeded local time limit and returned no usable result. Do not report it as completed.
+
+**Concrete Part B code bug (PR #13 review posted):** In \`real_data.py\` low-floor sensitivity, \`np.nanmean(Y[m,...,j] == 1)\` divides the floor count by all *scheduled* slots, because \`NaN == 1\` is False. For four observed responses \`[1,1,6,7]\` and six missing values, it reports 0.2 versus true observed floor fraction 0.5. Correct by computing \`v = Y[m,...,j]; obs = v[np.isfinite(v)]; float(np.mean(obs == 1)) if obs.size else 1.0\`. This is a sensitivity-subset error, not a bug in the primary T1 estimator. It must be fixed *prospectively* before Part B, with a dated amendment.
+
+**Next gates:** independent replication of the full R-006 Part A simulation and bootstrap / ordinal calibration; proof and scope clarification for E3a (nonnegative lag contributions); independent code-review and correction of low-floor handling; preregistration freeze. No R-006 human-data outcomes or model tests were run in this pass. The already-recovered 0010 file has the expected historical SHA, but Part B remains gated.
