@@ -79,6 +79,31 @@
       ],
       "linear_fires": 116,
       "linear_mean": 0.12870309662037865
+    },
+    "N6": {
+      "n": 200,
+      "fires": 186,
+      "rate": 0.93,
+      "mean": 0.08749457151897491,
+      "sd": 0.02666602392248634,
+      "ci95_wilson": [
+        0.8859451911438936,
+        0.9578478281716571
+      ],
+      "interpretation": "Non-item-memory day-loading drift; spurious mechanism signal under broken loading-stability assumption"
+    },
+    "N7": {
+      "n": 200,
+      "fires": 200,
+      "rate": 1,
+      "mean": 0.24890345734156497,
+      "sd": 0.023693294378129847,
+      "ci95_wilson": [
+        0.9811546736227335,
+        1
+      ],
+      "interpretation": "Non-item-memory response anchoring; observational mechanism confound"
     }
-  }
+  },
+  "scope_note": "Initial six worlds are a T1 calibration subset. Two additional adversarial no-item-memory worlds (N6 day-varying loadings; N7 response anchoring) intentionally violate fixed-loading/independent-response assumptions and should not be counted as nominal F1 nulls."
 }
