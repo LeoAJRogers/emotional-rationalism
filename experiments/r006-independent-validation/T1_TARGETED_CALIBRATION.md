@@ -4,11 +4,11 @@
 
 ## Sources and reproducibility
 
-- Source under audit: Claude Opus 5.5, ER PR #13, revision \`2f6ebbf2d64c0c263a8440629200276a93b0c2c8\`; original \`lagmom.py\`, \`simulate.py\`, \`bench.py\` and \`results/bench_summary.json\`.
-- Independent code: \`calibrate_t1_independent.py\` (NumPy/SciPy), separate from the original \`lagmom.py\` and \`simulate.py\`. Algorithm independently implements lag-one disjoint-pair U-statistic, per-period centering/scalar scaling, 6-day leave-one-day-out jackknife, 20-term Hermite ordinal correction, and person-level multinomial bootstrap. \`test_calibrate_t1_independent.py\` verifies disjoint-pair algebra against explicit nested-loop enumeration and checks finite severe-floor results; both local tests passed.
+- Source under audit: Claude Opus 5.5, ER PR #13, revision `2f6ebbf2d64c0c263a8440629200276a93b0c2c8`; original `lagmom.py`, `simulate.py`, `bench.py` and `results/bench_summary.json`.
+- Independent code: `calibrate_t1_independent.py` (NumPy/SciPy), separate from the original `lagmom.py` and `simulate.py`. Algorithm independently implements lag-one disjoint-pair U-statistic, per-period centering/scalar scaling, 6-day leave-one-day-out jackknife, 20-term Hermite ordinal correction, and person-level multinomial bootstrap. `test_calibrate_t1_independent.py` verifies disjoint-pair algebra against explicit nested-loop enumeration and checks finite severe-floor results; both local tests passed.
 - 127 people × 2 periods (254 person-periods), 6 days × 10 nominal prompts, shared NA factor AR(1), item-white error, Beta-distributed per-period compliance; combined nuisance worlds also vary person loadings/inertia and MNAR response. Six targeted NA worlds: W0, N3, N3h, N8, W1s+N8 (strong item excess .25), W1w+N8 (weak item excess .10).
-- 200 new replicates per world (1,200 simulations total); 199 person-bootstrap draws per replicate (less than Claude's 499). Seeds: \`100000*(world_index+1)+rep\`, with world order \`[W0,N3,N3h,N8,W1s+N8,W1w+N8]\` and \`rep = 0..199\`. The T1 positivity decision is the *lower two-sided 95% bootstrap percentile bound > 0*; this is equivalent to a one-sided nominal 2.5% criterion. Results are aggregated without retaining individual synthetic outputs; the script regenerates them deterministically.
-- Run from the script directory: \`python calibrate_t1_independent.py --reps 100 --start 0 --worlds N8 --boot 199 --output N8_part1.json\` and repeat \`--start 100\`. For other worlds, substitute the name. The output folder must already exist if using a path.
+- 200 new replicates per world (1,200 simulations total); 199 person-bootstrap draws per replicate (less than Claude's 499). Seeds: `100000*(world_index+1)+rep`, with world order `[W0,N3,N3h,N8,W1s+N8,W1w+N8]` and `rep = 0..199`. The T1 positivity decision is the *lower two-sided 95% bootstrap percentile bound > 0*; this is equivalent to a one-sided nominal 2.5% criterion. Results are aggregated without retaining individual synthetic outputs; the script regenerates them deterministically.
+- Run from the script directory: `python calibrate_t1_independent.py --reps 100 --start 0 --worlds N8 --boot 199 --output N8_part1.json` and repeat `--start 100`. For other worlds, substitute the name. The output folder must already exist if using a path.
 
 ## Primary result: independent T1 detection
 
@@ -21,7 +21,7 @@
 | W1s+N8 strong item persistence | 193/200 (96.5%) | +0.2721 (0.0852) | 98.0% |
 | W1w+N8 weak item persistence | 58/200 (29.0%) | +0.0891 (0.0711) | 29.5% |
 
-All independently generated detection rates are broadly consistent with Claude's original runs. The rates are *sampling estimates*, not exact probabilities: for the N8 null, 5/200 has a Wilson 95% binomial interval approximately 1.1–5.7%; for the weak effect, 58/200 has interval 23.2–35.6%. Detailed values and all rates are in \`results/t1_targeted_calibration_summary.json\`.
+All independently generated detection rates are broadly consistent with Claude's original runs. The rates are *sampling estimates*, not exact probabilities: for the N8 null, 5/200 has a Wilson 95% binomial interval approximately 1.1–5.7%; for the weak effect, 58/200 has interval 23.2–35.6%. Detailed values and all rates are in `results/t1_targeted_calibration_summary.json`.
 
 ## Important divergences and limitations
 
@@ -30,7 +30,7 @@ All independently generated detection rates are broadly consistent with Claude's
 - **Weak-effect limitation:** under W1w+N8 the primary corrected T1 detected 29%, so *a negative Part B result would not exclude a weak item-specific persistence effect*. Power is condition-specific.
 - **Uncovered scope:** This independently tests T1 only, not T2 lag-rate minors, T3 curvature, PA determinant, bipolar tetrad, sign-test familywise control, E3a under signed lag contributions, or R-006's full 22-world preregistration. Other nuisance classes (between-day loading drift N6, response anchoring N7, non-Gaussian ordinal settings, floor-dependent drift) remain possible confounds.
 - **Simulation matching:** The generator matches the NA marginal model and 0010-like schedule/completeness assumptions but does not simulate the full correlated PA/NA system. It uses new RNG streams, a 40-iteration Newton inverse rather than Claude's 50, and 199 rather than 499 bootstrap resamples. This is an *independent implementation check*, not exact seeded code duplication. Higher-order details and null coverage should be reconciled in cross-review.
-- **Code gate remains:** the observed-denominator low-floor sensitivity bug in \`real_data.py\` and duplicate-key fail-closed concerns were separately reported on PR #13. These must be repaired prospectively before Part B. Geschwind file integrity and participant-period keys were verified by HAAR H-001, but no human-data models were run here.
+- **Code gate remains:** the observed-denominator low-floor sensitivity bug in `real_data.py` and duplicate-key fail-closed concerns were separately reported on PR #13. These must be repaired prospectively before Part B. Geschwind file integrity and participant-period keys were verified by HAAR H-001, but no human-data models were run here.
 
 ## Director's disposition
 
