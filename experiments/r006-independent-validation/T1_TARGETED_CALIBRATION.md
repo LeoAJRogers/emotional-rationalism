@@ -6,8 +6,8 @@
 
 - Source under audit: Claude Opus 5.5, ER PR #13, revision `2f6ebbf2d64c0c263a8440629200276a93b0c2c8`; original `lagmom.py`, `simulate.py`, `bench.py` and `results/bench_summary.json`.
 - Independent code: `calibrate_t1_independent.py` (NumPy/SciPy), separate from the original `lagmom.py` and `simulate.py`. Algorithm independently implements lag-one disjoint-pair U-statistic, per-period centering/scalar scaling, 6-day leave-one-day-out jackknife, 20-term Hermite ordinal correction, and person-level multinomial bootstrap. `test_calibrate_t1_independent.py` verifies disjoint-pair algebra against explicit nested-loop enumeration and checks finite severe-floor results; both local tests passed.
-- 127 people × 2 periods (254 person-periods), 6 days × 10 nominal prompts, shared NA factor AR(1), item-white error, Beta-distributed per-period compliance; combined nuisance worlds also vary person loadings/inertia and MNAR response. Six targeted NA worlds: W0, N3, N3h, N8, W1s+N8 (strong item excess .25), W1w+N8 (weak item excess .10).
-- 200 new replicates per world (1,200 simulations total); 199 person-bootstrap draws per replicate (less than Claude's 499). Seeds: `100000*(world_index+1)+rep`, with world order `[W0,N3,N3h,N8,W1s+N8,W1w+N8]` and `rep = 0..199`. The T1 positivity decision is the *lower two-sided 95% bootstrap percentile bound > 0*; this is equivalent to a one-sided nominal 2.5% criterion. Results are aggregated without retaining individual synthetic outputs; the script regenerates them deterministically.
+- 127 people × 2 periods (254 person-periods), 6 days × 10 nominal prompts, shared NA factor AR(1), item-white error, Beta-distributed per-period compliance; combined nuisance worlds also vary person loadings/inertia and MNAR response. Six initial targeted NA worlds: W0, N3, N3h, N8, W1s+N8 (strong item excess .25), W1w+N8 (weak item excess .10).
+- 200 new replicates per initial world (1,200 simulations initially; 400 further simulations in the adversarial extension below); 199 person-bootstrap draws per replicate (less than Claude's 499). Seeds: `100000*(world_index+1)+rep`, with world order `[W0,N3,N3h,N8,W1s+N8,W1w+N8]` and `rep = 0..199`. The T1 positivity decision is the *lower two-sided 95% bootstrap percentile bound > 0*; this is equivalent to a one-sided nominal 2.5% criterion. Results are aggregated without retaining individual synthetic outputs; the script regenerates them deterministically.
 - Run from the script directory: `python calibrate_t1_independent.py --reps 100 --start 0 --worlds N8 --boot 199 --output N8_part1.json` and repeat `--start 100`. For other worlds, substitute the name. The output folder must already exist if using a path.
 
 ## Primary result: independent T1 detection
@@ -37,3 +37,23 @@ All independently generated detection rates are broadly consistent with Claude's
 The T1 core has survived an independent targeted replication of the central *false-positive vs strong/weak power pattern*. **Do not promote to validated mechanism identification**: loading stability, reporting anchoring, positive lag-covariance assumptions, and meaningful external anchors remain unverified. Maintain PR #14 as draft and PR #13 unmerged pending Claude cross-review and the remaining test families. Next highest-value pass: deliberately challenge the ordinal correction with non-Gaussian measurement and **calibrate negative/sign tests** rather than rerunning confirming T1 worlds indefinitely.
 
 **No new HAAR assignment.** The five acquired datasets remain untouched pending a preregistration amendment, code review, and a separate Part B decision.
+
+
+## Adversarial extension — assumption-breaking rivals
+
+Following the six-world calibration, the independent generator was extended with two **synthetic no-item-memory alternatives**, each with 200 new replicates, 199 person-bootstrap draws, and the same population size/design. These are exploratory replication worlds; they intentionally fall **outside** the strict fixed-loading/independent-response one-factor null and are **not** pooled with the nominal null false-positive estimates above.
+
+| World | Alternative with no item-specific latent residual persistence | Independent T1 positive | T1 mean (SD) | Claude PR #13 |
+| --- | --- | ---: | ---: | ---: |
+| N6 | Day-varying item loadings, independent multiplicative log-normal day shifts (log-SD .3) | **186/200 (93%)** | +0.0875 (0.0267) | 95% |
+| N7 | Response anchoring: 85% current latent report, 15% previous answered response within the day | **200/200 (100%)** | +0.2489 (0.0237) | 100% |
+
+New generator seeds use world indices 6 and 7 in the now-eight-entry order `[W0,N3,N3h,N8,W1s+N8,W1w+N8,N6,N7]`. As before, these are independent stochastic draws, not Claude's original replicate seeds.
+
+**Interpretation:** The independent checker reproduces the most important caveat from PR #13. Under day-loading drift or response anchoring, T1 overwhelmingly detects an excess that **cannot be assigned specifically to item-level emotional persistence**. This is not a defect in type-I error calibration for the narrower fixed-loading F1 null; it is observational nonidentifiability when the model assumptions are relaxed. The T1 statistic is therefore useful for detecting deviations from a restricted measurement model, not establishing their mechanism.
+
+**Reproduction:** `python calibrate_t1_independent.py --reps 200 --worlds N6 N7 --boot 199 --output adversarial.json`. The direct brute-force parity test was rerun and passed after this code extension.
+
+### Next decision
+
+A future Part B result must distinguish **a measured persistent response signature** from **a claimed distinct affect mechanism**. Even a statistically decisive positive T1 is not causally diagnostic against the N6/N7 alternatives. Before any human analysis, preregister interpretation limits, corrections to the low-floor subset, and any discriminating follow-ups. No human data have been analyzed.
