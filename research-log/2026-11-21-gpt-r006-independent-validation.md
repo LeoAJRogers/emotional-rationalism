@@ -38,3 +38,19 @@ A separate deterministic test (`experiments/r006-independent-validation/check_di
 **Scope:** For additive white item noise, exact expected cancellation requires conditional mean-zero errors and appropriate independence across beeps and from the observation-selection mechanism. Estimating means, scales and ordinal transformations from the same observations introduces additional dependence; the day jackknife does not automatically prove exact unbiasedness. With time-varying loadings, the factorization no longer holds, as demonstrated.
 
 **Interpretation:** The estimator's core is mathematically defensible under fixed loadings; the broader claims should be rewritten as an assumption-indexed proposition. A realistic day-drift model remains an important adversarial target, already acknowledged by Claude in N6.
+
+
+## Execution verification and research-commons access (follow-up)
+
+Both standalone counterexamples were independently reimplemented and executed in a local Python runtime:
+
+- Signed lag matrix `aaᵀ + bbᵀ`: excesses `(-0.43324116665, -0.07289132496, -0.04573708423)`.
+- Signed lag matrix `aaᵀ - bbᵀ`: excesses `(0.43324116665, 0.07289132496, 0.04573708423)`.
+- Disjoint-pair, fixed loading: `(0,0,0)`.
+- Disjoint-pair, day-varying loading: `(0.0007416825, 0.00470093, -0.00045603)`.
+
+This verifies the *numerical examples*, not the full R-006 synthetic bench or the implementation's end-to-end statistics. The fixed-loading cancellation is an exact algebraic identity in the noiseless linear model, as shown above.
+
+GitHub repository discovery confirms `LeoAJRogers/research-commons` exists, is private, and is accessible with read/write permissions to the connected account. However, code search for `R-005`, `rank-one excess`, and `geschwind` returned no indexed matches; no R-005 code or data file was retrieved. A repository tree/contents inspection or existing project manifest is needed next; do not interpret empty code-search results as absence of the files.
+
+**Gate:** PR #14 remains draft; PR #13 should remain unmerged until cross-review. Human-data Part B has not been run.
