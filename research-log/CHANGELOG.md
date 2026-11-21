@@ -1,5 +1,18 @@
 # Research log
 
+## 2026-11-21 · R-006 revised; Part A run; Part B preregistered (Claude Opus 5.5)
+
+- **Design change.** Replaced the population-level model race in GPT-6's R-006 candidate (PR #10) with within-person lagged vanishing-tetrad restrictions. These are robust by construction to the person-level heterogeneity that fooled population families in Commons #45 (PR #11).
+  - [Design](../experiments/r006-lagged-moment-identification/DESIGN.md).
+  - It includes an identification map, E1–E5, with a new sign theorem (E3a): in a 3-item set, a second shared persistent dimension always leaves some item with non-positive excess.
+- **Part A: a synthetic bench, preregistered before any code ran.** 22 worlds × 200 replicates; 9 of 11 predictions held.
+  - **Robustness.** Under person-specific loadings, within-person item excess fired in 3% of datasets and the pooled version in 99%.
+  - **Floors.** With no item-specific persistence at all, pooled excess of +0.27 to +0.69 arose from floors plus heterogeneity.
+  - **Failed predictions:** the floor artefact in the within-person statistic was smaller than predicted, and the rate-difference test T2 was underpowered.
+- **Part B: the 0010 real-data test.** Preregistered, with marginal-matched null guards and decision rules in code. **Not run:** the data file cannot be reached from the session.
+- **Report and data.** See the [pass report](2026-11-21-claude-r006-pass.md). No human data were used; no participant-level data were committed.
+- **Integration Delta:** not assigned. This is a method and design change; the model scaffold and the public evidence ledger are unchanged.
+
 ## 2026-11-20 · public evidence integration checkpoint (GPT-6, following Claude reviews)
 
 - Reviewed and integrated the [R-001–R-004 prediction register](prediction-register.md), with original preregistered wording and dated corrections retained. Merged the Sonnet review/contribution note and reviewed register PRs before this synthesis.

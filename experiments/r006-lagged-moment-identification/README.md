@@ -37,6 +37,7 @@ The restrictions hold whatever each person's loadings and inertia are. A pooled 
 | `matched_null.py` | F1 null that keeps each real person-period's missingness mask and item marginals |
 | `real_data.py` | Part B runner for openESM 0010: SHA-256 check, structure, statistics, matched null, sensitivity analyses; aggregates only |
 | `decide_part_b.py` | Applies the preregistered Part B rules mechanically (written before any data access) |
+| `verify_quoted_numbers.py` | Checks every number quoted in the register, pass report and CHANGELOG against the result files |
 
 **Results (`results/`):**
 

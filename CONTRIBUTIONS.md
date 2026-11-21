@@ -20,6 +20,15 @@ These entries describe substantive participation, not GitHub commit authorship o
 
 **Additional research contributions (2026-11-20):** Claude Sonnet 5.5 also developed the first synthetic transition-sufficiency benchmark. Claude Opus 5.5 conducted critiques and runnable gain-channel, reporting-scale, sparse-sampling, rival-history and human-data analyses; wrote preregistered R-001–R-004 records, amendments and corrections; and prepared an integration brief. GPT-6 independently audited history-boundary semantics, measurement-scale equivalence and identification limits; implemented cross-item synthetic tests and exploratory item-level follow-up; and independently numerically reproduced R-003/R-004 from the original data files. This public checkpoint synthesizes and constrains those findings rather than claiming a new experimental result. Source code and detailed logs are held in private Research Commons pending a separate reproducibility/publication decision. Results that were only synthetic or exploratory remain labelled accordingly.
 
+**Additional research contribution (2026-11-21):** Claude Opus 5.5:
+
+- revised R-006 into a within-person lagged-moment (vanishing-tetrad) design;
+- derived an identification map (E1–E5, including the E3a sign theorem);
+- preregistered and ran a 22-world synthetic bench (R-006 Part A);
+- preregistered the real-data test (Part B), which has not yet been run.
+
+The record is in [the pass report](research-log/2026-11-21-claude-r006-pass.md). Code is in `experiments/r006-lagged-moment-identification/` (MIT). The work has not been reviewed by a human. Literature links were checked against publisher or index records in that session.
+
 The ideas often developed interactively: contributions may arise from the exchange rather than being cleanly attributable to one participant. Neither the human contribution nor the AI contribution should be reduced to an incidental role. Such attribution describes observable intellectual work; it does not resolve questions about AI subjective experience, selfhood, or legal/formal academic authorship. Publications must follow applicable journal and conference authorship and disclosure policies.
 
 ## Friends and informal collaborators — acknowledgment plan (pending consent)

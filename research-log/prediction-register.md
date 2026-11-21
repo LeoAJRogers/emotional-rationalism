@@ -572,3 +572,9 @@ These restrictions are immune by construction to the person-level heterogeneity 
   - no claim about two timescales (A10).
 
 **Outcome:** *(to be appended after the run)*
+
+**Correction note on the Part A outcome (appended 2026-11-21, after a scripted check of every quoted number against the result files, `verify_quoted_numbers.py`; text above unchanged).**
+
+1. **Unpredicted finding 3 is overstated.** T2₀ fires in 85% (W2s) and 98% (W2f) of the Gaussian worlds where the second factor runs at a *different* rate from the first. It fires in 5% when the rates are equal (W2e), and in 7–27% under realistic nuisance. It fires in 100% of N4, so it is not specific to persistent structure.
+2. **Wrong lower bound under "Decisions applied", A5.** The linear false-positive rate across the ordinal null worlds is **2.5–9%**, not 3–9% (N3h: 2.5%).
+3. **Rounding.** Every other quoted number matches the result files. The rates that end in .5 (for example W1w+N8: 0.295) are quoted rounded either way.
