@@ -39,13 +39,15 @@ def sim(rng,world):
     load_sd=(.3 if world in ('N8','W1s+N8','W1w+N8') else 0)
     phisd=(.5 if world in ('N8','W1s+N8','W1w+N8') else 0)
     mnar=(.6 if world in ('N8','W1s+N8','W1w+N8') else 0)
-    ordinal=world!='W0'
+    ordinal=world not in ('W0','N6','N7')
     floors=(.75,.75,.75) if world=='N3h' else (.45,.65,.50)
     phi=np.full(N,.55) if phisd==0 else expit(logit(.55)+phisd*rng.standard_normal(N))
     phi=np.repeat(phi,2)
     lam=np.tile(LAM,(M,1)) if load_sd==0 else np.repeat(LAM*np.exp(load_sd*rng.standard_normal((N,J))),2,axis=0)
     f=phi_path(rng,phi)
     signal=f[...,None]*lam[:,None,None,:]
+    if world=='N6':
+        signal*=np.exp(.3*rng.standard_normal((M,D,J)))[:,:,None,:]
     target=(.25 if world=='W1s+N8' else .10 if world=='W1w+N8' else 0)
     s=target*.55*LAM**2/.6
     if target:
@@ -58,6 +60,18 @@ def sim(rng,world):
     pi=rng.beta(means*8,(1-means)*8)
     pr=expit(logit(np.clip(pi,1e-6,1-1e-6))[:,None,None]-mnar*f)
     obs=rng.random((M,D,B))<pr
+    if world=='N7':
+        resp=ystar.copy()
+        for d in range(D):
+            have=np.zeros(M,bool)
+            last=np.zeros((M,J))
+            for b in range(B):
+                if b>0:
+                    resp[:,d,b,:]=np.where(have[:,None],.85*ystar[:,d,b,:]+.15*last,ystar[:,d,b,:])
+                upd=obs[:,d,b]
+                last=np.where(upd[:,None],resp[:,d,b,:],last)
+                have|=upd
+        ystar=resp
     if ordinal:
         tot_sd=np.sqrt(1+(.8)**2+(.3)**2)
         meanitem=-ndtri(np.array(floors))*tot_sd
@@ -178,7 +192,7 @@ def main():
     p.add_argument('--start',type=int,default=0)
     p.add_argument('--output',default='r006_targeted_bench.json')
     a=p.parse_args();out={}
-    world_order=['W0','N3','N3h','N8','W1s+N8','W1w+N8']
+    world_order=['W0','N3','N3h','N8','W1s+N8','W1w+N8','N6','N7']
     for world in a.worlds:
         wi=world_order.index(world)
         arr=[]
@@ -187,7 +201,7 @@ def main():
         for rr in range(a.start,a.start+a.reps):
             seed=100000*(wi+1)+rr
             y=sim(np.random.default_rng(seed),world)
-            c=world!='W0'
+            c=world not in ('W0','N6','N7')
             z=run(y,cor=c,seed=rr,nboot=a.boot)
             if c:
                 linear=run(y,cor=False,seed=rr,nboot=a.boot)
