@@ -176,3 +176,22 @@ where θ̂_(−d) recomputes centering, scaling, the ordinal correction and the 
 - **Ordinal correction.** The correction assumes a latent Gaussian marginal within each person-period, and thresholds are estimated from about 48 beeps.
 - **Within-day variation.** Loading variation *within* a day, and item-specific diurnal profiles, are not handled. A population item × beep-of-day centering is a planned sensitivity check.
 - **Statistics, not model comparison.** No held-out predictive race is run. For identification, the restrictions above are the targets. Predictive comparison answers a different question ("which approximation predicts best"). Pseudo-true effects contaminate it in exactly the way #45 showed.
+
+---
+
+## Correction note on E3 (appended 2026-11-21, while writing `equivalences.py`, before any bench run; text above unchanged)
+
+The E3 row above is true, but it understates what is identified.
+
+- **Sign theorem (E3a).** For three items, take any pure rank-2 persistent matrix `a aᵀ + b bᵀ`. This covers lag-1 matrices of a two-factor model at any rates. The three item excesses then satisfy
+
+  `g_W · g_F · g_S = −(x y z)²  ≤  0`,
+
+  where x, y, z are the 2×2 minors of the loading matrix [a b]. So at least one item has a **non-positive** excess. Under F1+R every excess is ≥ 0.
+- **Consequence.** Pure two-factor persistence is always distinguishable from F1+R by the per-item sign pattern, given enough precision. The one exception is two items with proportional loadings on both factors. That case *is* F1+R, with a residual on the third item only.
+- **Checked numerically.**
+  - 0 of 20,000 random rank-2 matrices had all three excesses positive.
+  - The identity holds to 4e-11.
+  - The degenerate case matches F1+R to 1e-16.
+- **What is not identified (E3b).** F1+R versus **F2+R**: a second shared factor *plus* item residuals, at equal rates. When the combined persistent matrix has all excesses positive, an F1+R model reproduces it exactly (checked to 1e-16). So "item-specific persistence" in the NA triad cannot exclude "a second factor plus item persistence".
+- **Effect on the predictions.** A7's per-item sign test is therefore better founded than the original E3 row implied. A1 refers to E1–E4 and is checked against both statements.
