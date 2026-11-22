@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Emotional Rationalism — interactive introduction</title>
+<style>
+:root{font-family:system-ui,-apple-system,Segoe UI,sans-serif;color:#e9edf7;background:#101827;font-size:17px}*{box-sizing:border-box}body{margin:0}main{max-width:880px;margin:auto;padding:36px 20px 90px}a{color:#a5d7ff}h1{font-size:clamp(2rem,6vw,3.5rem);line-height:1.12}h2{margin-top:2.5rem}.lead{font-size:1.2rem;color:#c9d5e6;line-height:1.6}.panel{background:#1a2639;border:1px solid #40516b;border-radius:18px;padding:24px;margin:24px 0}label{display:block;margin:22px 0 8px;font-weight:650}input{width:100%;accent-color:#82caff}output{color:#a5d7ff;font-variant-numeric:tabular-nums}.bar{height:32px;background:#33435b;border-radius:10px;overflow:hidden;margin:12px 0}.fill{height:100%;background:linear-gradient(90deg,#4ea7cf,#9bdac5);width:0%;transition:width .3s}.metrics{display:flex;gap:20px;flex-wrap:wrap}.metric{flex:1;min-width:180px}.metric strong{display:block;font-size:2rem;margin-top:8px}small,.muted{color:#b8c5d7;line-height:1.5}.tag{display:inline-block;border:1px solid #64809b;border-radius:99px;padding:4px 12px;color:#bcd9ef}.step{border-left:3px solid #7cc9e5;padding-left:16px;margin:18px 0}button{background:#a5d7ff;color:#102036;border:0;border-radius:9px;padding:11px 18px;font-weight:700;cursor:pointer}button:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid #fff;outline-offset:4px}@media(prefers-reduced-motion:reduce){.fill{transition:none}}</style></head>
+<body><main><p class="tag">Interactive research explainer · illustrative, not clinical</p>
+<h1>Why can understanding change before feeling does?</h1>
+<p class="lead">Imagine someone you care about hasn't replied. You feel alarmed. Later, you learn their phone battery died. You believe the explanation—but your alarm may take time to settle.</p>
+<p>The project asks three separate questions. <strong>What response tends to happen?</strong> <strong>What response fits the evidence under stated criteria?</strong> <strong>What response is attainable within a given time?</strong> None of these automatically answers the others.</p>
+<div class="step"><strong>Belief:</strong> “The silence has a harmless explanation.”</div>
+<div class="step"><strong>Feeling:</strong> Alarm may still persist.</div>
+<div class="step"><strong>Reachability:</strong> The chance of settling can depend on time, context, and feasible actions.</div>
+<h2>Try a miniature model</h2>
+<p>Here we assume just two possible states: <strong>high alarm</strong> and <strong>low alarm</strong>. The person begins in high alarm. At each step there is a fixed chance of moving to low alarm, which then persists. This is deliberately simplified.</p>
+<section class="panel" aria-label="Interactive alarm recovery model">
+<label for="chance">Chance of settling at each step: <output id="chanceValue">10%</output></label>
+<input id="chance" type="range" min="0" max="100" value="10" step="1">
+<label for="steps">Number of steps: <output id="stepsValue">3</output></label>
+<input id="steps" type="range" min="0" max="30" value="3" step="1">
+<label for="threshold">Reachability threshold: <output id="thresholdValue">50%</output></label>
+<input id="threshold" type="range" min="1" max="100" value="50" step="1">
+<div class="bar" role="img" id="barLabel" aria-label="Probability of low alarm"><div class="fill" id="fill"></div></div>
+<div class="metrics"><div class="metric">Probability of low alarm<strong id="probability">27.1%</strong></div><div class="metric">Low alarm meets threshold?<strong id="reachable">No</strong></div></div>
+<p id="explanation" aria-live="polite"></p><button id="reset" type="button">Reset example</button>
+</section>
+<p class="muted"><strong>How the calculation works:</strong> Probability of low alarm after h steps = 1 − (1 − p)<sup>h</sup>, where p is the chance of settling per step. “Reachable” here means the probability meets the threshold you selected, not that someone can simply choose to feel differently. The model has no measured human parameters, individual differences, setbacks, or clinical validity.</p>
+<h2>What this demonstrates—and what it doesn't</h2>
+<p>Even if low alarm is the response preferred by the example's explicitly chosen evaluative rule, it need not be likely within three steps. Change the assumptions and the prediction changes. This is a mathematical illustration of the distinction, <strong>not evidence that real people follow this transition rule</strong>.</p>
+<p>Our empirical work has found predictive information in earlier affect reports, but that does not by itself establish a distinct slow emotional mechanism. The wider research examines measurement, context, history, and competing explanations.</p>
+<h2>Explore the research</h2>
+<p><a href="README.md">Project overview and evidence status</a> · <a href="theory/model.md">Mathematical model</a> · <a href="theory/research-scope.md">Broader research scope</a> · <a href="research-log/2026-11-20-public-integration-checkpoint.md">Evidence and limitations</a></p>
+<p class="muted">Educational interactive prototype. No personal data collected. Source: Emotional Rationalism research repository.</p>
+</main><script>
+const chance=document.getElementById('chance'),steps=document.getElementById('steps'),threshold=document.getElementById('threshold');
+function update(){const p=Number(chance.value)/100,h=Number(steps.value),a=Number(threshold.value)/100,v=1-Math.pow(1-p,h),yes=v+1e-12>=a;
+document.getElementById('chanceValue').textContent=chance.value+'%';document.getElementById('stepsValue').textContent=steps.value;document.getElementById('thresholdValue').textContent=threshold.value+'%';
+document.getElementById('probability').textContent=(100*v).toFixed(1)+'%';document.getElementById('reachable').textContent=yes?'Yes':'No';document.getElementById('fill').style.width=(100*v)+'%';document.getElementById('barLabel').setAttribute('aria-label','Probability of low alarm: '+(100*v).toFixed(1)+'%');
+document.getElementById('explanation').textContent=yes?'Under these illustrative assumptions, low alarm meets the selected probability threshold.':'Under these illustrative assumptions, low alarm does not yet meet the selected probability threshold.'}
+[chance,steps,threshold].forEach(x=>x.addEventListener('input',update));document.getElementById('reset').addEventListener('click',()=>{chance.value=10;steps.value=3;threshold.value=50;update()});update();
+</script></body></html>
