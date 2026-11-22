@@ -6,6 +6,18 @@
 
 The project grew from sustained inquiry into lived experience, relationships, and self-understanding. The current mathematical formulation is a **narrow, testable starting point** within a wider research program—not an assertion that all state changes are emotional or that the objective is to control feelings. See [research scope](theory/research-scope.md) for the broader conceptual scaffold, its limitations, and candidate extensions.
 
+## Start here: a human-readable introduction
+
+New to the research? Begin with the [interactive introduction](interactive.html), a self-contained HTML demo you can download and open in a browser. It walks through the delayed-reply example with adjustable recovery probability, time horizon, and reachability threshold. **The demo is illustrative mathematics, not an empirical model of a person's emotions.** GitHub's file viewer does not execute HTML; open the downloaded file locally to use its controls.
+
+In everyday language, the project separates three ideas:
+
+1. **What happens:** An emotion may persist even after someone's understanding changes.
+2. **What fits:** Given evidence and explicitly stated values, some responses might be judged more fitting than others. That judgment is conditional, not a universal rule.
+3. **What is possible:** Even when a response is judged fitting, reaching it may be difficult or unlikely within a particular time.
+
+These questions are distinct. The current evidence supports narrower claims about predicting reported affect from history, not a validated mechanism explaining all emotional change. Readers wanting technical detail can continue to the [mathematical model](theory/model.md); the [research scope](theory/research-scope.md) explains the broader ambitions and boundaries.
+
 ## First formal case: emotional dynamics
 
 How do emotions change after a person revises an interpretation, and under what conditions does an emotional response they judge fitting become attainable?
