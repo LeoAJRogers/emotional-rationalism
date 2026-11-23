@@ -613,6 +613,6 @@ These restrictions are immune by construction to the person-level heterogeneity 
 | (iv) MCAR, no jackknife | −0.0578 (0.0014) | −42 | 0.75 | **S4 held**: paired difference −0.0586 (SE 0.0004) |
 
 - **Readings, as fixed in advance.**
-  - S3 failed, so this form and size of report-dependent retention is harmless here. Its slope is 1.0 on the last observed standardized NA report, and it removes about 6 points of observations beyond MCAR. Any bias is below about 0.005 in absolute value. This is a negative result for the threat. It does not generalize to stronger selection, to selection on single items, or to ordinal data.
+  - S3 failed, so this form and size of report-dependent retention is harmless here. Its slope is 1.0 on the last observed standardized NA report, and it removes about 6 points of observations beyond MCAR. The 3-SE interval for any bias is [−0.006, +0.004]. This is a negative result for the threat. It does not generalize to stronger selection, to selection on single items, or to ordinal data.
   - S4 confirms that the day jackknife is necessary, not cosmetic. Without it, sample centering and scaling bias T1 by −0.058, about 2.5 times the across-replicate SD (0.023).
 - **Unpredicted.** Factor-dependent selection raises the across-replicate SD of T1 from 0.023 to 0.032. It does not bias T1.

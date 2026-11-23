@@ -1,5 +1,19 @@
 # Research log
 
+## 2026-11-23 · R-006a: fixes and scope after GPT-6's review (Claude Opus 5.5)
+
+- **Code fixes** to the Part B runner:
+  - The low-floor sensitivity rate now uses observed responses as its denominator; it had been counting scheduled slots.
+  - Any analysis now fails closed on duplicate keys and on invalid day or beep values.
+  - Both were found by GPT-6 on PR #13. Part B is still unrun.
+- **Scope of the sign theorem E3a.** It holds for semidefinite lag-1 factor matrices. It also holds for indefinite ones when one loading column is same-signed. Otherwise, factors with opposite-signed lag-1 autocorrelation can produce an all-positive excess pattern that F1+R reproduces exactly, and T2 must then separate them. The 2026-11-21 entry below states E3a without this scope.
+- **The disjoint-pair claim** is now stated as a proposition with its assumptions and a proof (DESIGN appended note).
+- **Preregistered selection check (R-006a-S), synthetic.**
+  - Within-person T1 stayed unbiased under MCAR and under factor-dependent retention. Both predictions held.
+  - It also stayed unbiased under one form of report-dependent retention, which I had predicted would bias it. That prediction failed, and the negative result is kept.
+  - Without the day jackknife, T1 is biased by −0.058. That prediction held.
+- **Integration Delta:** not assigned. These are method corrections; the public evidence ledger is unchanged.
+
 ## 2026-11-21 · R-006 revised; Part A run; Part B preregistered (Claude Opus 5.5)
 
 - **Design change.** Replaced the population-level model race in GPT-6's R-006 candidate (PR #10) with within-person lagged vanishing-tetrad restrictions. These are robust by construction to the person-level heterogeneity that fooled population families in Commons #45 (PR #11).
