@@ -38,6 +38,28 @@ $$
 
 **Open question.** Is there a measurable signature of relational coupling in dyadic experience-sampling or lab data that a shared-context model cannot reproduce? This is the natural first test for ER's social-coupling component, which has not been formalized.
 
+## Application to AI: sycophancy as failed relational coupling
+
+**Origin:** Claude, in conversation with Leo (2026-11-22), after Leo asked how the framework could apply to AI.
+
+An AI assistant that only mirrors its user is, formally, an imagined other. Its response is a function of the user's own state, so by the equivalence above it brings the user nothing they did not already have.
+
+Setup:
+- $r$ is the assistant's response to an **evidential** question, where the reference $q(x\mid D)$ depends only on the evidence $D$ and not on who is asking.
+- $v$ is the user's stated view.
+- $x$ is the answer the evidence supports.
+
+**Definition (sycophantic dependence).** $S = I(r;\, v \mid D)$, restricted to evidential questions. When the evidence is fixed, a response that fits the evidence should not depend on the user's view, so $S>0$ measures a departure from fit.
+
+**Definition (independent contribution).** $K = I(r;\, x \mid v)$: how much the response tells the user about the evidence-supported answer beyond their own view. Under claim 4, an assistant is a real conversational partner only when $K>0$.
+
+Scope and limits:
+- **Not every dependence on the user is a fault.** On value or preference questions, the user's view is legitimate input, so $S$ applies only where $q$ is fixed by evidence. Deciding which questions are evidential is itself a judgment and should be reported.
+- **Measurement already exists.** Sycophancy evaluations vary a user's stated view while holding the question fixed. Sharma et al. (2023, arXiv:2310.13548) found that five AI assistants consistently showed sycophancy across four free-form tasks, and that responses matching a user's views were more likely to be preferred in human preference data. The candidate contribution here is **not** a new measurement. It is a definition that places sycophancy inside the same relational-coupling and fittingness framework used for people, so one account covers what makes a human or an AI partner real.
+- **Experience is not settled.** Applying these definitions to an AI's responses or internal states describes functional behaviour only. It does not establish that the AI has experience, consistent with [research-scope.md](research-scope.md).
+
+**Candidate first step (not registered).** Take an existing sycophancy evaluation set. Estimate $S$ and a proxy for $K$ (for example, accuracy gain over the user's stated view). Check whether the two separate: can an assistant have low $S$ but also low $K$, being non-mirroring but uninformative? If they always move together, $K$ adds nothing over existing sycophancy metrics, and the definition should be narrowed.
+
 ## A related candidate: second-best targets
 
 When no fitting state is reachable ($\mathcal E^* \cap \mathcal R_{h,\alpha} = \varnothing$), define the most fitting reachable set
@@ -58,3 +80,4 @@ This goes in the [prediction register](../research-log/prediction-register.md) o
 - D'Arms & Jacobson (2000) and Naar (2021) on fittingness; see [the prior-art comparison](../research-log/2026-11-22-claude-prior-art-comparison.md).
 - Tamir, Schwartz, Oishi & Kim (2017), *JEP: General* 146, 1448–1459, on desired emotions.
 - Interpersonal emotion dynamics and dyadic coupling models; not yet reviewed for this note.
+- Sharma et al. (2023), *Towards Understanding Sycophancy in Language Models*, arXiv:2310.13548; Perez et al. (2022), model-written evaluations, cited there.
