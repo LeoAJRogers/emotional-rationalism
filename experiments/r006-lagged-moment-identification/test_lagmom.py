@@ -143,10 +143,60 @@ def test_real_loader():
           and info["rows_without_beep"] == Y.shape[0] and np.array_equal(person2, person), str(info["day_range"]))
 
 
+def _fake_tsv(rows):
+    import csv
+    import os
+    import tempfile
+    path = os.path.join(tempfile.mkdtemp(), "fake.tsv")
+    with open(path, "w", newline="") as fh:
+        w = csv.writer(fh, delimiter="\t")
+        w.writerow(["id", "day", "beep", "study_period", "cheerful", "relaxed", "worried", "fearful", "sad"])
+        w.writerows(rows)
+    return path
+
+
+def test_real_loader_fail_closed():
+    """Amendment R-006a (2026-11-23), GPT-6 requests on ER #13: duplicate keys and invalid
+    day/beep values stop any analysis run; the structure-only report counts them instead."""
+    import real_data
+    base = [[1, d, b, 0, "4", "4", "2", "1", "3"] for d in (1, 2) for b in (1, 2, 3)]
+    def raises(rows):
+        try:
+            real_data.load(_fake_tsv(rows), strict=True)
+        except SystemExit:
+            return True
+        return False
+    dup = base + [[1, 1, 2, 0, "7", "7", "7", "7", "7"]]
+    check("strict loader fails closed on a duplicate id-period-day-beep key", raises(dup))
+    Y, _, info = real_data.load(_fake_tsv(dup), strict=False)
+    check("structure-only loader counts the duplicate and keeps the first record",
+          info["duplicate_id_period_day_beep"] == 1 and Y[0, 0, 1, 0] == 4.0, str(Y[0, 0, 1, 0]))
+    check("strict loader fails closed on day 0 (would wrap to the last day)",
+          raises(base + [[1, 0, 1, 0, "4", "4", "2", "1", "3"]]))
+    check("strict loader fails closed on a non-integer beep",
+          raises(base + [[1, 1, 2.5, 0, "4", "4", "2", "1", "3"]]))
+    check("strict loader accepts clean keys", not raises(base))
+
+
+def test_floor_rate_denominator():
+    """GPT-6's example on ER #13: observed [1, 1, 6, 7] plus six missing beeps -> 0.5, not 0.2."""
+    import real_data
+    Y = np.full((1, 1, 10, 5), np.nan)
+    Y[0, 0, :4, 2] = [1, 1, 6, 7]
+    Y[0, 0, :, 3] = 1.0                                  # fully observed, all floor -> 1.0
+    r = real_data.floor_rates(Y)
+    old = np.nanmean(Y[0, ..., 2] == 1)                  # the replaced expression, for the record
+    check("floor rate uses observed responses as denominator", np.isclose(r[0, 0], 0.5)
+          and np.isclose(r[0, 1], 1.0) and r[0, 2] == 1.0 and np.isclose(old, 0.2),
+          f"new {r[0, 0]:.2f}, old {old:.2f}; item with no responses -> {r[0, 2]:.1f}")
+
+
 if __name__ == "__main__":
     test_ustat()
     test_hermite()
     test_jackknife_linear()
     test_real_loader()
+    test_real_loader_fail_closed()
+    test_floor_rate_denominator()
     print("FAILURES:", FAIL if FAIL else "none")
     sys.exit(1 if FAIL else 0)

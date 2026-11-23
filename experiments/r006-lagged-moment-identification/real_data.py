@@ -60,7 +60,26 @@ def to_float(x):
     return float(x)
 
 
-def load(path):
+def key_problems(rec):
+    """Count key defects that would silently corrupt the array (amendment R-006a, 2026-11-23).
+
+    Day and beep must be integer-valued and >= 1; otherwise int() truncates and a 0 index
+    wraps to the last slot. Counts only: no participant-level values are returned.
+    """
+    out = {}
+    for k in ("day", "beep"):
+        v = rec[k]
+        out[f"{k}_non_integer"] = int(np.sum(np.abs(v - np.round(v)) > 1e-9))
+        out[f"{k}_below_1"] = int(np.sum(v < 1))
+    return out
+
+
+def load(path, strict=True):
+    """Read the 0010 TSV into Y[person-period, day, beep, item].
+
+    strict=True (any analysis run) fails closed on duplicate id-period-day-beep keys and on
+    invalid day/beep values. strict=False (structure-only report) records their counts instead.
+    """
     with open(path, newline="") as fh:
         rd = csv.reader(fh, delimiter="\t")
         header = next(rd)
@@ -74,6 +93,13 @@ def load(path):
         np.isnan(np.column_stack([rec[w] for w in ITEM_WORDS])), axis=1)).sum())
     keep = ~nobeep & ~np.isnan(rec["day"]) & ~np.isnan(rec["study_period"]) & ~np.isnan(rec["id"])
     rec = {k: v[keep] for k, v in rec.items()}
+    bad = key_problems(rec)
+    info.update(bad)
+    if strict and any(bad.values()):
+        raise SystemExit(f"invalid day/beep values {bad}; refusing to run (fail closed)")
+    ok = (np.abs(rec["day"] - np.round(rec["day"])) <= 1e-9) & (rec["day"] >= 1) \
+        & (np.abs(rec["beep"] - np.round(rec["beep"])) <= 1e-9) & (rec["beep"] >= 1)
+    rec = {k: v[ok] for k, v in rec.items()}               # only reached when strict=False
     ids = np.unique(rec["id"])
     periods = np.unique(rec["study_period"])
     days = np.unique(rec["day"]).astype(int)
@@ -91,9 +117,12 @@ def load(path):
         d, b = int(rec["day"][r]) - 1, int(rec["beep"][r]) - 1
         if seen[m, d, b]:
             dup += 1
+            continue                                       # never overwrite an earlier record
         seen[m, d, b] = True
         Y[m, d, b] = [rec[w][r] for w in ITEM_WORDS]
     info["duplicate_id_period_day_beep"] = dup
+    if strict and dup:
+        raise SystemExit(f"{dup} duplicate id-period-day-beep keys; refusing to run (fail closed)")
     person = np.array([np.searchsorted(ids, i) for (i, _) in pp])
     complete5 = ~np.isnan(Y).any(-1)
     completeNA = ~np.isnan(Y[..., 2:]).any(-1)
@@ -102,6 +131,23 @@ def load(path):
     info["values_outside_1_7"] = int(np.nansum((Y < 1) | (Y > 7)))
     info["non_integer_values"] = int(np.nansum(np.abs(Y - np.round(Y)) > 1e-9))
     return Y, person, info
+
+
+def floor_rates(Y, items=(2, 3, 4)):
+    """Per person-period floor (category 1) rate among OBSERVED responses of each item.
+
+    Amendment R-006a (2026-11-23): the earlier inline expression np.nanmean(Y == 1) divided by
+    scheduled slots, because Y == 1 is False (not NaN) at missing beeps (found by GPT-6, ER #13).
+    A person-period with no observed response for an item gets rate 1.0 (excluded downstream).
+    """
+    out = np.ones((Y.shape[0], len(items)))
+    for m in range(Y.shape[0]):
+        for c, j in enumerate(items):
+            v = Y[m, ..., j]
+            obs = v[np.isfinite(v)]
+            if obs.size:
+                out[m, c] = float(np.mean(obs == 1))
+    return out
 
 
 def marginals(Y):
@@ -133,7 +179,7 @@ def main():
     h = sha256(a.ts)
     if h != SHA256_TS:
         raise SystemExit(f"SHA-256 mismatch: {h} (expected {SHA256_TS}); refusing to run")
-    Y, person, info = load(a.ts)
+    Y, person, info = load(a.ts, strict=not a.structure_only)
     info["sha256"] = h
     os.makedirs("results", exist_ok=True)
     with open("results/real_0010_structure.json", "w") as fh:
@@ -213,8 +259,7 @@ def run_part_b(Y, person, info, n_boot, null_reps):
         sub = np.unique(person[sel], return_inverse=True)[1]
         r = lm.analyse(Y[sel], sub, discrete=True, n_boot=n_boot, seed=2 + per, linear_too=False)
         sens[f"period_{per}_only"] = summarise_stats(r, "cor_w_T")
-    floor = np.array([[np.nanmean(Y[m, ..., j] == 1) if np.isfinite(Y[m, ..., j]).sum() else 1.0
-                       for j in (2, 3, 4)] for m in range(Y.shape[0])])
+    floor = floor_rates(Y)                                 # observed-response denominator (R-006a)
     sel = (floor < 0.5).all(1)
     sens["low_floor_subset_n_pp"] = int(sel.sum())
     if sel.sum() >= 40:

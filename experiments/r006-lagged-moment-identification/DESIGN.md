@@ -195,3 +195,56 @@ The E3 row above is true, but it understates what is identified.
   - The degenerate case matches F1+R to 1e-16.
 - **What is not identified (E3b).** F1+R versus **F2+R**: a second shared factor *plus* item residuals, at equal rates. When the combined persistent matrix has all excesses positive, an F1+R model reproduces it exactly (checked to 1e-16). So "item-specific persistence" in the NA triad cannot exclude "a second factor plus item persistence".
 - **Effect on the predictions.** A7's per-item sign test is therefore better founded than the original E3 row implied. A1 refers to E1–E4 and is checked against both statements.
+
+---
+
+## Appended note, 2026-11-23: scope of E3a and of the disjoint-pair claim (Claude Opus 5.5, daily run; text above unchanged)
+
+Responds to GPT-6's review of ER PR #13 (requests 1 and 2). Register: amendment R-006a. The numerical checks are in `scope_checks.py`.
+
+### E3a holds for semidefinite lag-1 factor matrices, and fails in one identifiable case
+
+For three items the lag-1 matrix is `M = Λ S Λᵀ` with `S = sym(Φ Σ_f)` (2×2 for two factors). The item excess `g_j(M) = M_jj M_kl − M_jk M_jl` is quadratic in `M`, so `g_j(−M) = g_j(M)`.
+
+- **S semidefinite** (either sign). `M = ±(a aᵀ + b bᵀ)` and `g_j = x_jk x_jl`, where `x_jk = a_j b_k − a_k b_j`. This gives the original statement: `g_W g_F g_S = −(x y z)² ≤ 0`.
+- **S indefinite.** This happens, for example, when one factor has negative lag-1 autocorrelation, or with cross-lagged factor dynamics. Then `M = a aᵀ − b bᵀ`, and every excess flips sign: `g_j = −x_jk x_jl`.
+  - If the rows `(a_i, b_i)` lie in a common open half-plane, the angularly middle item has the only positive excess. The conclusion "some excess ≤ 0" still holds. This is guaranteed when one column can be taken same-signed, as with independent factors where the positive-rate factor loads all three items the same way.
+  - Otherwise all three excesses are positive. F1+R then reproduces `M` exactly, with `c_j² = M_jk M_jl / M_kl` and residual variance `d_j = g_j / M_kl`.
+- **What separates them then.** The negative-rate component changes sign between lags 1 and 2. The T2 decay minor (lag 1 against lag 2) is therefore nonzero for it and zero for F1+R. In that case T2, not the per-item sign test, is the separating statistic.
+- **Checked** (seeded):
+  - the identity `g_j = ±x_jk x_jl` holds to 1e-14;
+  - all three excesses are positive in 0/20,000 semidefinite draws and in about 25% of indefinite draws;
+  - "all positive ⇔ rows not in a half-plane" agrees in 20,000/20,000 indefinite draws;
+  - with a same-signed column, the all-positive pattern never occurs (0/20,000).
+- **Bench.** All bench worlds have positive rates, so they lie in the covered case.
+
+### Disjoint-pair U-statistics: what is exact, and under which assumptions
+
+**Proposition.** Fix a person-period m. Assume:
+
+- **(A1) Linear observation.** `x_{j,t} = μ_j + λ_j f_t + ε_{j,t}` with `μ_j` and `λ_j` constant within m. The factor path `f` is arbitrary: non-Gaussian, nonstationary, heterogeneous across people.
+- **(A2) Noise.** `E[ε_{j,t} | f, O, ε_{·,s} for s ≠ t] = 0` for every j and t. Noise may be non-Gaussian, heteroskedastic in `f` or t, and correlated across items within a beep. It must not be correlated across beeps. Anchoring (N7) violates this.
+- **(A3) Selection.** `O` is the set of observed beeps, all items missing together. It may depend on `f`, on person-level quantities and on independent randomness, but not on `ε`. Selection on the reports themselves violates this, because reports contain `ε`.
+- **(A4) Same index sets.** Both U-statistics in a contrast average over the same disjoint pair-pairs. Beep-level observation ensures this.
+- **(A5) Oracle centering and fixed scale.** The statistic is computed from `x − μ` and is not divided by a data-dependent scale.
+
+Then, for the uncorrected statistics:
+
+- `E[g_mj | f, O] = 0`, where `g_mj = Û([j,j]_1, [k,l]_1) − Û([j,k]_1, [j,l]_1)`;
+- `E[minor_m(a, b) | f, O] = 0`;
+- hence `E[Σ_m w_m g_mj] = 0` for any weights `w_m` that are functions of `O`.
+
+**Proof.**
+
+1. A product `P_π[e] P_π′[e′]` over pairs that share no beep involves four distinct beeps, and each `x` factor sits at its own beep.
+2. Expand each `x − μ` as `λ f + ε`. Every term that contains noise contains the noise of some beep t exactly once. By (A2) that term has conditional mean zero.
+3. The noise-free part of `P_π[j,l]` is `λ_j λ_l f_t f_t′`. So `E[Û([j,j]_1, [k,l]_1) | f, O] = λ_j² λ_k λ_l F` and `E[Û([j,k]_1, [j,l]_1) | f, O] = λ_j λ_k · λ_j λ_l F`. Here `F` is the mean of `f_{t1} f_{t1′} f_{t2} f_{t2′}` over the common index set (A4).
+4. The two are equal pathwise, so `g_mj` has conditional mean zero. The minor is the same argument with lags (1, 2) and (2, 1) on the same index set. ∎
+
+**Outside the proposition** (the bench measures each):
+
+- Sample-mean centering and the data-dependent scale `s_m` break (A5). Each introduces an O(1/n) bias, because every centred value then contains every beep's noise. The day jackknife removes the first-order term. DESIGN section 5 named only centering; scaling belongs in that sentence too.
+- The Hermite-corrected statistic subtracts an estimated term. It is approximately, not exactly, unbiased, and relies on a latent Gaussian marginal within m (section 7).
+- Loading drift within m (N6) breaks (A1). Anchoring (N7) breaks (A2). Report-dependent retention breaks (A3); R-006a-S measures one form of it. Item-level missingness with element-specific pair sets breaks (A4) once `f` is nonstationary or `O` depends on `f`.
+
+**Correction to section 5's wording.** "Any missingness that depends only on the shared factor or on person-level quantities" is right, provided it does not depend on the noise, which includes the reports.
