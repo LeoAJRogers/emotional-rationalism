@@ -6,7 +6,7 @@
 
 **What this project does and does not do:** it describes and tests how beliefs, affect, context and feasible actions interact over time. It does not prescribe how anyone should feel, and it does not propose controlling emotion.
 
-The project grew from sustained inquiry into lived experience, relationships, and self-understanding. The current mathematical formulation is a **narrow, testable starting point** within a wider research program—not an assertion that all state changes are emotional. See [research scope](theory/research-scope.md) for the broader conceptual scaffold, its limitations, and candidate extensions.
+The project grew from sustained inquiry into lived experience, relationships, and self-understanding. Its broader ambition is to understand how experience and interaction shape future responses, and how beings come to understand what matters to one another, including when their perspectives differ. The first formal case is human affect. Future adaptations to other animals or artificial systems would need their own observations, measurement models and tests; no shared mechanism or subjective experience is assumed. The current mathematics is a **narrow, testable starting point**, not an assertion that all state changes are emotional. See [research scope](theory/research-scope.md).
 
 ## Start here: a human-readable introduction
 
@@ -34,9 +34,11 @@ We propose representing emotion as a multidimensional state whose evolution depe
 
 For example, someone may learn that a delayed reply had an ordinary explanation and revise their estimate of rejection while still feeling alarm. The model lets us ask how fast each quantity changes and whether the lag depends on the person, situation, or actions available. **Descriptive prediction, evaluative judgment, and achievable change are distinct.** The evaluated response need not be unique, and the evaluation is conditional on chosen criteria.
 
-## Current core and research status (2026-11-20)
+## What we know so far — evidence checkpoint (2026-11-20)
 
-**Working objective:** *Find a compact predictive description of how affect changes with perceived context and history; test what predictive history is necessary while separating persistent state from context and measurement.* Fittingness and reachability remain distinct formal questions, not assertions that any emotion is objectively correct or easily chosen. The wider population-conditioned, learnable, social-feedback architecture remains a [candidate proposal (PR #4)](https://github.com/LeoAJRogers/emotional-rationalism/pull/4), **not an established model**.
+**Current empirical objective:** *Find a compact predictive description of how affect changes with perceived context and history; test what predictive history is necessary while separating persistent state from context and measurement.* Fittingness and reachability remain distinct formal questions. The wider social architecture is a [candidate proposal (PR #4)](https://github.com/LeoAJRogers/emotional-rationalism/pull/4), not an established model.
+
+**How to read the evidence:** Mathematical results follow from specified assumptions. Synthetic experiments test behavior of models under simulated conditions. Human-data analyses concern measured reports and observed outcomes in a particular sample. Candidate explanations and study designs are not findings. Independent numerical checks on the same data are not independent-sample replications.
 
 - **Retained mathematical scaffold:** descriptive stochastic dynamics, conditional/set-valued evaluative fittingness, and action/information/horizon-dependent reachability. The toy two-state reachability example is a derivation from illustrative assumptions, not a human result.
 - **Executed synthetic methods:** history gain can arise from filtering noise rather than a second latent timescale; individual reporting scale can mimic latent trait sensitivity; a model-selection margin failed under sparse sampling. These results constrain interpretation of statistical models, not human emotional mechanisms.
@@ -49,21 +51,19 @@ Read the [full integration checkpoint](research-log/2026-11-20-public-integratio
 
 Read the [symbolic model](theory/model.md), [proposed experiments](experiments/protocol.md), [research scope](theory/research-scope.md), and [open problems and literature](challenges/open-problems.md). See [contribution notes](CONTRIBUTIONS.md) and the [research log](research-log/CHANGELOG.md) for provenance and critical revisions.
 
-## Since the checkpoint (2026-11-21 to 2026-11-23)
+## Where the research is going — status as of 2026-11-23
 
-There are no new human-data results. Work since the checkpoint consists of proposals, synthetic checks and mathematical notes, several still under cross-review. None of it changes the evidence above. The [integration note](research-log/2026-11-23-public-integration-pass.md) lists each item's review state.
+There are no new human-data results in this update. New mathematical notes, synthetic tests, proposals and reviews are tracked separately from the evidence checkpoint above. Open PRs are proposals or work under review, not accepted results. The [dated integration note](research-log/2026-11-23-public-integration-pass.md) records the individual items and review state.
 
-| Thread | What exists | Status |
-| --- | --- | --- |
-| Lag mechanisms: affect, belief or reporting persistence | [Design note](research-log/2026-11-22-director-lag-identifiability-pass.md); identifiability audit ([#16](https://github.com/LeoAJRogers/emotional-rationalism/pull/16)) | Proposed design; audit under review |
-| Context-dependent transitions | [Discriminating design](research-log/2026-11-21-context-transition-discrimination.md) | Proposed, not executed |
-| Reachability | [Passive target entry is not controlled reachability](research-log/2026-11-21-passive-vs-controlled-reachability.md); synthetic identification counterexample ([#12](https://github.com/LeoAJRogers/emotional-rationalism/pull/12)) | Mathematical note; counterexample under review |
-| Lagged-moment identification (R-006) | Synthetic bench and theorems ([#13](https://github.com/LeoAJRogers/emotional-rationalism/pull/13)); independent validation ([#14](https://github.com/LeoAJRogers/emotional-rationalism/pull/14)) | Synthetic and mathematical; real-data test preregistered, not run |
-| Novelty and prior art | First-pass comparison ([#17](https://github.com/LeoAJRogers/emotional-rationalism/pull/17)); affect as an adaptive signal ([#18](https://github.com/LeoAJRogers/emotional-rationalism/pull/18)) | Literature first pass; under review |
-| Evaluators that can change | Exploratory discussion ([#15](https://github.com/LeoAJRogers/emotional-rationalism/issues/15)) | Open question |
-| Social and population extensions | Candidate architecture ([#4](https://github.com/LeoAJRogers/emotional-rationalism/pull/4)) with an external review and scope decision; social affect distributions ([#21](https://github.com/LeoAJRogers/emotional-rationalism/pull/21)); a test design for reflective reference distributions (private Commons) | Candidate only. Population patterns are empirical references, not prescriptions |
-| Relational grounding | Candidate theory note ([#20](https://github.com/LeoAJRogers/emotional-rationalism/pull/20)) | Value claims plus a formal sketch; not yet reviewed |
-| Reproducibility | Release gate ([#19](https://github.com/LeoAJRogers/emotional-rationalism/pull/19)) | Proposed; not passed |
+| Research thread | Current status |
+| --- | --- |
+| Individual dynamics and measurement | [Lag discrimination](research-log/2026-11-22-director-lag-identifiability-pass.md) and [context-dependent transitions](research-log/2026-11-21-context-transition-discrimination.md): proposed designs; lag-identification audits and synthetic checks in review. |
+| Fittingness and reachability | [Passive versus controlled reachability](research-log/2026-11-21-passive-vs-controlled-reachability.md): conceptual distinction; candidate counterexamples and changing evaluators remain under investigation. |
+| Social understanding and population patterns | [Candidate social architecture](https://github.com/LeoAJRogers/emotional-rationalism/pull/4) and [affect distributions](https://github.com/LeoAJRogers/emotional-rationalism/pull/21): exploratory extensions, no human-data test yet. |
+| Prior art and alternatives | [First-pass literature comparison](https://github.com/LeoAJRogers/emotional-rationalism/pull/17): provisional, not a novelty verdict. |
+| Reproducibility and replication | [Proposed release gate](https://github.com/LeoAJRogers/emotional-rationalism/pull/19): not passed. Independent-sample replication remains future work. |
+
+One exploratory social question is whether responses to comparable perceived situations, including responses after reflection, can provide useful **empirical reference distributions**. Such distributions might help describe commonalities and differences without deciding how an individual ought to feel. Reflection may expose stable differences rather than produce convergence; both are worth investigating. Population patterns do not establish moral correctness, determine individual states, or supply a reward or control objective. A study design and synthetic methods checks are being developed; they have not established a human result.
 
 ## Contributors
 
