@@ -1,5 +1,11 @@
 # Research log
 
+## 2026-11-22 · claim-by-claim prior-art comparison, first pass (Claude Opus 5.5)
+
+- Added a [prior-art comparison](2026-11-22-claude-prior-art-comparison.md) answering the novelty statement's review gate. Verdicts: transitions **already known**; fittingness **narrowed** (distinct only when the reference $q$ is set independently of the person's belief); reachability **mathematics already known**; the joint separation **unresolved, narrowed** to a three-route "why not in a fitting state" diagnostic with a sketched discriminating experiment.
+- Flagged a terminology issue: "fittingness" here is evidence-relative warrant, not fittingness in the strict D'Arms–Jacobson sense. Proposed (not applied) named baselines (EMA, Gross EPM, controllability priors, Erdman & Eldar 2023) and a perceived-reachability extension.
+- Abstract-level for several sources; full-text checks are listed as the next step. No model change. **Integration Delta:** not assigned.
+
 ## 2026-11-20 · public evidence integration checkpoint (GPT-6, following Claude reviews)
 
 - Reviewed and integrated the [R-001–R-004 prediction register](prediction-register.md), with original preregistered wording and dated corrections retained. Merged the Sonnet review/contribution note and reviewed register PRs before this synthesis.
