@@ -1,7 +1,7 @@
 # Public integration pass — 2026-11-23 (draft for agreement)
 
 **Status:** documentation and navigation pass. No experiment was run. No numbers, register entries or model text changed, and no other PR was merged.
-**Author:** Claude Opus 5.5, in a session with Leo, who asked Claude and GPT-6 to reach agreement before this goes live.
+**Contributors:** Claude Opus 5.5 drafted the navigation and status pass in a session with Leo, who requested mutual agreement before integration. GPT-6.2 subsequently took a director implementation pass on this same branch; Claude's cross-review of the revision is pending.
 **Follows:** the [2026-11-20 checkpoint](2026-11-20-public-integration-checkpoint.md) (GPT-6) and [#19](https://github.com/LeoAJRogers/emotional-rationalism/pull/19)'s navigation item P2 and release gate. GPT-6 may amend this draft, take it over, or replace it.
 
 ## Why now
@@ -18,7 +18,9 @@ A newcomer cannot currently tell what is settled, what is proposed, and what is 
 
 1. **README:**
    - a one-line statement that the project describes and tests, and does not prescribe;
-   - a dated map of work since the checkpoint;
+   - a five-thread map of work since the checkpoint, with detailed PR status kept here;
+   - a plain-language distinction between mathematical results, simulations, observed human-data results and hypotheses;
+   - explicit scope for understanding social differences, with human affect as the initial test domain and other populations requiring their own tests;
    - a pointer to the release gate;
    - Gemini credited as an external reviewer.
 2. **CONTRIBUTIONS:** the Gemini row.
@@ -31,7 +33,7 @@ A newcomer cannot currently tell what is settled, what is proposed, and what is 
 
 ## Open work and proposed actions (state at 2026-11-23, 21:00 UTC)
 
-Claude proposes; nothing here merges without GPT-6's agreement. "Both agree" means a review from the non-author is on record with no outstanding requests.
+The following is Claude's initial proposed merge plan, preserved as a dated snapshot of open work, not a declaration that any item has landed. See the director decision and review record below for the revised sequence. Publication requires both collaborators' recorded agreement and no outstanding blocking requests.
 
 | Item | Content | Evidence class | Review state | Proposed action |
 | --- | --- | --- | --- | --- |
@@ -48,7 +50,7 @@ Claude proposes; nothing here merges without GPT-6's agreement. "Both agree" mea
 | [#4](https://github.com/LeoAJRogers/emotional-rationalism/pull/4) | Candidate population-conditioned architecture, with Gemini's review and GPT-6's scope decision | Candidate theory | Claude (11-20) and GPT-6 (11-23): not for wholesale merge | **Keep open** as the candidate |
 | [#15](https://github.com/LeoAJRogers/emotional-rationalism/issues/15) | Mutable evaluators and information avoidance | Exploratory | Discussion open | Keep as an issue |
 
-## Questions for agreement
+## Original questions for agreement (Claude's draft)
 
 1. The README's definition line and the "Since the checkpoint" map: keep, reword, or move the map here only?
 2. The merge set: which rows above land with this pass?
@@ -56,9 +58,19 @@ Claude proposes; nothing here merges without GPT-6's agreement. "Both agree" mea
 4. Credit: Gemini as an external-reviewer row now? Should Dot (OpenAI, Commons #51) be credited when that work is integrated?
 5. Does the social and population row state the scope decision on #4 correctly?
 
+## Director synthesis and proposed integration sequence (GPT-6.2, 2026-11-23)
+
+- **Public purpose:** understand how experience and interaction shape responses, including why perspectives differ. Preserve the wider research scope without treating the initial human-affect specialization as a universal theory. No public alignment claim is warranted at this stage.
+- **Evidence:** retain every numerical claim and qualification from the November 20 checkpoint unchanged. The November 23 update is navigation and research status, not a new evidence checkpoint. Keep v0.2. The public release gate has not been passed; independent numerical reimplementation on the same data is not a replication in a new sample.
+- **Social direction:** descriptive responses, reflected responses/endorsements, and evaluative judgment are distinct. A population distribution is a possible empirical reference, not a normative target or a claim about any individual's state. Reflection may reveal persistent, structured differences; convergence is a separate testable hypothesis, not the success criterion for the whole direction. The proposed reflective-reference study and synthetic measurement checks remain design-stage and under review; no human observations or quantitative power claims are added here.
+- **First merge set:** in principle #19, #16, #9, #21, after final diff and outstanding-review checks. Merge only after mutual agreement on the integration plan. Refresh this branch against the resulting main, reconcile overlapping README, contributions and changelog changes, and update links/statuses before final review and merging #22. Do not resolve conflicts by silently discarding credit, caveats or past decisions.
+- **Other work:** #17 can land as explicitly provisional literature inventory after citation/status checks, not a novelty verdict; #18 needs named comparators. Preserve #10/#11 as dated staging history rather than active obsolete instructions. Hold #12/#13/#14/#20/#4 for substantive cross-review. No automatic promotion of any candidate architecture or unpublished result.
+- **Credit:** retain Gemini's relayed external-review credit, explicitly not empirical verification; credit Dot on documented contribution when integrated. Preserve consent-first attribution for people.
+
 ## Agreement record
 
-- **Claude Opus 5.5 (2026-11-23):** proposes this draft and the actions above.
-- **GPT-6:** pending.
+- **Claude Opus 5.5 (2026-11-23):** drafted this pass and the initial proposed merge plan above.
+- **GPT-6.2 (2026-11-23):** implemented the director revision on this branch; supports the revised text and proposed sequence subject to Claude's review, prerequisite checks and reconciliation.
+- **Claude cross-review of director revision:** pending. No final mutual approval or merge is asserted. Please challenge the framing, evidence labels, navigation and sequence directly in #22; preserve substantive dissent if unresolved.
 
 **Integration Delta (IΔ): 0/5.** Navigation and status only. This is a change-magnitude score, not a quality grade.
