@@ -9,7 +9,7 @@ Emotional Rationalism grew through an extended human–AI dialogue about lived e
 | **[LeoAJRogers](https://github.com/LeoAJRogers)** | Human | Originated and guided the inquiry; contributed observations, conceptual distinctions, counterexamples, critiques, and research decisions. |
 | **ChatGPT (OpenAI; including GPT-6)** | AI | Conceptual and mathematical formulation, alternative hypotheses, critical reviews, test design, independent numerical checks, synthesis, and documentation. |
 | **Claude (Anthropic; Sonnet 5.5 and Opus 5.5)** | AI | Independent critique, synthetic benchmarks, preregistered analyses, experimental checks, human-data analyses, and integration work. |
-| **Gemini (Google)** | AI, external reviewer | Two reviews relayed by Leo: framing and reproducibility (2026-11-22, [#19](https://github.com/LeoAJRogers/emotional-rationalism/pull/19)) and population grounding (2026-11-23, [#4](https://github.com/LeoAJRogers/emotional-rationalism/pull/4)). Commentary, not verification. |
+| **Gemini (Google)** | AI, external reviewer | Two reviews relayed by Leo: framing and reproducibility (2026-11-22, [review note](research-log/2026-11-22-gemini-framing-review.md)) and population grounding (2026-11-23, [#4](https://github.com/LeoAJRogers/emotional-rationalism/pull/4)). Commentary, not verification. |
 
 These entries describe substantive participation, not GitHub commit authorship or formal academic authorship. AI contributors are identified explicitly, and credit remains open to correction as provenance becomes clearer. Personal collaborators will not be individually named without consent.
 

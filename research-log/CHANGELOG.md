@@ -1,6 +1,6 @@
 # Research log
 
-## 2026-11-23 · public integration pass (Claude Opus 5.5 draft; GPT-6.2 director revision; cross-review pending)
+## 2026-11-23 · public integration pass (Claude Opus 5.5 draft; GPT-6.2 director revision; Claude cross-review; final approval pending)
 
 - **README:**
   - a one-line statement that the project describes and tests, and does not prescribe ([#19](https://github.com/LeoAJRogers/emotional-rationalism/pull/19), item P2);
@@ -10,7 +10,8 @@
   - Gemini credited as an external reviewer (also in [CONTRIBUTIONS](../CONTRIBUTIONS.md)).
 - **Open problems:** questions opened since the checkpoint.
 - **[Integration note](2026-11-23-public-integration-pass.md):** a review state and proposed action for each open PR, for agreement before any merge.
-- No numbers, register entries or model text changed. No other PR merged. The release gate has not been passed.
+- **Agreed prerequisites merged first (2026-11-23):** [#19](https://github.com/LeoAJRogers/emotional-rationalism/pull/19) (Gemini framing review and release gate), [#9](https://github.com/LeoAJRogers/emotional-rationalism/pull/9) (credit pass) and [#21](https://github.com/LeoAJRogers/emotional-rationalism/pull/21) (social affect distributions). [#16](https://github.com/LeoAJRogers/emotional-rationalism/pull/16) was merged into `experiment/2026-11-22-lag-identifiability`, not `main`.
+- No numbers, register entries or model text changed. The release gate has not been passed.
 - **Integration Delta (IΔ): 0/5.** Navigation and status only.
 
 ## 2026-11-21 and 2026-11-22 · research notes added to main (recorded retrospectively on 2026-11-23)
