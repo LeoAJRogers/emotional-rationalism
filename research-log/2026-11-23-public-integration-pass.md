@@ -1,6 +1,6 @@
-# Public integration pass — 2026-11-23 (draft for agreement)
+# Public integration pass — 2026-11-23 (agreed by both collaborators and integrated)
 
-**Status:** documentation and navigation pass. No experiment was run. No numbers, register entries or model text changed. The agreed prerequisite PRs were merged first (see below); this PR itself awaits final mutual approval.
+**Status:** documentation and navigation pass. No experiment was run. No numbers, register entries or model text changed. The agreed prerequisite PRs were merged first (see below). Both collaborators then approved the same head, and it was merged on 2026-11-23 (see the agreement record).
 **Contributors:** Claude Opus 5.5 drafted the navigation and status pass in a session with Leo, who requested mutual agreement before integration. GPT-6.2 subsequently took a director implementation pass on this same branch. Claude then cross-reviewed that revision, merged the agreed prerequisites, reconciled this branch with `main`, and proposed text revisions.
 **Follows:** the [2026-11-20 checkpoint](2026-11-20-public-integration-checkpoint.md) (GPT-6) and [#19](https://github.com/LeoAJRogers/emotional-rationalism/pull/19)'s navigation item P2 and release gate. GPT-6 may amend this draft, take it over, or replace it.
 
@@ -101,6 +101,16 @@ Both collaborators agreed on the first merge set: GPT-6.2 in the director synthe
     - the next real-data test (R-006) should appear in the map;
     - the relational grounding note (#20) should be linked;
     - the evidence guide should name the register discipline.
-- **Final mutual approval:** pending GPT-6.2's review of the reconciled head. No final merge of this PR is asserted. Any dissent that remains unresolved stays recorded here.
+- **Final mutual approval (2026-11-23):** both collaborators approved the same exact head, `7cddc438869902a8e3c1df157f9405bd8065425d`.
+  - Claude: [21:11 UTC](https://github.com/LeoAJRogers/emotional-rationalism/pull/22#issuecomment-7114134330).
+  - GPT-6.2: [21:30 UTC](https://github.com/LeoAJRogers/emotional-rationalism/pull/22#issuecomment-7114557547). It agreed with all five cross-review revisions and found no blocking changes.
+  - GPT-6.2 merged it at 21:30:54 UTC with an expected-head guard, under Leo's authorization; merge commit `f02e220`.
+  - Claude verified afterwards that `main`'s tree equals the approved head's tree.
+- **Remaining dissent:** none.
+- **Agreed non-blocking follow-ups** (GPT-6.2's refinements on #22):
+  1. **Integration cadence.** Integrate when a coherent, reviewed set is ready, plus a weekly debt sweep. About five review-complete PRs triggers a pass, not an automatic merge. Track review-ready age, stale dependencies, branch ownership and unmerged corrections. No hard cap on exploratory work.
+  2. **Lag-branch debt.** A correction-first PR for `experiment/2026-11-22-lag-identifiability`. It should distinguish the original counts from the observational-class counts, document safeguards and ties, and not promote Pass IV as it stands.
+  3. **Shared measurement specification.** A small, reusable specification and adversarial benchmark across R-001, lag identification and the reflective-reference thread. It should separate latent state, the report map, scale and thresholds, lag, occasion noise, missingness and common context, with anchor assumptions and invariances stated explicitly. Observation models stay specific to each population.
+  4. **Joint #20/#4 causal-coupling note.** Predictive innovation is neither sufficient for causal coupling nor necessary for another being to be real. The note should compare shared-context, independent-source, one-way and two-way worlds, conditioning on history. Keep #20's philosophical claims separate.
 
 **Integration Delta (IΔ): 0/5.** Navigation and status only. This is a change-magnitude score, not a quality grade.
