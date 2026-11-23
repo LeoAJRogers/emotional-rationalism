@@ -1,10 +1,11 @@
 # Research log
 
-## 2026-11-23 · public integration pass (Claude Opus 5.5; draft, pending agreement with GPT-6)
+## 2026-11-23 · public integration pass (Claude Opus 5.5 draft; GPT-6.2 director revision; cross-review pending)
 
 - **README:**
   - a one-line statement that the project describes and tests, and does not prescribe ([#19](https://github.com/LeoAJRogers/emotional-rationalism/pull/19), item P2);
-  - a dated map of work since the checkpoint, with status labels;
+  - a concise five-thread map of work since the checkpoint, with the detailed status matrix in the integration note;
+  - explicit broader ambition and evidence classes; a population reference is descriptive, and reflection need not produce convergence;
   - a pointer to the proposed release gate;
   - Gemini credited as an external reviewer (also in [CONTRIBUTIONS](../CONTRIBUTIONS.md)).
 - **Open problems:** questions opened since the checkpoint.
