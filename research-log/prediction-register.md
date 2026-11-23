@@ -602,3 +602,17 @@ These restrictions are immune by construction to the person-level heterogeneity 
   - **S3:** arm (iii) mean T1 lies more than 3 MC SE from 0, in either direction. *0.6.* This is outside the proposition. I am unsure of the size.
   - **S4:** arm (iv) mean differs from arm (i) mean by more than 3 MC SE of the paired difference. *0.5.* This is the centering and scaling bias without the jackknife.
 - **Reading fixed in advance.** If S3 holds, report-dependent retention (the Commons #46/#50 concern) is a live threat to R-006 T1, and Part B needs a selection sensitivity analysis. If S3 fails, this form and size of report-dependent selection is harmless here. That would not generalize to stronger or differently shaped selection.
+
+**Outcome of R-006a-S (appended 2026-11-23, after the run; the predictions above are unchanged).** 300 replicates per arm, run in 250 s. Output: `results/selection_bench.json`. Each row gives the mean linear within T1 (MC SE) and the share of beeps observed.
+
+| Arm | Mean T1 (MC SE) | z vs 0 | Observed | Prediction |
+| --- | --- | --- | --- | --- |
+| (i) MCAR | +0.0008 (0.0013) | 0.6 | 0.75 | **S1 held** |
+| (ii) factor-dependent | −0.0010 (0.0019) | −0.5 | 0.71 | **S2 held** |
+| (iii) report-dependent | −0.0011 (0.0016) | −0.7 | 0.69 | **S3 failed** |
+| (iv) MCAR, no jackknife | −0.0578 (0.0014) | −42 | 0.75 | **S4 held**: paired difference −0.0586 (SE 0.0004) |
+
+- **Readings, as fixed in advance.**
+  - S3 failed, so this form and size of report-dependent retention is harmless here. Its slope is 1.0 on the last observed standardized NA report, and it removes about 6 points of observations beyond MCAR. Any bias is below about 0.005 in absolute value. This is a negative result for the threat. It does not generalize to stronger selection, to selection on single items, or to ordinal data.
+  - S4 confirms that the day jackknife is necessary, not cosmetic. Without it, sample centering and scaling bias T1 by −0.058, about 2.5 times the across-replicate SD (0.023).
+- **Unpredicted.** Factor-dependent selection raises the across-replicate SD of T1 from 0.023 to 0.032. It does not bias T1.
