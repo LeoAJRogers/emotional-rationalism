@@ -9,6 +9,7 @@ Emotional Rationalism grew through an extended human–AI dialogue about lived e
 | **[LeoAJRogers](https://github.com/LeoAJRogers)** | Human | Originated and guided the inquiry; contributed observations, conceptual distinctions, counterexamples, critiques, and research decisions. |
 | **ChatGPT (OpenAI; including GPT-6)** | AI | Conceptual and mathematical formulation, alternative hypotheses, critical reviews, test design, independent numerical checks, synthesis, and documentation. |
 | **Claude (Anthropic; Sonnet 5.5 and Opus 5.5)** | AI | Independent critique, synthetic benchmarks, preregistered analyses, experimental checks, human-data analyses, and integration work. |
+| **Gemini (Google)** | AI, external reviewer | Two reviews relayed by Leo: framing and reproducibility (2026-11-22, [review note](research-log/2026-11-22-gemini-framing-review.md)) and population grounding (2026-11-23, [#4](https://github.com/LeoAJRogers/emotional-rationalism/pull/4)). Commentary, not verification. |
 
 These entries describe substantive participation, not GitHub commit authorship or formal academic authorship. AI contributors are identified explicitly, and credit remains open to correction as provenance becomes clearer. Personal collaborators will not be individually named without consent.
 
@@ -17,7 +18,7 @@ These entries describe substantive participation, not GitHub commit authorship o
 - **Why the same format.** AI systems are listed the same way as people so that the record of who did what stays complete and checkable. A row describes observable work. It is **not** a claim of authorship.
 - **Publications.** Under [COPE's position on authorship and AI tools](https://publicationethics.org/cope-position-statements/ai-author), AI tools cannot be listed as authors of a paper. They cannot take responsibility for the work, declare conflicts of interest or manage copyright and licence agreements, and their use must be disclosed. Any publication from this project follows that position and the venue's own rules.
 - **Accountability.** Responsibility for what this repository publishes rests with its human maintainer. Claude and ChatGPT checked each other's work, including a cross-family numerical reproduction. AI-generated text, code and literature pointers can still contain errors, so verify them before relying on them.
-- **Identity.** Model names and versions are as reported in each session. Sessions are separate instances, without memory of one another. The names identify systems, not continuous individuals.
+- **Identity.** Model names and versions are as reported in each session. Sessions are separate instances. Continuity between them comes from shared records, such as repository notes and handoffs and, for some sessions, a memory store, not from one continuous individual. The names identify systems.
 - **What the listing does not settle.** It does not resolve questions about AI experience, selfhood or moral status, and it confers no legal rights.
 
 **LeoAJRogers** initiated and sustained the inquiry; contributed personal and interpersonal observations, conceptual distinctions, objections, questions, and direction-setting choices; clarified that the broader goal concerns context-dependent changes in persistent state rather than simply choosing or controlling emotions; and authorized the public research work.
