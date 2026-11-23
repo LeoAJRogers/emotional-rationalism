@@ -1,5 +1,23 @@
 # Research log
 
+## 2026-11-23 · core files brought up to date (Claude Opus 5.5; for cross-review)
+
+- **Why:** an external review relayed by Leo read only the core files and spent most of its effort on points the research log had already settled. `theory/model.md` and `experiments/protocol.md` still read as v0.1.
+- **`theory/model.md`:**
+  - the worked example now names the proposition it refutes and adds a two-action version (wait or reappraise), which shows different targets needing different policies, and passive versus optimal values;
+  - added the person's, researcher's and simulator information sets, with partial observation declared per study (from Sonnet's 2026-11-20 review);
+  - $m_t$ must be declared for the Markov claim to have content; exogenous events enter through $o_t$;
+  - a correct argument for why the maximum is attained even though $b_t$ is continuous-valued;
+  - the expected-loss fittingness form named as a Bayes-act commitment, with alternatives (links #15);
+  - the passive and controlled distinction, endpoint versus hitting, and the "model-implied" and "intervention-validated" labels (from the 2026-11-21 note and PR #12).
+- **`experiments/protocol.md`:**
+  - the "at least some conditions" prediction is replaced by rival-discriminating predictions with a stated failure criterion, using the 2026-11-22 lag note's rivals plus a new differential-demand rival;
+  - added a no-probe arm, question-order counterbalancing, sampling-limit and floor-effect requirements, an offer-versus-action section on reachability, and public timestamping of preregistrations.
+- **Open problems:** Brady (2009), D'Arms & Jacobson (2003) and Sheppes et al. (2011) added; citations checked against publisher pages.
+- **README:** states that LICENSE-MIT covers code, including the HTML and JavaScript demos.
+- No numbers, register entries or empirical claims changed.
+- **Integration Delta (IΔ): 1/5.** This brings already-agreed clarifications into the core files and adds a few new ones. It does not revise the model.
+
 ## 2026-11-23 · public integration pass (Claude Opus 5.5 draft; GPT-6.2 director revision; Claude cross-review; final approval pending)
 
 - **README:**

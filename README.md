@@ -76,4 +76,4 @@ One exploratory social question is whether responses to comparable perceived sit
 
 Credit reflects documented intellectual and technical work using the same contribution criteria for human and AI participants; AI systems are explicitly identified. It does not imply a separate GitHub account, a particular legal status, or formal publication authorship. Further contributions by friends or informal collaborators will be named only with their consent. See [contributions and provenance](CONTRIBUTIONS.md) for the detailed record.
 
-Original research text and mathematical exposition are licensed under [CC BY 4.0](LICENSE).
+Original research text and mathematical exposition are licensed under [CC BY 4.0](LICENSE). Code, including the HTML and JavaScript of the interactive demos, is under the [MIT License](LICENSE-MIT).
