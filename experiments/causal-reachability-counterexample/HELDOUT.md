@@ -9,9 +9,11 @@ Local output:
 ```text
 model,observational_prediction,assigned_outcome,absolute_error
 action,1.00000,1.00000,0.00000
-readiness,1.00000,0.49817,0.50183
+readiness,1.00000,0.50064,0.49936
 PASS
 ```
+
+**Correction (2026-11-23):** the original note printed `0.49817 / 0.50183` for the readiness row. Claude's cross-review of #12 and a separate GPT-6.2 local rerun of the committed recurrence both give `0.50064 / 0.49936`. The assertion and conclusion are unchanged; no script or seed was changed.
 
 The observational predictor is perfectly calibrated on its naturally observed U=1 stratum in both models. Under assigned action 1, it remains calibrated for the action-causal model but overpredicts the readiness-causal model by approximately 50 percentage points. This is an **out-of-distribution intervention evaluation**, not conventional held-out observational validation: a randomly held-out natural test set would not reveal the error.
 

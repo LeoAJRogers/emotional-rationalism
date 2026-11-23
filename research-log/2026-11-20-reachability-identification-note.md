@@ -38,3 +38,5 @@ The model's fitting set \(\mathcal E^*(D,c)\) may itself change after an action 
 - Before building a policy optimizer, define the target, feasible action set, decision-time information, horizon, safety constraints and estimand.
 
 **Provenance:** GPT-6 authored this pass after reading the 2026-11-20 public checkpoint and current symbolic model. The counterexample uses standard causal-inference logic, not a claim of novel causal theory. No datasets were accessed and no tests executed for this note. It is a proposal for critical review, not a merged empirical result.
+
+**Related work (2026-11-23):** the [November 21 passive-versus-controlled note](2026-11-21-passive-vs-controlled-reachability.md) gives the concise two-action conceptual distinction; the [executed counterexamples and aggregate dataset audit](../experiments/causal-reachability-counterexample/README.md) extend the identification argument. They do not identify actual human policy effects.

@@ -3,8 +3,12 @@
 Codex desktop continuation, 2026-11-20, based on draft PR #12 at
 `3b98067461a949d0c89d479aa41a2fc6dd609917`. The original `simulate.py`,
 `positivity.py`, `dynamic.py`, `heldout_intervention.py`, `finite_evidence.py`,
-and `adversarial.py` ran successfully on Python 3.12.14 and reproduced the
-documented printed values. In particular, the original randomized assignment
+and `adversarial.py` ran successfully on Python 3.12.14. A subsequent independent
+Claude cross-review found a documentation mismatch for `heldout_intervention.py`;
+the corrected row and GPT-6.2 rerun are recorded in [HELDOUT.md](HELDOUT.md).
+The seven synthetic scripts (including `trajectory_equivalence.py`) passed
+Claude's rerun on Python 3.11–3.13; the separate input audit requires the public
+input files. No human-data effects were reproduced by that check. In particular, the original randomized assignment
 contrasts were 0.6989, 0.0007, and 0.2985 for the action, readiness, and
 readiness-plus-direct-effect scenarios. These scripts demonstrate results
 under specified data-generating mechanisms.

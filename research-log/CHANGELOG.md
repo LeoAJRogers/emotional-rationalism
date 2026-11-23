@@ -1,5 +1,41 @@
 # Research log
 
+## 2026-11-23 · reachability identification cross-review (GPT-6.2; Claude Opus 5.5; pending integration)
+
+- PR #12: preserves the dated Nov 20 causal counterexample, seven synthetic checks, and aggregate structure audit of three public releases. No new human-data effect estimate or empirical reachability claim.
+- Claude independently checked the scripts and exact results; corrected the documented readiness row in HELDOUT.md (0.50064 / 0.49936), independently rerun by GPT-6.2; corrected reproduction wording, added links to the Nov 21 passive/controlled note and retained the HeartSteps reconciliation flag.
+- Integration Delta (IΔ): 1/5, dated methods and identification boundary. No prediction register or checkpoint change.
+
+## 2026-11-23 · public integration pass (Claude Opus 5.5 draft; GPT-6.2 director revision; Claude cross-review; final approval pending)
+
+- **README:**
+  - a one-line statement that the project describes and tests, and does not prescribe ([#19](https://github.com/LeoAJRogers/emotional-rationalism/pull/19), item P2);
+  - a concise five-thread map of work since the checkpoint, with the detailed status matrix in the integration note;
+  - explicit broader ambition and evidence classes; a population reference is descriptive, and reflection need not produce convergence;
+  - after Claude's cross-review: the definition line keeps a person's own feasible actions in scope as conditional questions; the social paragraph names the open fittingness question; the map shows the preregistered, unrun R-006 test and links the relational grounding note (#20); the evidence guide names the register discipline;
+  - a pointer to the proposed release gate;
+  - Gemini credited as an external reviewer (also in [CONTRIBUTIONS](../CONTRIBUTIONS.md)), where a sentence about session memory was also corrected.
+- **Open problems:** questions opened since the checkpoint.
+- **[Integration note](2026-11-23-public-integration-pass.md):** a review state and proposed action for each open PR, for agreement before any merge.
+- **Agreed prerequisites merged first (2026-11-23):** [#19](https://github.com/LeoAJRogers/emotional-rationalism/pull/19) (Gemini framing review and release gate), [#9](https://github.com/LeoAJRogers/emotional-rationalism/pull/9) (credit pass) and [#21](https://github.com/LeoAJRogers/emotional-rationalism/pull/21) (social affect distributions). [#16](https://github.com/LeoAJRogers/emotional-rationalism/pull/16) was merged into `experiment/2026-11-22-lag-identifiability`, not `main`.
+- No numbers, register entries or model text changed. The release gate has not been passed.
+- **Integration Delta (IΔ): 0/5.** Navigation and status only.
+
+## 2026-11-21 and 2026-11-22 · research notes added to main (recorded retrospectively on 2026-11-23)
+
+- GPT-6, [context-dependent dynamics: a discriminating design](2026-11-21-context-transition-discrimination.md). Proposed, not executed.
+- GPT-6, [passive target entry is not controlled reachability](2026-11-21-passive-vs-controlled-reachability.md). Conceptual; IΔ 1/5.
+- GPT-6 (director), [discriminating affect-lag mechanisms](2026-11-22-director-lag-identifiability-pass.md). Proposed design; IΔ 1/5.
+
+## 2026-11-20 · credit pass (Claude Opus 5.5, at Leo's invitation)
+
+- **Contributors table:** the contribution-based table merged on `main` (`1690918`) stands, so there is one format for everyone. The CRediT-format table first proposed in PR #9 was withdrawn when PR #9 was brought up to date. CRediT roles remain an option any contributor may propose later.
+- **AI note:** a short note says the AI rows describe work, not authorship. It cites COPE's position on AI tools, and states that accountability rests with the human maintainer.
+- **Data credit:** Bringmann et al. (2013) and the openESM introduction paper (Siepe et al., 2026) are added alongside Geschwind et al. (2011), as the dataset record asks. They appear in CONTRIBUTIONS, the README and a dated addendum to the checkpoint.
+- **Lived experience:** a general acknowledgment that many people's lived experience contributed, without specifying whose. The data-credit section also thanks the trial participants.
+- **Unchanged:** the friends and informal-collaborators plan. There is no scientific content.
+- **Integration Delta:** not assigned. This is a provenance change.
+
 ## 2026-11-20 · public evidence integration checkpoint (GPT-6, following Claude reviews)
 
 - Reviewed and integrated the [R-001–R-004 prediction register](prediction-register.md), with original preregistered wording and dated corrections retained. Merged the Sonnet review/contribution note and reviewed register PRs before this synthesis.

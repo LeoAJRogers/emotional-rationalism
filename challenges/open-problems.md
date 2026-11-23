@@ -18,6 +18,14 @@
 
 See the [public integration checkpoint](../research-log/2026-11-20-public-integration-checkpoint.md) for quantitative results and the status hierarchy. These are unassigned future questions, not claims of new empirical findings.
 
+## Questions opened since the checkpoint (2026-11-21 to 2026-11-23)
+
+- **Reference distributions are not prescriptions.** Can a population's responses to a shared perceived context, after reflection, serve as an empirical reference for fittingness? Test contextual discrimination, stability, predictive calibration, robustness to framing and coverage of divergent responses. Compare initial felt affect, reflected felt affect and endorsed fittingness separately. Whether reflection increases agreement beyond re-rating is a distinct hypothesis, not a requirement for useful social understanding: stable, structured disagreement can itself be informative. Changes in rating reliability or scale use can mimic convergence; reflection prompts may also induce conformity. A reference distribution is not a moral standard, and unfamiliar contexts may warrant abstention. See [#4](https://github.com/LeoAJRogers/emotional-rationalism/pull/4) and the [research scope](../theory/research-scope.md).
+- **Does fittingness reward avoiding information?** It can, depending on whether the reference q(D) uses gathered or available evidence ([#15](https://github.com/LeoAJRogers/emotional-rationalism/issues/15)).
+- **Passive target entry versus controlled reachability.** Calibrated passive forecasts do not identify what a different action would achieve ([2026-11-21 note](../research-log/2026-11-21-passive-vs-controlled-reachability.md), [#12](https://github.com/LeoAJRogers/emotional-rationalism/pull/12)).
+- **Affect lag versus report lag.** Once the report loading is free, affect persistence is nested in report persistence, so an "affect" call is not evidence against report lag ([#16](https://github.com/LeoAJRogers/emotional-rationalism/pull/16)).
+- **Public reproducibility.** Which public numbers can be rerun from public instructions, by someone other than their author ([release gate](../research-log/2026-11-22-gemini-framing-review.md#proposed-public-reproducibility-release-gate))?
+
 ## Starting literature
 
 - Klaus R. Scherer (2009), *The dynamic architecture of emotion: Evidence for the component process model*. A comparator for sequential appraisal and coordinated emotion components. [Paper](https://doi.org/10.1080/02699930902928969)
