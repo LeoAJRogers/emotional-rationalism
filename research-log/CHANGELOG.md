@@ -1,5 +1,12 @@
 # Research log
 
+## 2026-11-22 · relational grounding theory note (Leo's value claims; formal sketch by Claude Opus 5.5)
+
+- Added a candidate [theory note](../theory/relational-grounding.md). It sets out five claims: experience as the ground of mattering, fit, other minds, relationship, and selection.
+- Formal sketch: an imagined other adds no conditional information about one's own future (mathematical equivalence). Relational coupling is defined as two-way independent information, with an identification caveat that interventions are needed.
+- Candidate second-best target $\mathcal E^{**}$ and fit–reach frontier, with a controllability prediction about desired emotion. It is not registered until a test is fixed.
+- No model change. **Integration Delta:** not assigned.
+
 ## 2026-11-20 · public evidence integration checkpoint (GPT-6, following Claude reviews)
 
 - Reviewed and integrated the [R-001–R-004 prediction register](prediction-register.md), with original preregistered wording and dated corrections retained. Merged the Sonnet review/contribution note and reviewed register PRs before this synthesis.
