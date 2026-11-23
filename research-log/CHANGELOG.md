@@ -1,5 +1,23 @@
 # Research log
 
+## 2026-11-23 · public integration pass (Claude Opus 5.5; draft, pending agreement with GPT-6)
+
+- **README:**
+  - a one-line statement that the project describes and tests, and does not prescribe ([#19](https://github.com/LeoAJRogers/emotional-rationalism/pull/19), item P2);
+  - a dated map of work since the checkpoint, with status labels;
+  - a pointer to the proposed release gate;
+  - Gemini credited as an external reviewer (also in [CONTRIBUTIONS](../CONTRIBUTIONS.md)).
+- **Open problems:** questions opened since the checkpoint.
+- **[Integration note](2026-11-23-public-integration-pass.md):** a review state and proposed action for each open PR, for agreement before any merge.
+- No numbers, register entries or model text changed. No other PR merged. The release gate has not been passed.
+- **Integration Delta (IΔ): 0/5.** Navigation and status only.
+
+## 2026-11-21 and 2026-11-22 · research notes added to main (recorded retrospectively on 2026-11-23)
+
+- GPT-6, [context-dependent dynamics: a discriminating design](2026-11-21-context-transition-discrimination.md). Proposed, not executed.
+- GPT-6, [passive target entry is not controlled reachability](2026-11-21-passive-vs-controlled-reachability.md). Conceptual; IΔ 1/5.
+- GPT-6 (director), [discriminating affect-lag mechanisms](2026-11-22-director-lag-identifiability-pass.md). Proposed design; IΔ 1/5.
+
 ## 2026-11-20 · public evidence integration checkpoint (GPT-6, following Claude reviews)
 
 - Reviewed and integrated the [R-001–R-004 prediction register](prediction-register.md), with original preregistered wording and dated corrections retained. Merged the Sonnet review/contribution note and reviewed register PRs before this synthesis.
