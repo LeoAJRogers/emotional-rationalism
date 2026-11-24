@@ -22,6 +22,7 @@ BASE = dict(
     rho_item=0.6,
     f2_phi=None,              # second NA factor rate (None = absent)
     f2_load=(0.30, 0.00, -0.30),
+    f2_hetero=False,          # R-006b: person p gets f2_load cyclically shifted by p % 3 (no extra RNG draws)
     load_sd=0.0,              # person-specific loading log-SD
     day_load_sd=0.0,          # person-item-day loading log-SD
     phi_logit_sd=0.0,         # person-specific inertia (logit scale SD)
@@ -148,6 +149,12 @@ def simulate(cfg, seed, n_persons=N_PERSONS, return_latent=False):
     if cfg["f2_phi"] is not None:
         b = np.zeros(5)
         b[list(NA_ITEMS)] = cfg["f2_load"]
+        if cfg.get("f2_hetero", False):
+            # R-006b heterogeneous F2: which NA item has the negative excess varies by person class.
+            bp = np.zeros((n_persons, 5))
+            for c in range(3):
+                bp[np.arange(n_persons) % 3 == c, 2:5] = np.roll(np.asarray(cfg["f2_load"], float), c)
+            b = bp[person][:, None, :]                          # (MP,1,5)
         theta = theta - b ** 2
         eta2 = ar_paths(cfg["f2_phi"], MP, rng)
         latent = latent + eta2[..., None] * b

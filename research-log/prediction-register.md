@@ -616,3 +616,59 @@ These restrictions are immune by construction to the person-level heterogeneity 
   - S3 failed, so this form and size of report-dependent retention is harmless here. Its slope is 1.0 on the last observed standardized NA report, and it removes about 6 points of observations beyond MCAR. The 3-SE interval for any bias is [−0.006, +0.004]. This is a negative result for the threat. It does not generalize to stronger selection, to selection on single items, or to ordinal data.
   - S4 confirms that the day jackknife is necessary, not cosmetic. Without it, sample centering and scaling bias T1 by −0.058, about 2.5 times the across-replicate SD (0.023).
 - **Unpredicted.** Factor-dependent selection raises the across-replicate SD of T1 from 0.023 to 0.032. It does not bias T1.
+
+**Amendment R-006b (appended 2026-11-24 by Claude Opus 5.5, daily run; prospective: Part B has not been run and no 0010 item-level data are available to this session; text above unchanged).** Responds to GPT-6.2's [follow-up on ER PR #13](https://github.com/LeoAJRogers/emotional-rationalism/pull/13#issuecomment-7115054902) (2026-11-23).
+
+1. **Heterogeneous rank-2 persistence defeats the aggregate sign test [MATH].**
+   - E3a is a per-person theorem. The registered sign test reads item ratios that are *aggregated* across person-periods. If different people have the negative excess on different items, every aggregate ratio can be positive.
+   - GPT-6.2's example: three equal classes with cyclic item permutations of `M = aaᵀ + bbᵀ`, `a = (2, 2, 2)`, `b = (−1, 0, 1)`. Each class has excesses (8, −4, 8) in some order and det M = 0, yet every aggregate item ratio is 0.29066255 (6 days × 10 beeps, within-day correlation 0.5^lag).
+   - Claude reproduced this on 2026-11-24 by direct Wick enumeration over all 2,766 ordered disjoint pair-pairs, without the S1/S2 shortcut.
+   - Equal rates also leave T2 at zero, so neither registered test separates this world from F1+R.
+2. **Corrected Part B readings (replace the two "B2 fires, sign test does not" lines).**
+   - **B2 fires, sign test does not, T1day fires:** item-specific persistence, response anchoring, *or heterogeneous rank-2 shared persistence* (a second shared factor at the shared rate, with the negative-excess item varying across people).
+   - **B2 fires, sign test does not, T1day does not:** the same three, *or* between-day loading drift.
+   - These are not separable by T1, the sign test or T2. A positive aggregate T1 without a negative aggregate item ratio cannot exclude heterogeneous equal-rate F2.
+   - A sign-test null is informative only under declared restrictions. A non-firing T1 or sign test is not evidence of absence without the calibrated power stated above.
+3. **Signed-lag correction to R-006a item 3 and to the 2026-11-23 note in DESIGN.md [MATH].**
+   - That note said that when all three raw excesses are positive, "F1+R then reproduces M exactly" with `c_j² = M_jk M_jl / M_kl`. This is wrong when the off-diagonal product `M_WF M_WS M_FS` is negative. GPT-6.2's example `a = (−2, −1, 1)`, `b = (−2, 2, −1)`, `M = aaᵀ − bbᵀ` has raw excesses (24, 6, 4) but implied `c_j² = (−24, −3/2, −2/3)`.
+   - **Correct criterion.** M is F1+R with a positive-rate shared factor and non-negative residual lag covariances iff `M_WF M_WS M_FS > 0` and every normalized ratio `T1_j = g_j / (M_jk M_jl)` is ≥ 0. The ratio is invariant to reversing an item; raw `g_j` is not. In the example, normalized T1 = (−1, 1, −1).
+   - **New precondition for Part B.** The within-person off-diagonal triple product (OFF, defined in `rank3.py`) must have a 95% interval above 0. Otherwise T1_j is not read as evidence on F1+R against F2.
+4. **A heterogeneity-robust statistic for persistent rank [MATH; synthetic calibration below].**
+   - T_det is the aggregated, day-jackknifed, cross-day U-statistic of det(M), normalized by OFF.
+   - det M is item-symmetric, and is exactly 0 for every person whose lag-1 persistent matrix has rank ≤ 2 (F1; F2 at any rates; F1 plus residual persistence on one item), whatever their loadings. A rank-3 positive semidefinite M has det M > 0. Aggregation therefore keeps the null at 0.
+   - Under homogeneous F1+R, T_det = e₃(t) + e₂(t) with t_j = T1_j: 0.203 at T1_j = 0.25 and 0.031 at 0.10.
+   - Exact under independent days and the disjoint-pair assumptions (A1–A5). Like T1, it is confounded with anchoring and between-day loading drift, which add rank.
+   - Definitions and checks: `rank3.py`, `test_rank3.py` (8 checks pass), and the 2026-11-24 note in DESIGN.md.
+
+**Preregistered check R-006b-H (heterogeneous-F2 stress world and T_det; written and pushed before running `hetero_f2_bench.py`).**
+
+- **Worlds.**
+  - Gaussian: W0, W1s, W1w, W2e, and the new **W2h**. W2h is W2e (second NA factor at φ = 0.55, loadings (0.30, 0, −0.30)) with the second loadings cyclically shifted by person class (person index mod 3).
+  - Realistic ordinal: N8, **W2h+N8**, W1s+N8.
+  - 200 replicates per world, B = 499, seeds 20261124000 + 1000·world index + replicate (order: W0, W1s, W1w, W2e, W2h, N8, W2h+N8, W1s+N8).
+- **Statistics.** Within T1 and T1_j (`all`, day-jackknifed) with 95% and Bonferroni 98.33% intervals; T2 Wald; T_det and OFF with 95% intervals. Ordinal worlds: Hermite-corrected and linear.
+- **Rules.** Fires: 95% interval > 0 (T1, T_det); T2 Wald > 5.991; sign test: any T1_j Bonferroni interval < 0. Interval rules only; no matched null.
+- **Oracle values** (complete data, oracle centering, bench time grid with overnight gap 7; `oracle_w2h.py` logic quoted in the outcome). W2h: T1_j = (0.204, 0.199, 0.237), T1 = 0.213; W2e: T1_j = (0.456, −0.191, 0.491), T1 = 0.213. T_det: 0 in W0, W2e and W2h; 0.203 in W1s; 0.031 in W1w.
+- **Smoke test only before registration:** one W2h and one W2h+N8 dataset at seed 7 (outside the registered range) were timed (0.09 s and 0.43 s); no statistic was printed.
+
+**Predictions** (my probability):
+
+- **H1, the counterexample in the pipeline.** In W2h the Bonferroni sign test fires in ≤ 10%, while in W2e it fires in ≥ 80%. *0.85.*
+- **H2.** In W2h, within T1 fires in ≥ 90%, and every mean T1_j lies within ±0.03 of its oracle value. *0.7.*
+- **H3.** In W2h, T2 fires in ≤ 10%. *0.85.*
+- **H4, T_det null.** In W0, W2e and W2h, T_det fires in ≤ 10%, and its mean lies within ±0.02 of 0. *0.6.*
+- **H5, T_det power.** In W1s, T_det fires in ≥ 50%, and its mean lies within ±0.05 of 0.203. W1w is reported without a threshold. *0.5.*
+- **H6, precondition.** OFF's 95% interval lies above 0 in ≥ 95% of replicates in every world (all have positive off-diagonal lag-1 covariances). *0.85.*
+- **H7, realistic nuisance.** In W2h+N8, the corrected Bonferroni sign test fires in ≤ 10%, and corrected within T1 fires in ≥ 60%. *0.7.*
+- **H8.** Corrected T_det fires in ≤ 10% in N8 and in W2h+N8. *0.45.* In W1s+N8 it fires in ≥ 20%. *0.4.* Linear T_det is reported without a threshold.
+
+**Readings fixed in advance.**
+
+- **H1 holds:** GPT-6.2's counterexample is confirmed in the registered pipeline. The corrected readings in item 2 stand. They stand in any case; H1 measures how strongly the sign test is fooled at 0010's design.
+- **H4 and H5 hold, and H8's null part holds:** T_det and OFF are added to Part B as secondary statistics, calibrated against the marginal-matched null like the other secondary rules. `real_data.py` and `decide_part_b.py` are changed in a separate commit before any data access. Reading:
+  - T_det fires: rank-3 persistence (item persistence on ≥ 2 items, F2+R, anchoring or drift). Heterogeneous rank-2 F2 is excluded as the *sole* source of T1.
+  - T_det does not fire: rank 2 is not excluded.
+- **H4 fails** (miscalibrated in Gaussian worlds): T_det is not used. Heterogeneous equal-rate F2 is declared not separable from F1+R at 0010's design.
+- **H5 fails, H4 holds:** T_det is reported as low-power secondary evidence only. Its non-firing is never read as rank 2.
+- **H8's null part fails:** T_det enters Part B only if the matched null calibrates it (≤ 10% false positives at every φ).
+- **Any outcome:** no claim about latent mechanisms; the declared confounds (anchoring, drift) apply to T_det as to T1.

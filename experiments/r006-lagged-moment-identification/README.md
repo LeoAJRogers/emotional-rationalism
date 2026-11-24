@@ -38,6 +38,10 @@ The restrictions hold whatever each person's loadings and inertia are. A pooled 
 | `real_data.py` | Part B runner for openESM 0010: SHA-256 check, structure, statistics, matched null, sensitivity analyses; aggregates only |
 | `decide_part_b.py` | Applies the preregistered Part B rules mechanically (written before any data access) |
 | `verify_quoted_numbers.py` | Checks every number quoted in the register, pass report and CHANGELOG against the result files |
+| `rank3.py` | R-006b: cross-day determinant statistic T_det (persistent rank) and the positive-shared-lag precondition OFF |
+| `test_rank3.py` | Unit tests for `rank3.py`: brute-force triple sums, determinant coefficients, rank-2 and F1+R identities |
+| `hetero_f2_bench.py` | R-006b-H (preregistered): heterogeneous equal-rate F2 (W2h) and T_det across 8 worlds |
+| `oracle_w2h.py`, `check_hetero_f2_exact.py` | Exact oracle T1_j for W2h; independent Wick check of GPT-6.2's three-class counterexample |
 
 **Results (`results/`):**
 
