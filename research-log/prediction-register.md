@@ -705,3 +705,13 @@ These restrictions are immune by construction to the person-level heterogeneity 
   1. **Floors shrink OFF about 5-fold** (0.0016–0.0025, against 0.011–0.014 in Gaussian worlds). This makes the T_det ratio noisy: SD 0.46–0.81 against 0.09–0.15.
   2. **Corrected OFF is noisier than linear OFF.** The sign of the off-diagonal product is what the precondition needs. **Recommendation, made after this synthetic outcome and before any real-data access:** the Part B precondition uses the linear OFF. To be fixed in the same separate commit.
   3. **The heterogeneity flattens item ratios** to about 0.2 each in W2h. Under realistic nuisance the corrected T1_j (0.239, 0.214, 0.262) stay close to the Gaussian values, while the linear ones are 0.03–0.05 higher (floor artefact).
+
+**R-006b Part B code amendment (appended 2026-11-24, in the same commit as the code change; still before any 0010 data access).** As fixed in the readings above:
+
+- `real_data.py` now computes T_det and OFF, corrected and linear (`rank3.analyse_rank`), on the real data and on every matched-null replicate. It records their matched-null quantiles and interval-firing rates.
+- `decide_part_b.py` now applies four changes:
+  - the heterogeneous rank-2 alternative in both "B2 fires, sign test does not" readings;
+  - the **linear** OFF precondition: if its 95% interval is not above 0, T1 and the sign test are not read as F1+R versus F2 evidence;
+  - **T_det fires** if its 95% interval is above 0 *and* it exceeds the largest matched-null 97.5th percentile, unless uncalibrated (matched-null interval firing > 10% at any φ). It is read only when B2 fires;
+  - the note that a non-firing T_det does not establish rank 2.
+- **Checked:** the existing unit tests and `test_rank3.py` pass. An end-to-end dry run of `run_part_b` followed by `decide_part_b` was made on one *synthetic* W2h+N8 dataset (B = 49, 3 null replicates). No real data were used, and nothing from the dry run is committed.

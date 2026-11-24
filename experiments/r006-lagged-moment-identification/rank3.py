@@ -82,3 +82,22 @@ def t_det(LM, person, n_persons, counts, cache=None):
     with np.errstate(invalid="ignore", divide="ignore"):
         draws = {"T_det": (counts @ pn) / (counts @ pd), "OFF": (counts @ pd) / (counts @ pw)}
     return est, draws, int(ok.sum())
+
+
+def analyse_rank(Y, person, discrete, n_boot=499, seed=0):
+    """T_det and OFF for one dataset, in the same versions as lagmom.analyse
+    ('cor' and 'lin' if discrete, else 'lin'). Keys: {tag}_w_T_det(_lo/_hi), {tag}_w_OFF(_lo/_hi).
+    Added for Part B by amendment R-006b (2026-11-24), before any 0010 data access."""
+    person = np.asarray(person)
+    n_persons = int(person.max()) + 1
+    counts = lm.boot_counts(n_persons, n_boot, np.random.default_rng(seed))
+    out = {}
+    modes = [("cor", True), ("lin", False)] if discrete else [("lin", False)]
+    for tag, correct in modes:
+        LM = lm.LagMoments(Y, lm.NA_IDX, discrete, lags=(1,), correct=correct, jk=True)
+        est, draws, n_ok = t_det(LM, person, n_persons, counts)
+        for k in ("T_det", "OFF"):
+            lo, hi = lm.ci(draws[k])
+            out[f"{tag}_w_{k}"], out[f"{tag}_w_{k}_lo"], out[f"{tag}_w_{k}_hi"] = float(est[k]), lo, hi
+        out[f"{tag}_n_pp_det"] = n_ok
+    return out

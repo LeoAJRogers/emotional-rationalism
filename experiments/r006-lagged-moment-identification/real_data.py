@@ -20,6 +20,7 @@ import warnings
 import numpy as np
 
 import lagmom as lm
+import rank3
 
 SHA256_TS = "811f41aeaeb8dbfaa67ca8f8a5387d222701c42fc316f9eb3d61326d138bc8ee"
 ITEM_WORDS = ("cheerful", "relaxed", "worried", "fearful", "sad")
@@ -221,6 +222,7 @@ def run_part_b(Y, person, info, n_boot, null_reps):
     out["marginals"] = marginals(Y)
     # 1. primary and secondary statistics (corrected and linear; within and pooled)
     res = lm.analyse(Y, person, discrete=True, n_boot=n_boot, seed=20261121)
+    res.update(rank3.analyse_rank(Y, person, discrete=True, n_boot=n_boot, seed=20261124))   # R-006b
     out["main"] = res
     # 2. marginal-matched F1 null (no dynamic information from Y is used)
     keys = []
@@ -228,12 +230,14 @@ def run_part_b(Y, person, info, n_boot, null_reps):
         keys += [f"{tag}_w_T1", f"{tag}_w_T1_lo", f"{tag}_w_T2_W", f"{tag}_w_T20_W", f"{tag}_w_PA_det",
                  f"{tag}_w_PA_det_lo", f"{tag}_p_T1", f"{tag}_w_T1day_lo", f"{tag}_w_BIP"]
         keys += [f"{tag}_w_T1_{j}_hi3" for j in range(3)] + [f"{tag}_w_T1_{j}" for j in range(3)]
+        keys += [f"{tag}_w_T_det", f"{tag}_w_T_det_lo", f"{tag}_w_OFF_lo"]                  # R-006b
     nulls = {}
     for phi in (0.40, 0.55, 0.70):
         vals = []
         for r in range(null_reps):
             Z = mn.simulate_matched(Y, person, seed=int(1000 * phi) * 1000 + r, phi=phi)
             rr = lm.analyse(Z, person, discrete=True, n_boot=199, seed=r, linear_too=True)
+            rr.update(rank3.analyse_rank(Z, person, discrete=True, n_boot=199, seed=r))  # R-006b
             vals.append({k: rr[k] for k in keys})
         nulls[str(phi)] = vals
     mnull = {}
@@ -248,6 +252,8 @@ def run_part_b(Y, person, info, n_boot, null_reps):
             d[f"{tag}_anyneg3_rate"] = float(np.mean([any(x[f"{tag}_w_T1_{j}_hi3"] < 0 for j in range(3))
                                                       for x in vals]))
             d[f"{tag}_T2_fire_rate"] = float(np.mean([x[f"{tag}_w_T2_W"] > 5.991 for x in vals]))
+            d[f"{tag}_Tdet_ci_fire_rate"] = float(np.mean([x[f"{tag}_w_T_det_lo"] > 0 for x in vals]))
+            d[f"{tag}_OFF_ci_pos_rate"] = float(np.mean([x[f"{tag}_w_OFF_lo"] > 0 for x in vals]))
         mnull[phi] = d
     out["matched_null"] = mnull
     # 3. sensitivity analyses
