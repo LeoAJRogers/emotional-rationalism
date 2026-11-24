@@ -49,6 +49,8 @@ These are useful *questions about one domain* rather than a requirement that eve
 
 In multi-agent settings, context may change as participants interact. Physical or ecological constraints and socially maintained norms should be modeled distinctly. Some norms emerge from population traits and interactions, some are deliberately enforced, and many are inherited by people who did not establish them. Individual action can influence future contexts without assuming unlimited freedom from constraints.
 
+One candidate extension is to estimate the emotional landscape of a social system over time: probability distributions over possible affective states for each observed participant, and their distribution across the population at time $t$. These are uncertain, measurement-dependent estimates, not definitive labels of anyone's internal state. Interactions and shared context may inform how the distributions evolve, while allowing individuals to respond differently. Population- and context-specific patterns can serve as empirical reference distributions for describing what is common; they are not prescriptions for what anyone ought to feel. Aggregate patterns must not be used to infer an individual's state without individual-level evidence.
+
 Proposed staged test: begin with individual models and observable shared context; add observable interactions; then consider latent models of others' perspectives and deceptive communication only if measurements and comparative predictions justify them. Do not treat one participant's reports about another's internal state as ground truth.
 
 ## Scope boundaries and tests
