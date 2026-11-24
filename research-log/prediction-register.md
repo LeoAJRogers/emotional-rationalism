@@ -672,3 +672,36 @@ These restrictions are immune by construction to the person-level heterogeneity 
 - **H5 fails, H4 holds:** T_det is reported as low-power secondary evidence only. Its non-firing is never read as rank 2.
 - **H8's null part fails:** T_det enters Part B only if the matched null calibrates it (≤ 10% false positives at every φ).
 - **Any outcome:** no claim about latent mechanisms; the declared confounds (anchoring, drift) apply to T_det as to T1.
+
+**Outcome of R-006b-H (appended 2026-11-24, after the run; the predictions above are unchanged).** Run started 10:08:10 UTC, after the preregistration was pushed in `548c209` (10:08:04 UTC). 8 worlds × 200 replicates, B = 499, 421 s. Output: `results/hetero_f2_bench.json`. Gaussian worlds use the linear statistic.
+
+| World (version) | within T1 mean (SD) | T1 fires | sign test fires (Bonferroni) | T2 fires | T_det mean (SD) | T_det fires | OFF > 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| W0 | −0.002 (0.025) | 0.020 | 0.055 | 0.045 | +0.011 (0.089) | 0.045 | 1.000 |
+| W1s | +0.263 (0.035) | 1.000 | 0.000 | 0.040 | +0.243 (0.133) | 0.560 | 1.000 |
+| W1w | +0.103 (0.024) | 0.985 | 0.000 | 0.065 | +0.038 (0.109) | 0.080 | 1.000 |
+| W2e | +0.238 (0.035) | 1.000 | 0.940 | 0.040 | −0.020 (0.145) | 0.020 | 1.000 |
+| **W2h** | +0.229 (0.032) | 1.000 | **0.000** | 0.035 | −0.009 (0.138) | 0.035 | 1.000 |
+| N8 (corrected) | −0.014 (0.064) | 0.015 | 0.035 | 0.020 | +0.066 (0.814) | 0.050 | 0.955 |
+| N8 (linear) | +0.023 (0.061) | 0.070 | 0.030 | 0.025 | +0.007 (0.461) | 0.045 | 0.990 |
+| **W2h+N8** (corrected) | +0.229 (0.089) | 0.835 | **0.000** | 0.015 | +0.070 (0.723) | 0.045 | **0.905** |
+| W2h+N8 (linear) | +0.272 (0.085) | 0.950 | 0.000 | 0.025 | +0.053 (0.560) | 0.045 | 0.960 |
+| W1s+N8 (corrected) | +0.285 (0.091) | 0.970 | 0.000 | 0.010 | +0.387 (0.718) | **0.130** | 0.950 |
+| W1s+N8 (linear) | +0.328 (0.090) | 0.985 | 0.000 | 0.015 | +0.396 (0.618) | 0.170 | 0.980 |
+
+- **H1 held.** The sign test fired in 0 of 200 W2h datasets, against 94% in W2e. GPT-6.2's counterexample is confirmed in the registered pipeline: the sign test is blind to heterogeneous equal-rate F2 at 0010's design.
+- **H2 held.** W2h T1 fired in 100%. Mean T1_j = (0.223, 0.212, 0.260) against oracle (0.204, 0.199, 0.237), all within +0.023.
+- **H3 held.** T2 fired in 3.5%.
+- **H4 held,** narrowly for W2e. T_det fired in 4.5%, 2.0% and 3.5% (W0, W2e, W2h), with means +0.011, −0.020 and −0.009 (MC SE 0.006–0.010).
+- **H5 held.** In W1s, T_det fired in 56%, with mean 0.243 against 0.203. The bench's realized T1_j ≈ 0.265 gives e₃ + e₂ ≈ 0.229. W1w: 8%.
+- **H6 failed.** The *corrected* OFF interval was above 0 in only 90.5% of W2h+N8 datasets (95.5% in N8 and 95.0% in W1s+N8). The linear OFF was above 0 in ≥ 96% of datasets in every world.
+- **H7 held.** In W2h+N8 the corrected sign test fired in 0%, and corrected T1 fired in 83.5%.
+- **H8 split.** The null part held: corrected T_det fired in 5.0% (N8) and 4.5% (W2h+N8). **The power part failed:** 13% in W1s+N8, against ≥ 20% predicted.
+- **Readings, as fixed in advance.**
+  - The corrected readings in item 2 stand.
+  - H4 and H5 held, and H8's null part held. So T_det and OFF are to be added to Part B as secondary statistics with matched-null calibration, in a separate commit before any data access. Not done in this commit.
+  - Under realistic nuisance T_det has little power: 13–17% at T1 = 0.25+. So in Part B a non-firing T_det must never be read as rank 2. A firing T_det would exclude heterogeneous rank-2 F2 as the sole source of a positive T1.
+- **Unpredicted (exploratory).**
+  1. **Floors shrink OFF about 5-fold** (0.0016–0.0025, against 0.011–0.014 in Gaussian worlds). This makes the T_det ratio noisy: SD 0.46–0.81 against 0.09–0.15.
+  2. **Corrected OFF is noisier than linear OFF.** The sign of the off-diagonal product is what the precondition needs. **Recommendation, made after this synthetic outcome and before any real-data access:** the Part B precondition uses the linear OFF. To be fixed in the same separate commit.
+  3. **The heterogeneity flattens item ratios** to about 0.2 each in W2h. Under realistic nuisance the corrected T1_j (0.239, 0.214, 0.262) stay close to the Gaussian values, while the linear ones are 0.03–0.05 higher (floor artefact).

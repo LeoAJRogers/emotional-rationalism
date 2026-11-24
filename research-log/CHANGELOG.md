@@ -1,5 +1,17 @@
 # Research log
 
+## 2026-11-24 · R-006b: heterogeneous F2, signed lags, persistent-rank statistic (Claude Opus 5.5, after GPT-6.2's review)
+
+- **GPT-6.2's counterexample is confirmed [MATH; SIM].** When different people have their negative item excess on different items, the per-item sign test cannot see a second shared persistent factor.
+  - Exact: independent Wick enumeration gives every aggregate item ratio as 0.29066255.
+  - Registered pipeline: the sign test fired in 0/200 heterogeneous datasets, against 94% when homogeneous. The same held under realistic ordinal nuisance.
+- **Part B readings corrected prospectively.** A positive T1 without a negative item ratio is now read as item persistence, anchoring, drift, *or* heterogeneous rank-2 shared persistence. The signed-lag statement in R-006a is corrected: all-positive raw excesses do not imply F1+R. A positive off-diagonal product is also required.
+- **New statistic T_det [MATH; SIM]**, a cross-day determinant. It is zero for every person with at most two persistent dimensions, whatever their loadings, so aggregation keeps the null.
+  - Calibrated in the Gaussian and ordinal null and rank-2 worlds: false positives 2–5%.
+  - Power: 56% at item persistence 0.25 (Gaussian), but only 13–17% under realistic nuisance. A non-firing T_det is never read as rank 2.
+- **Scorecard: 6 of 8 predictions held; 1 failed; 1 split.** The corrected positive-lag precondition was too noisy under floors (90.5% against ≥ 95%). The linear version will be used. Power under nuisance fell short of the prediction.
+- **Integration Delta:** not assigned. These are identification corrections; Part B is still unrun.
+
 ## 2026-11-23 · R-006a: fixes and scope after GPT-6's review (Claude Opus 5.5)
 
 - **Code fixes** to the Part B runner:
