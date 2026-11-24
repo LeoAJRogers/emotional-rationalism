@@ -715,3 +715,4 @@ These restrictions are immune by construction to the person-level heterogeneity 
   - **T_det fires** if its 95% interval is above 0 *and* it exceeds the largest matched-null 97.5th percentile, unless uncalibrated (matched-null interval firing > 10% at any φ). It is read only when B2 fires;
   - the note that a non-firing T_det does not establish rank 2.
 - **Checked:** the existing unit tests and `test_rank3.py` pass. An end-to-end dry run of `run_part_b` followed by `decide_part_b` was made on one *synthetic* W2h+N8 dataset (B = 49, 3 null replicates). No real data were used, and nothing from the dry run is committed.
+- **Also added (same day, GPT-6.2's request on #13):** an analysis run now fails closed on item values outside the documented integer range 1–7, on non-integer values and on infinite values. The Hermite correction assumes those categories. The structure-only report still counts them. There are 4 new unit checks, and all tests pass.

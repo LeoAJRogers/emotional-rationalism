@@ -176,6 +176,14 @@ def test_real_loader_fail_closed():
     check("strict loader fails closed on a non-integer beep",
           raises(base + [[1, 1, 2.5, 0, "4", "4", "2", "1", "3"]]))
     check("strict loader accepts clean keys", not raises(base))
+    # R-006b (GPT-6.2, 2026-11-23): documented item range and finite integer categories
+    check("strict loader fails closed on an item value of 8", raises(base + [[1, 3, 1, 0, "8", "4", "2", "1", "3"]]))
+    check("strict loader fails closed on a non-integer item value",
+          raises(base + [[1, 3, 1, 0, "4", "4", "2.5", "1", "3"]]))
+    check("strict loader fails closed on an infinite item value", raises(base + [[1, 3, 1, 0, "4", "inf", "2", "1", "3"]]))
+    _, _, info = real_data.load(_fake_tsv(base + [[1, 3, 1, 0, "8", "4", "2.5", "1", "3"]]), strict=False)
+    check("structure-only loader counts out-of-range and non-integer item values",
+          info["values_outside_1_7"] == 1 and info["non_integer_values"] == 1)
 
 
 def test_floor_rate_denominator():

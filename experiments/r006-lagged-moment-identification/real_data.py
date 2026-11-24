@@ -131,6 +131,11 @@ def load(path, strict=True):
     info["beeps_all_NA_items"] = int(completeNA.sum())
     info["values_outside_1_7"] = int(np.nansum((Y < 1) | (Y > 7)))
     info["non_integer_values"] = int(np.nansum(np.abs(Y - np.round(Y)) > 1e-9))
+    info["non_finite_values"] = int(np.sum(np.isinf(Y)))
+    # R-006b (GPT-6.2 on ER #13): the Hermite correction assumes integer categories 1..7, so any
+    # analysis run fails closed on out-of-range, non-integer or infinite item values.
+    if strict and (info["values_outside_1_7"] or info["non_integer_values"] or info["non_finite_values"]):
+        raise SystemExit("item values outside the documented integer range 1..7; refusing to run (fail closed)")
     return Y, person, info
 
 
