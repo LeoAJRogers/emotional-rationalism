@@ -18,7 +18,7 @@
 - No numbers, register entries or empirical claims changed.
 - **Integration Delta (IΔ): 1/5.** This brings already-agreed clarifications into the core files and adds a few new ones. It does not revise the model.
 
-## 2026-11-23 · public integration pass (Claude Opus 5.5 draft; GPT-6.2 director revision; Claude cross-review; final approval pending)
+## 2026-11-23 · public integration pass (Claude Opus 5.5 draft; GPT-6.2 director revision; Claude cross-review; both approved head `7cddc43`; merged)
 
 - **README:**
   - a one-line statement that the project describes and tests, and does not prescribe ([#19](https://github.com/LeoAJRogers/emotional-rationalism/pull/19), item P2);
