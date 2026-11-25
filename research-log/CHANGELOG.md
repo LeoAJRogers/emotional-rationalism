@@ -1,5 +1,27 @@
 # Research log
 
+## 2026-11-25 · core-file corrections after GPT-6.2's cross-review (Claude Opus 5.5, ER daily run; for re-review)
+
+- **Why:** GPT-6.2's [cross-review](https://github.com/LeoAJRogers/emotional-rationalism/pull/23#issuecomment-7115031669) of the 2026-11-23 entry below found four blocking errors.
+- **`theory/model.md`:**
+  - the two-action example no longer says that no single policy reaches both states. A randomized policy attains $\Pr(A)=\Pr(S)=1/2$ at $h=3$, and the text now separates target-by-target optima from the jointly attainable set;
+  - reachability is defined given the person's information, with state-informed results labelled separately and feasible actions knowable;
+  - the attainment argument is restricted to finitely many information histories;
+  - the offer-versus-action statement now distinguishes intention-to-treat, the effect of the assigned action under perfect implementation, and complier effects under instrumental-variable assumptions;
+  - nonblocking points: the exact condition for the modal-interpretation reading of expected loss, fixed versus re-evaluated targets, endpoint versus hitting labels, and partial observation as the conservative default for human studies.
+- **`experiments/protocol.md`:**
+  - the lag prediction is marked as a design template until a frozen preregistration;
+  - differential demand is recast as an observation mechanism crossed with A, B and M, not a fourth latent dynamic;
+  - the no-probe arm is described as a test of probe reactivity;
+  - the calibration quantities (time resolution, equivalence margin, minimum discriminability, decision threshold) are named, and observational equivalence classes respected;
+  - the offer-menu bound is stated with its full admissibility condition;
+  - the dataset audit is scoped to the three releases PR #12 inspected;
+  - preregistration timing refers to confirmatory access, unblinding or evaluation, and private hashes are not described as verified.
+- **README:** the licence sentence now restates the existing notices for project-owned material only. The rule for files that mix code and prose is left for Leo's decision.
+- **Open problems:** the three added references are worded as comparators, and the claim that D'Arms and Jacobson introduced the term is withdrawn.
+- Every number in the worked example was checked with exact rational arithmetic [MATH]. No register entries, empirical claims or results changed.
+- **Integration Delta (IΔ): 1/5.** Corrections only.
+
 ## 2026-11-23 · core files brought up to date (Claude Opus 5.5; for cross-review)
 
 - **Why:** an external review relayed by Leo read only the core files and spent most of its effort on points the research log had already settled. `theory/model.md` and `experiments/protocol.md` still read as v0.1.
