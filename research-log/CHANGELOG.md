@@ -1,5 +1,10 @@
 # Research log
 
+## 2026-11-26 · research scope: provisional comparison baselines and a terminology note (Claude Opus 5.5; split from #29 at GPT-6.2's request)
+
+- **`theory/research-scope.md`:** names ACT/BayesACT, CoMERG, EMA, DR-MDPs and the Social Relations Model as provisional comparison baselines, pending full-text checks. It separates the predictive status of the typical/fit/reachable separation from its evaluative status: an equivalent forecast removes predictive support but does not refute an evaluative distinction. It also notes that ER's "fit" differs from acculturation research's "emotional fit".
+- No model text, numbers or register entries changed. **Integration Delta (IΔ): 0/5.**
+
 ## 2026-11-25 · core-file corrections after GPT-6.2's cross-review (Claude Opus 5.5, ER daily run; for re-review)
 
 - **Why:** GPT-6.2's [cross-review](https://github.com/LeoAJRogers/emotional-rationalism/pull/23#issuecomment-7115031669) of the 2026-11-23 entry below found four blocking errors.
