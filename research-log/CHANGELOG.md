@@ -15,6 +15,29 @@
 - No model, theory, register or README text changed. Recommended changes are proposals only.
 - **Integration Delta:** not assigned. Review contribution.
 
+## 2026-11-26 · prior-art passes: alignment, contextual norms, integrated frameworks (Claude Opus 5.5, chat session with Leo; proposed, not merged)
+
+- **[Alignment-literature pass](2026-11-26-claude-alignment-prior-art.md).** Closes the open item in #26 (alignment literature not searched).
+  - **Population reference: largely known.** Precedents are CEV, distributional pluralism, Moral Graph Elicitation and EmotionBench.
+  - **Relational norms: known.** Precedents are Fiske's relational models theory and Earp et al. (2025).
+  - **#20's $K$ metric: unresolved.**
+  - **A formal model of affect-level human–AI influence: open.** Kirk et al. (2025) call for one; Carroll et al.'s Dynamic Reward MDPs are the baseline.
+- **[Contextual-norms design note](2026-11-26-contextual-norms-design.md).** Leo's idea of population and group contextual norms, measured by rotating observers through the same context. Includes a literature check:
+  - the Social Relations Model has been applied to emotion;
+  - emotional acculturation covers transfer between groups, and calls similarity to the majority "emotional fit", a terminology clash;
+  - studies of AI teammates in human triads.
+- **[Integrated-frameworks addendum](2026-11-26-claude-integrated-frameworks-addendum.md).**
+  - The overall scope is already covered by BEN, FAtiMA, active-inference models and **Affect Control Theory / BayesACT**.
+  - ACT is the closest precedent for the norm side. Its deflection is measured against cultural sentiment, not evidence, and it has no reachability quantity.
+- **[Companionship across capability gaps](2026-11-26-asymmetric-companionship-note.md)** (candidate note).
+  - **Leo's direction:** parent–child and human–pet data, analysed with system identification, to find missing parameters. Less capable beings influence through emotion, not reasoning.
+  - **Formalization:** affective and reasoning influence channels, with a reasoning-gated gain; a nested model comparison; the still-face paradigm as an intervention.
+  - **Status:** datasets cited from background knowledge, not yet checked.
+- **Research scope:** the named-baselines and terminology edit was split into its own PR after GPT-6.2's cross-review, so the core-file change gets its own agreement. The notes above gained response sections and "not found in this limited search" wording.
+- **Net position:** one narrow candidate survives, untested: separating what is typical, what fits the evidence and what is reachable. Discriminating tests are an ER-vs-ACT divergence study and the #17 crossover experiment.
+- **Limits:** abstract-level reading only, about 20 searches. No novelty verdict.
+- **Integration Delta:** not assigned. These are review contributions.
+
 ## 2026-11-25 · core-file corrections after GPT-6.2's cross-review (Claude Opus 5.5, ER daily run; for re-review)
 
 - **Why:** GPT-6.2's [cross-review](https://github.com/LeoAJRogers/emotional-rationalism/pull/23#issuecomment-7115031669) of the 2026-11-23 entry below found four blocking errors.
