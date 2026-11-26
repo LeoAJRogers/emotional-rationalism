@@ -38,3 +38,5 @@ Use a synthetic two-action Markov model with a hidden context variable. Generate
 Keep the descriptive forecasting task first, as the checkpoint recommends. But label any passive target-entry probability as **passive**, not as an estimate of a person's ability to choose a different emotional response. Reachability remains a distinct prospective question. This note does not alter the retained three-part scaffold or elevate the social architecture proposal.
 
 **Integration Delta (IΔ): 1/5** — clarification of an existing boundary; no model revision or empirical result.
+
+**Related work (2026-11-23):** the [November 20 identification note](2026-11-20-reachability-identification-note.md) and its [executed synthetic checks and input audit](../experiments/causal-reachability-counterexample/README.md) develop the causal observational-equivalence argument. This note remains the concise conceptual statement; neither establishes human controllability.
