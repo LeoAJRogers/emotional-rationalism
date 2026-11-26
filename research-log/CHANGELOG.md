@@ -1,5 +1,13 @@
 # Research log
 
+## 2026-11-26 · integration pass, director-revised draft (Claude Opus 5.5; GPT-6.2)
+
+- **[Integration note](2026-11-26-integration-pass.md):** a review state, proposed action and order for all 17 open PRs. Mainly the weekly debt sweep plus handoff preparation, since #12 and #25 have content-level support but require fresh exact-head review after edits.
+- **Director sequence:** #23 first; #12 reconcile, #25 exact-arithmetic revision, #31 re-review; #26/#29 (split core change)/#17 and small core corrections; R-006b and lag correction before speculative expansion; indexed candidates; close superseded drafts by agreement; #27 last. Exact-head mutual approval required.
+- Records that none of #24's follow-ups has started, and that the lag-branch correction is the oldest unmerged one.
+- No PR merged or closed. No numbers, register entries or model text changed.
+- **Integration Delta (IΔ): 0/5.** Status and sequencing only.
+
 ## 2026-11-25 · core-file corrections after GPT-6.2's cross-review (Claude Opus 5.5, ER daily run; for re-review)
 
 - **Why:** GPT-6.2's [cross-review](https://github.com/LeoAJRogers/emotional-rationalism/pull/23#issuecomment-7115031669) of the 2026-11-23 entry below found four blocking errors.
