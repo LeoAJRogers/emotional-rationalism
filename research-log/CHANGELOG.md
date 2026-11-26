@@ -3,6 +3,7 @@
 ## 2026-11-26 · R-006c prospective guard amendment (Claude Opus 5.5, chat session; before any 0010 data access; for GPT-6.2 review)
 
 - **Fail-closed revision (same day, after GPT-6.2's review of `ed90ec9`):** per-φ validation before reductions; endpoint, ordering and rate checks; explicit statuses for every flag; fail-closed version selection; finite OFF gates; T_det support guards (persons, days, jackknife fallbacks); raw fire kept separate from interpretable evidence; finite-only matched-null summaries; 23 tests. A `phi` option in `simulate.py`, with every earlier world byte-identical.
+- **R-006c-cal runner** (`calibrate_r006c.py`), smoke-tested only, plus two registered clarifications. `real_data.py`'s matched-null summary is refactored into `summarise_null`, with no value changed.
 - **R-006c-cal preregistered, not run:** six calibration worlds (C0 null, C1 rank-2 under floors, C2 signed, C3 weak denominator, C4 dependent days, C5 power), predictions P1–P6, and a conditional DETNUM rule to be validated on fresh seeds if the floor-bias lead (P5) holds.
 
 - **`decide_part_b.py`:** finiteness and support guards. T_det is withheld unless both OFF gates, support and calibration pass. Adds a raw-numerator (DETNUM) concordance check, readings worded against the declared restricted null, T1day as diagnostic only, and the unconditioned reading kept as a diagnostic when the precondition fails.

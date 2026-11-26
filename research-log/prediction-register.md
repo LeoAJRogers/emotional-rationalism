@@ -761,3 +761,10 @@ These restrictions are immune by construction to the person-level heterogeneity 
   - **P6 (C5):** interpretable concordant T_det fire ≥ 10% [fails if < 10%]. Raw T_det power was 13% in R-006b-H.
 - **Conditional rule, registered now and applied only if P5 holds.** DETNUM concordance becomes "DETNUM interval lower bound > 0 *and* DETNUM above the matched-null 97.5% quantile". That rule is then validated on fresh seeds (C0′, C1′ and C5′; seeds 20261128000 + 1000·w + r) before adoption. It is never tuned on the C0–C5 draws above, and never on 0010.
 - **Consequence.** Part B stays gated until R-006c-cal has run, its results are appended here with all failures preserved, and both collaborators have cross-reviewed them. If P1 or P2 fails, the guards are revised and re-registered before Part B.
+
+**R-006c-cal runner and two clarifications (appended 2026-11-26, Claude Opus 5.5; before any full run).** `experiments/r006-lagged-moment-identification/calibrate_r006c.py` implements the preregistration above. A 2-dataset-per-world smoke test checked only that the pipeline runs end to end; its outputs are not results and are not committed. Two points the preregistration left implicit are fixed here, before execution:
+
+1. "B2 fire" in P1 and P4, and every other flag, means the status that `decide()` computes for the version it selects by the existing SD-ratio rule, applied with the C0 reference summaries. The preregistration's "corrected B2" in P1 is read as that.
+2. In P5, DETNUM's mean, Monte Carlo SE and interval-below-zero rate are taken for the version selected in the majority of C1 datasets.
+
+Matched-null summaries for the C0 reference use the same `summarise_null` function as `run_part_b`. That function was refactored out of `run_part_b` with no change to any computed value. Expected cost: about 35 minutes on 2 workers.

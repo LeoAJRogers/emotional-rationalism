@@ -219,17 +219,8 @@ def summarise_stats(res, prefix):
     return {k: res[k] for k in keys}
 
 
-def run_part_b(Y, person, info, n_boot, null_reps):
-    import datetime
-    import matched_null as mn
-    out = dict(code_commit=git_head(), run_utc=datetime.datetime.utcnow().isoformat() + "Z",
-               sha256=info["sha256"], n_boot=n_boot)
-    out["marginals"] = marginals(Y)
-    # 1. primary and secondary statistics (corrected and linear; within and pooled)
-    res = lm.analyse(Y, person, discrete=True, n_boot=n_boot, seed=20261121)
-    res.update(rank3.analyse_rank(Y, person, discrete=True, n_boot=n_boot, seed=20261124))   # R-006b
-    out["main"] = res
-    # 2. marginal-matched F1 null (no dynamic information from Y is used)
+def null_keys():
+    """Matched-null statistics summarised for the decision rules (R-006, R-006b, R-006c)."""
     keys = []
     for tag in ("cor", "lin"):
         keys += [f"{tag}_w_T1", f"{tag}_w_T1_lo", f"{tag}_w_T2_W", f"{tag}_w_T20_W", f"{tag}_w_PA_det",
@@ -237,15 +228,13 @@ def run_part_b(Y, person, info, n_boot, null_reps):
         keys += [f"{tag}_w_T1_{j}_hi3" for j in range(3)] + [f"{tag}_w_T1_{j}" for j in range(3)]
         keys += [f"{tag}_w_T_det", f"{tag}_w_T_det_lo", f"{tag}_w_OFF_lo"]                  # R-006b
         keys += [f"{tag}_w_DETNUM", f"{tag}_w_DETNUM_lo"]                                    # R-006c
-    nulls = {}
-    for phi in (0.40, 0.55, 0.70):
-        vals = []
-        for r in range(null_reps):
-            Z = mn.simulate_matched(Y, person, seed=int(1000 * phi) * 1000 + r, phi=phi)
-            rr = lm.analyse(Z, person, discrete=True, n_boot=199, seed=r, linear_too=True)
-            rr.update(rank3.analyse_rank(Z, person, discrete=True, n_boot=199, seed=r))  # R-006b
-            vals.append({k: rr[k] for k in keys})
-        nulls[str(phi)] = vals
+    return keys
+
+
+def summarise_null(nulls):
+    """{phi: [replicate dicts]} -> {phi: summaries}. Shared by run_part_b and the R-006c-cal runner
+    (refactored 2026-11-26 without changing any computed value)."""
+    keys = null_keys()
     mnull = {}
     for phi, vals in nulls.items():
         d = {"n": len(vals)}
@@ -272,6 +261,30 @@ def run_part_b(Y, person, info, n_boot, null_reps):
             d[f"{tag}_Tdet_nonfinite_rate"] = float(np.mean([not np.isfinite(x[f"{tag}_w_T_det"])         # R-006c
                                                              for x in vals]))
         mnull[phi] = d
+    return mnull
+
+
+def run_part_b(Y, person, info, n_boot, null_reps):
+    import datetime
+    import matched_null as mn
+    out = dict(code_commit=git_head(), run_utc=datetime.datetime.utcnow().isoformat() + "Z",
+               sha256=info["sha256"], n_boot=n_boot)
+    out["marginals"] = marginals(Y)
+    # 1. primary and secondary statistics (corrected and linear; within and pooled)
+    res = lm.analyse(Y, person, discrete=True, n_boot=n_boot, seed=20261121)
+    res.update(rank3.analyse_rank(Y, person, discrete=True, n_boot=n_boot, seed=20261124))   # R-006b
+    out["main"] = res
+    # 2. marginal-matched F1 null (no dynamic information from Y is used)
+    nulls = {}
+    for phi in (0.40, 0.55, 0.70):
+        vals = []
+        for r in range(null_reps):
+            Z = mn.simulate_matched(Y, person, seed=int(1000 * phi) * 1000 + r, phi=phi)
+            rr = lm.analyse(Z, person, discrete=True, n_boot=199, seed=r, linear_too=True)
+            rr.update(rank3.analyse_rank(Z, person, discrete=True, n_boot=199, seed=r))  # R-006b
+            vals.append({k: rr[k] for k in null_keys()})
+        nulls[str(phi)] = vals
+    mnull = summarise_null(nulls)
     out["matched_null"] = mnull
     # 3. sensitivity analyses
     sens = {}
