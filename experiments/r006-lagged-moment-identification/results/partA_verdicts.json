@@ -1,0 +1,78 @@
+{
+ "A1": {
+  "held": true,
+  "unit_tests_exit": 0
+ },
+ "A2": {
+  "held": true,
+  "within_part": true,
+  "pooled_part": true,
+  "N1_within_T1_rate": 0.03,
+  "N1_pooled_T1_rate": 0.99,
+  "N1_within_T1_mean": -0.0032,
+  "N1_pooled_T1_mean": 0.0902
+ },
+ "A3": {
+  "held": true,
+  "N2_lin_w_T1_pos": 0.04,
+  "N2_lin_p_T1_pos": 0.045,
+  "N2_lin_w_T2_W_fire": 0.055,
+  "N2_lin_p_T2_W_fire": 0.05
+ },
+ "A4": {
+  "held": true,
+  "N4_T20_rate": 1.0,
+  "N4_lin_w_T1_pos": 0.015,
+  "N4_lin_w_T2_W_fire": 0.065,
+  "N5_lin_w_T1_pos": 0.02,
+  "N5_lin_w_T2_W_fire": 0.05
+ },
+ "A5": {
+  "held": false,
+  "N3h_lin_mean": 0.0137,
+  "N3h_lin_rate": 0.025,
+  "N3h_cor_mean": -0.0263,
+  "N3h_cor_rate": 0.01
+ },
+ "A6": {
+  "held": false,
+  "W1s_T1_rate": 1.0,
+  "W1w_T1_rate": 0.995,
+  "W2s_T2_rate": 0.275,
+  "W2f_T2_rate": 0.045,
+  "W1s_T2_rate": 0.045,
+  "W1s_T1_held": true,
+  "W1w_T1_held": true,
+  "W2s_T2_held": false,
+  "W2f_T2_held": true,
+  "W1s_T2_held": true
+ },
+ "A7": {
+  "held": true,
+  "W2e_T2_rate": 0.065,
+  "W2e_T1fearful_neg_rate": 0.975
+ },
+ "A8": {
+  "held": true,
+  "N8_cor_T1_rate": 0.015,
+  "W1sN8_cor_T1_rate": 0.98,
+  "gate_feasibility_failure": false
+ },
+ "A9": {
+  "held": true,
+  "N6_all_rate": 0.95,
+  "N6_day_rate": 0.06,
+  "N7_rate": 1.0
+ },
+ "A10": {
+  "held": true,
+  "W3_T3_rate": 0.255,
+  "N2_pooled_T3_rate": 0.045,
+  "N2_within_T3_rate": 0.02
+ },
+ "A11": {
+  "held": true,
+  "W0_rate": 1.0,
+  "W0b_rate": 0.02
+ }
+}

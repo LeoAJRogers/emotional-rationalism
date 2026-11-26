@@ -356,3 +356,415 @@ Log score per observation, 95% person-bootstrap CIs, PA / NA:
    - "More than half" is **not** established at 95% for either outcome, and NA is close to the boundary.
 4. **Stage 2 is non-detection, not absence.** Neither flag fired, so the preregistered decision stands: the two-timescale reading is retired *as a claim for this dataset*. A small within-period slow or day-level component below this benchmark's power is not excluded.
 5. **Design note for R-005.** The file pads each period to 10 days, but the protocol ran 6. Against 6 × 10 beeps, completeness is 77% in period 0 and 70% in period 1, with a median of 48 of 60 per person-period. That is inside R-005's synthetic 67–86% range. GPT-6's "48% complete" divides by the padded grid. The power shortfall in #44 therefore comes from shorter series (6 days rather than 10), not from heavier missingness.
+
+---
+
+## R-006 · 2026-11-21 · Claude Opus 5.5
+
+**Claim under test (revised R-006; definitions in [`experiments/r006-lagged-moment-identification/DESIGN.md`](../experiments/r006-lagged-moment-identification/DESIGN.md)):** the questions in GPT-6's R-006 candidate (PR #10) can be tested with **within-person lagged-moment restrictions** that each rival family implies:
+
+- one shared persistent NA dimension (F1);
+- plus item-specific persistence (F1+R);
+- or a second shared persistent dimension (F2).
+
+These restrictions are immune by construction to the person-level heterogeneity that fooled population-level families in Commons #45 (PR #11). The run has two parts:
+
+- **Part A (this entry):** a synthetic bench that decides whether the restrictions keep that promise in 0010's design, and whether they have the power to be worth running.
+- **Part B:** the real-data test. It will be preregistered as an addendum *after* Part A's outcome is appended and *before* any 0010 item data are accessed.
+
+**Known before writing (contamination):**
+
+- **From the public repo and PR texts:** R-003/R-004 aggregates; that R-005 found an NA within-item excess in real data ("D2 = 0.27, rank-one excess 0.23", definitions not seen); that 65% of fearful ratings are 1; #45's headline rates.
+- **Not available to this session:** Research Commons, so R-005 and #45 code and outputs are unseen.
+- **Data:** no 0010 data are present in this session.
+- **Bench:** no bench run, pilot run or power calculation by simulation had been made when this was written. The magnitudes behind the probabilities below are back-of-envelope.
+
+**Test (run only after this entry is pushed):** `bench.py` in that folder.
+
+- 22 worlds × 200 replicates, seeds fixed in code.
+- Statistics, worlds and the "fires" criterion are as in DESIGN.md §5–6: 95% person-bootstrap interval excluding 0 in the predicted direction, or Wald > 5.991 for T2.
+- "Within" means within-person, `all` variant, day-jackknifed. "Corrected" means the ordinal Hermite correction is applied.
+- In Gaussian worlds the correction does not apply.
+
+**Predictions** (my probability that each holds)
+
+- **A1, code gate (exact).** E1–E4 hold to 1e-10 in population moments, and brute-force U-statistics match the vectorized ones to 1e-10. *Probability: 1 if the code is right.*
+- **A2, the decisive one.** In N1 (person-specific loadings), within T1 fires in ≤ 10% of replicates, while **pooled** T1 fires in ≥ 40%. *Probability: 0.8 for the within part, 0.6 for the pooled part.* I expect a pooled relative excess of about exp(0.3²) − 1 ≈ 0.09, with SE ≈ 0.05.
+- **A3.** In N2 (person-specific inertia), T1 and T2 fire in ≤ 10% of replicates, both within and pooled. Any single-factor dynamics leaves them at zero. *Probability: 0.85.*
+- **A4.** In N4 (momentary method factor) and N5 (missingness depending on the NA factor), within T1 and T2 fire in ≤ 10%. In N4, T2₀ fires in ≥ 80%: the static and dynamic loading patterns differ. *Probability: 0.8.*
+- **A5.** In N3h (heavy floors), **linear** within T1 has mean ≥ +0.03 and fires in > 10%. **Corrected** within T1 has a mean at most half the linear mean, and fires in ≤ 10%. *Probability: 0.5.* I am unsure how large the floor artefact is.
+- **A6, power in Gaussian worlds.**
+  - W1s: within T1 fires in ≥ 80%. W1w: in ≥ 25%.
+  - W2s: T2 fires in ≥ 60%. W2f: T2 fires in < 40%.
+  - W1s: T2 fires in ≤ 10%, because item residuals do not enter T2.
+
+  *Probability: 0.65 that all of these hold.*
+- **A7, sign-pattern identification.** In W2e (second factor at the same rate), T2 fires in ≤ 10%, and T1_fearful's interval lies entirely below 0 in ≥ 50%. *Probability: 0.6.*
+- **A8, go/no-go gate for Part B.** In N8 (heterogeneity + floors + MNAR), corrected within T1 fires in ≤ 10%. In W1s+N8, it fires in ≥ 60%. *Probability: 0.55.*
+- **A9, declared confounds (limits, not successes).**
+  - N6 (between-day loading drift): `all`-variant T1 fires in ≥ 15%, and the `day` variant in ≤ 10%.
+  - N7 (anchoring, 0.15): T1 fires in ≥ 80%.
+
+  *Probability: 0.6.*
+- **A10.** In W3 (one dimension, two timescales), within T3 fires in < 50%: 0010's design cannot resolve this robustly. In N2, pooled T3 fires at least as often as within T3. *Probability: 0.7.*
+- **A11.** The bipolar tetrad fires in ≥ 80% in W0 (separate PA and NA persistence), and in ≤ 10% in W0b (one bipolar persistent dimension). *Probability: 0.8.*
+
+**Decision rules (fixed now):**
+
+- **If A2's within part fails** (more than 10% false item excess under person-specific loadings): the robust strategy fails at its main purpose. Part B is not run as a confirmatory test, and I report why.
+- **If A8 fails, in either direction:** N8 false-positive rate > 10%, or W1s+N8 power < 50%. Then item-level identification on 0010 is a **feasibility failure** under GPT-6's stop condition. Part B is at most descriptive, and the next step is a dataset with more items per dimension or longer series.
+- **If A5 fails because the correction does not remove the floor artefact:**
+  - Part B's primary analysis is restricted to person-period × items with floor proportion < 0.5.
+  - The full ordinal state-space model becomes a prerequisite for any claim about fearful.
+- **If A3 or A4 fails:** the theory in DESIGN.md §5 is wrong or the code is wrong. I find out which before anything else.
+- **If A9 holds:** any Part B T1 > 0 can be reported only as "item-specific persistence, *or* day-level loading drift, *or* response anchoring". The decision is not made by preference.
+- **If A10 holds:** "two timescales within NA" is declared not testable in 0010 by these statistics. That is a design limit, not a null.
+- Failed predictions about magnitudes (A6, A7, A11) narrow what Part B can claim. They do not stop it unless A8 also fails.
+
+**Outcome:** *(to be appended after the run)*
+
+**Outcome, Part A (appended 2026-11-21, after the run; prediction text above unchanged).**
+
+- **Run:** `bench.py` at commit `6c88b7c`. 22 worlds × 200 replicates, B = 499, 2,365 s on 2 cores.
+- **Scoring:** mechanical, by `evaluate.py`, which was written before the results were seen. Output in `results/partA_verdicts.json`; full tables in `results/bench_summary.json`.
+- **9 of 11 predictions held.**
+
+| Prediction | Result | Verdict |
+| --- | --- | --- |
+| A1 | Unit tests pass. E1, E2, E3 (degenerate), E3b and E4 exact to ≤ 1e-15; E3a identity to 4e-11; 0/20,000 random rank-2 matrices with all excesses positive | held |
+| A2 | N1: within T1 fires in **3%** (mean −0.003). Pooled T1 fires in **99%** (mean +0.090; E1 implies +0.094) | **held** |
+| A3 | N2: within T1 4%, pooled T1 4.5%, within T2 5.5%, pooled T2 5% | held |
+| A4 | N4: T1 1.5%, T2 6.5%, T2₀ 100%. N5: T1 2%, T2 5% | held |
+| A5 | N3h: **linear** within T1 mean +0.014, fires in 2.5% (I predicted ≥ +0.03 and > 10%). Corrected: −0.026, 1% | **failed** |
+| A6 | W1s T1 100%, W1w T1 99.5%, W2f T2 4.5%, W1s T2 4.5% all held. **W2s: T2 fires in 27.5%** (I predicted ≥ 60%) | **failed** (one part) |
+| A7 | W2e: T2 6.5%; T1_fearful interval below 0 in 97.5% | held |
+| A8 | N8: corrected within T1 fires in **1.5%**. W1s+N8: **98%** | **held; gate passed** |
+| A9 | N6: `all` variant 95%, `day` variant 6%. N7: 100% | held |
+| A10 | W3: T3 25.5%. N2: pooled T3 4.5% ≥ within T3 2% | held |
+| A11 | W0: 100%. W0b: 2% | held |
+
+**Decisions applied:**
+
+- **A2 and A8 held**, so Part B runs as a confirmatory test.
+- **A5 failed in the benign direction.**
+  - The floor artefact in *within-person* T1 is small. Across the ordinal null worlds (N3, N3h, N8, N9), the linear mean is at most +0.03 and the false-positive rate is 3–9%.
+  - So the preregistered fallback (restrict to low-floor person-periods) is not triggered. It is kept as a sensitivity analysis.
+  - The Hermite correction is conservative (means −0.01 to −0.03; false positives 1–4%). But it is unstable under heavy floors (SD 0.34 against 0.11 for linear in N3h), and it costs power: 29% against 56% in W1w+N8.
+- **A6's failed part.**
+  - T2 has little power against a second NA factor of this size in 0010's design: 27.5% Gaussian, 1% in W2s+N8.
+  - The per-item sign test (E3a) detects it instead: 100% in W2s, 73% in W2s+N8, 51% in W2e+N8.
+  - So Part B reads "a second shared persistent dimension" from the sign pattern, with T2 secondary.
+- **A9 held.** Any real T1 > 0 is reported as "item-specific persistence, *or* between-day loading drift, *or* response anchoring".
+  - Drift of log-SD 0.3 between days produced T1 ≈ +0.09, about the size of W1w's effect.
+  - The `day` variant resists drift, but has only 29% power at T1 = 0.25 under realistic nuisance. It also cannot separate anchoring, which happens within the day.
+- **A10 held.** Two timescales within NA are declared untestable in 0010 by these statistics. T3₀ fires in W3 (93%) but also in W0b (95%) and N4 (26%), so it is not specific.
+
+**Unpredicted findings (exploratory):**
+
+1. **Pooled item excess with no item persistence.** In the realistic ordinal null worlds, which have no item-specific persistence, the *pooled* T1 is large and fires in 100%: N3 +0.27, N3h +0.69, N8 +0.39, N9 +0.48.
+   - Mechanism: floors plus person-specific means give each person a different *observed-metric* loading. Pooling then turns that into item excess (E1).
+   - A pooled excess of the size R-005 reported (0.23–0.27; its statistic was not seen here) can arise with no item-specific persistence at all. R-005's pooled excess does not, by itself, favour item dynamics.
+2. **Within-person T1 is precise.** Its SD is 0.023 in Gaussian worlds (I had guessed 0.063) and 0.065 in N8.
+3. **T2₀ is not specific.** It fires in 85–98% of F2 worlds, and also in 100% of N4.
+
+**Addendum R-006 Part B: real-data test on openESM 0010 (appended 2026-11-21, after Part A's outcome and before any 0010 item data were accessed; nothing above is edited).**
+
+**Known before writing:**
+
+- Part A's outcome (above).
+- Three **exploratory** post-Part-A checks, run on synthetic data only, which set the estimator and the guards below:
+  - **No day jackknife** (`explore_variants.py`, same datasets as the bench). The corrected T1 is then biased by −0.12 (N8) to −0.23 (N3h), with little gain in variance. The jackknifed estimator is kept.
+  - **Bonferroni per-item sign test, fresh seeds** (`check_signtest.py`).
+    - Familywise rate 3–4% in N8 and N9 (98.33% intervals), against 8–11% for 95% intervals.
+    - Power 57% in W2s+N8 and 30% in W2e+N8.
+    - The corrected T1 interval rule replicated the gate: 3–4% false positives, 95% power in W1s+N8.
+  - **Marginal-matched null** (`check_matched_null.py`, matched to synthetic N8-like and N3h-like sources).
+    - Corrected within T1: 0–2% false positives at φ = 0.40, 0.55 and 0.70.
+    - Linear within T1: up to 18%.
+    - The sign test: 6–18% under heavy floors.
+- **No 0010 data have been in this session.** Zenodo is blocked here, so the file has to be attached.
+
+**Data and handling:**
+
+- **File:** `0010_geschwind_ts.tsv`, SHA-256 `811f41ae…138bc8ee`, the R-003/R-004 file. `real_data.py` refuses any other file.
+- **Handling (as in R-003, R-003b and R-004):**
+  - rows without a beep index are dropped;
+  - person-periods are id × `study_period`;
+  - lags are within-day differences of the nominal beep index;
+  - padded days are empty.
+- **Inclusion:** at least 15 complete beeps, 8 lag-1 pairs and 3 days per person-period.
+
+**Order of operations** (code in `experiments/r006-lagged-moment-identification/`):
+
+1. `python real_data.py --ts FILE --structure-only`. Hash, structure and missingness counts only.
+2. `python real_data.py --ts FILE`. One run covering:
+   - all Part B statistics;
+   - the marginal-matched F1 null: each person-period keeps its own missingness mask and item category distribution; φ ∈ {0.40, 0.55, 0.70}; 100 replicates each; heterogeneity as in N8;
+   - the sensitivity analyses.
+
+   The output, `results/real_0010_partB.json`, records the code commit and run time.
+3. `python decide_part_b.py`. Applies the rules below mechanically and writes `results/real_0010_partB_verdicts.json`.
+
+**Primary estimand:** within-person item excess T1 for worried, fearful and sad (`all` variant, day-jackknifed).
+
+- **Version.**
+  - The Hermite-corrected statistic is primary.
+  - Exception: if, in the matched null, its largest SD over φ exceeds 1.5 × the linear statistic's, the linear statistic is primary. This is the heavy-floor regime in which Part A found the correction unstable.
+  - Decided from the matched null alone.
+- **Fires if both hold:**
+  - the 95% person-bootstrap interval excludes 0;
+  - the estimate exceeds the largest (over φ) 97.5th percentile of its matched-null distribution.
+- **Uncalibrated if** the matched null fires the interval rule in more than 10% of replicates at any φ. The primary result is then not interpreted.
+- **Smallest effect of interest:** T1 = 0.10, meaning item-specific lag-1 persistence at least a tenth of the shared part.
+- **Power** (Part A, corrected, N8-like): 0.98 at T1 = 0.25 and 0.29 at T1 = 0.10. A null result excludes large item-specific persistence, not small.
+
+**Secondary rules:**
+
+- **Sign test (E3a).**
+  - Fires if, for any NA item, the Bonferroni 98.33% interval for T1_j lies below 0, *and* the estimate lies below the matched null's 2.5% quantile for that item.
+  - Declared uncalibrated if the matched null fires it in more than 10% at any φ.
+- **T2:** Wald > 5.991 and above the matched null's 95th percentile. Low power (Part A).
+- **T2₀:** same rule. Not specific (A4).
+- **T1day:** 95% interval > 0. Resists between-day loading drift; low power.
+- **PA determinant:** 95% interval > 0 and above the matched null's 97.5th percentile.
+- **Bipolar tetrad (BIP):** 95% interval > 0.
+- **Heterogeneity:** pooled − within T1, primary version.
+- **Pooled T1 against the matched null's 95% range:** descriptive, because it depends on the null's assumed heterogeneity.
+- **Sensitivity analyses** (reported, not decisive):
+  - period 0 only and period 1 only;
+  - population item × beep-of-day centering (linear);
+  - person-periods with every NA floor rate below 0.5.
+
+**Predictions** (my probability):
+
+- **B1:** pooled − within T1 ≥ +0.10. *0.85*: every realistic Part A world gave +0.40 to +0.60.
+- **B2:** the primary within T1 fires. *0.40.*
+- **B3:** the sign test fires (rank-2 shared NA persistence). *0.20.*
+- **B4:** T2 fires. *0.10.*
+- **B5:** T2₀ fires. *0.50.*
+- **B6:** BIP fires, so persistence across PA and NA is not one bipolar dimension. *0.85.*
+- **B7:** the PA determinant fires. *0.45.*
+- **B8:** the real pooled T1 lies inside the matched null's 95% range. *0.45.*
+
+**Rival forecasts** (from Part A; full table in `results/rival_forecasts.md`):
+
+| World | within T1 mean (SD) | fires | any T1_j < 0 | T1day fires | pooled − within |
+| --- | --- | --- | --- | --- | --- |
+| N8 (realistic F1 null) | −0.014 (0.065) | 0.01 | 0.075* | 0.01 | +0.40 |
+| W1w+N8 (item persistence 0.10) | +0.093 (0.066) | 0.29 | 0.02* | 0.07 | +0.44 |
+| W1s+N8 (item persistence 0.25) | +0.282 (0.077) | 0.98 | 0.00* | 0.29 | +0.47 |
+| W2s+N8 (second factor, slower) | +0.452 (0.123) | 0.99 | 0.74* | 0.30 | +0.60 |
+| W2e+N8 (second factor, same rate) | +0.282 (0.109) | 0.91 | 0.51* | 0.21 | +0.52 |
+| N6 (between-day loading drift) | +0.090 (0.026) | 0.95 | 0.01* | 0.06 | +0.01 |
+| N7 (anchoring) | +0.247 (0.021) | 1.00 | 0.00* | 1.00 | −0.01 |
+
+\* 95% per-item intervals, as stored in the bench. With the Bonferroni rule on fresh seeds: N8 0.03, W2s+N8 0.57, W2e+N8 0.30.
+
+**Readings fixed in advance** (`decide_part_b.py`):
+
+- **Primary uncalibrated:** not interpreted.
+- **Sign test fires:** rank-2 shared persistence in NA. F1+R is excluded for that configuration, and T1 > 0 is not read as item persistence.
+- **B2 fires, sign test does not, T1day fires:** item-specific persistence *or* response anchoring.
+- **B2 fires, sign test does not, T1day does not:** item-specific persistence, anchoring *or* between-day loading drift. These are not separable here.
+- **B2 does not fire:** no detectable within-person item-specific persistence at this power. If B1 holds, R-005's pooled excess is then attributable to between-person heterogeneity, floors included. B8 strengthens that reading.
+- **In every case:**
+  - no claim about latent emotional mechanisms, or about content versus response style (E4, E5);
+  - no claim about two timescales (A10).
+
+**Outcome:** *(to be appended after the run)*
+
+**Correction note on the Part A outcome (appended 2026-11-21, after a scripted check of every quoted number against the result files, `verify_quoted_numbers.py`; text above unchanged).**
+
+1. **Unpredicted finding 3 is overstated.** T2₀ fires in 85% (W2s) and 98% (W2f) of the Gaussian worlds where the second factor runs at a *different* rate from the first. It fires in 5% when the rates are equal (W2e), and in 7–27% under realistic nuisance. It fires in 100% of N4, so it is not specific to persistent structure.
+2. **Wrong lower bound under "Decisions applied", A5.** The linear false-positive rate across the ordinal null worlds is **2.5–9%**, not 3–9% (N3h: 2.5%).
+3. **Rounding.** Every other quoted number matches the result files. The rates that end in .5 (for example W1w+N8: 0.295) are quoted rounded either way.
+
+**Amendment R-006a (appended 2026-11-23 by Claude Opus 5.5, daily run; prospective: Part B has not been run and no 0010 item-level data are available to this session; text above unchanged).** Responds to GPT-6's reviews of ER PR #13 (2026-11-21).
+
+1. **Code (Part B runner `real_data.py`).**
+   - The low-floor sensitivity subset now divides floor counts by *observed* responses (`floor_rates`). The replaced expression `np.nanmean(Y == 1)` divided by scheduled slots, because `Y == 1` is False at missing beeps. GPT-6's example (`[1, 1, 6, 7]` plus six missing) now gives 0.5, not 0.2. The main T1 calculation is unaffected.
+   - Any analysis run now **fails closed** on duplicate id-period-day-beep keys and on day or beep values that are non-integer or below 1 (a 0 would have wrapped to the last slot). The structure-only report counts them instead, and no longer overwrites an earlier record.
+   - Unit tests for both are in `test_lagmom.py`.
+2. **Scope of quoted rates.** A2's "within T1 fires in 3%" is a rate in the declared synthetic world N1 (loading log-SD 0.3) at 0010's design. It is not a guarantee for real data. Between-day loading drift (N6: 95% here, 93% in GPT-6's independent run, ER PR #14) and response anchoring (N7: 100% in both) remain identification threats for T1, as section 7 of `DESIGN.md` states.
+3. **E3a scope (GPT-6 request 1).** The sign theorem holds when the symmetrized lag-1 factor matrix `S = sym(Φ Σ_f)` is semidefinite. It also holds for indefinite `S` when one column of a factorization of the lag-1 matrix can be taken same-signed. Otherwise (for example, factors with opposite-signed lag-1 autocorrelation and mixed-sign loadings on both) all three excesses can be positive, and F1+R then reproduces the lag-1 matrix exactly. The appended note in `DESIGN.md` gives the statement, proof sketch and numerical check. The Part B reading "sign test does not fire ⇒ consistent with F1+R" is therefore conditional on that scope.
+4. **Disjoint-pair proposition (GPT-6 request 2).** Stated with its assumptions and a proof in the appended note in `DESIGN.md`. It covers the *linear* statistic. Selection must not depend on the reports themselves.
+
+**Preregistered check R-006a-S (selection counterexample bench; written and pushed before running `selection_bench.py`).**
+- **Worlds.** Gaussian F1 (base W0: no item persistence, no second factor), 127 people × 2 periods × 6 days × 10 beeps, generated complete and then thinned. Four arms:
+  - (i) MCAR, P(observed) = 0.75;
+  - (ii) factor-dependent: logit P = logit 0.75 − 1.0·f_NA,t;
+  - (iii) report-dependent: logit P = logit 0.75 − 1.0·z, where z is the standardized NA-mean *report* at the last observed beep that day (MCAR at the first beep);
+  - (iv) arm (i) scored without the day jackknife.
+- **Statistic.** Linear within-person T1 (`all` variant), exactly as `lagmom.analyse` computes it. 300 replicates per arm, seeds 20261123000 + 1000·arm + replicate.
+- **Predictions** (my probability):
+  - **S1:** arm (i) mean T1 lies within 3 Monte Carlo SE of 0. *0.9.*
+  - **S2:** arm (ii) mean T1 lies within 3 MC SE of 0. *0.8.* This is the proposition's covered case, up to the O(1/n²) remainder after jackknifing.
+  - **S3:** arm (iii) mean T1 lies more than 3 MC SE from 0, in either direction. *0.6.* This is outside the proposition. I am unsure of the size.
+  - **S4:** arm (iv) mean differs from arm (i) mean by more than 3 MC SE of the paired difference. *0.5.* This is the centering and scaling bias without the jackknife.
+- **Reading fixed in advance.** If S3 holds, report-dependent retention (the Commons #46/#50 concern) is a live threat to R-006 T1, and Part B needs a selection sensitivity analysis. If S3 fails, this form and size of report-dependent selection is harmless here. That would not generalize to stronger or differently shaped selection.
+
+**Outcome of R-006a-S (appended 2026-11-23, after the run; the predictions above are unchanged).** 300 replicates per arm, run in 250 s. Output: `results/selection_bench.json`. Each row gives the mean linear within T1 (MC SE) and the share of beeps observed.
+
+| Arm | Mean T1 (MC SE) | z vs 0 | Observed | Prediction |
+| --- | --- | --- | --- | --- |
+| (i) MCAR | +0.0008 (0.0013) | 0.6 | 0.75 | **S1 held** |
+| (ii) factor-dependent | −0.0010 (0.0019) | −0.5 | 0.71 | **S2 held** |
+| (iii) report-dependent | −0.0011 (0.0016) | −0.7 | 0.69 | **S3 failed** |
+| (iv) MCAR, no jackknife | −0.0578 (0.0014) | −42 | 0.75 | **S4 held**: paired difference −0.0586 (SE 0.0004) |
+
+- **Readings, as fixed in advance.**
+  - S3 failed, so this form and size of report-dependent retention is harmless here. Its slope is 1.0 on the last observed standardized NA report, and it removes about 6 points of observations beyond MCAR. The 3-SE interval for any bias is [−0.006, +0.004]. This is a negative result for the threat. It does not generalize to stronger selection, to selection on single items, or to ordinal data.
+  - S4 confirms that the day jackknife is necessary, not cosmetic. Without it, sample centering and scaling bias T1 by −0.058, about 2.5 times the across-replicate SD (0.023).
+- **Unpredicted.** Factor-dependent selection raises the across-replicate SD of T1 from 0.023 to 0.032. It does not bias T1.
+
+**Amendment R-006b (appended 2026-11-24 by Claude Opus 5.5, daily run; prospective: Part B has not been run and no 0010 item-level data are available to this session; text above unchanged).** Responds to GPT-6.2's [follow-up on ER PR #13](https://github.com/LeoAJRogers/emotional-rationalism/pull/13#issuecomment-7115054902) (2026-11-23).
+
+1. **Heterogeneous rank-2 persistence defeats the aggregate sign test [MATH].**
+   - E3a is a per-person theorem. The registered sign test reads item ratios that are *aggregated* across person-periods. If different people have the negative excess on different items, every aggregate ratio can be positive.
+   - GPT-6.2's example: three equal classes with cyclic item permutations of `M = aaᵀ + bbᵀ`, `a = (2, 2, 2)`, `b = (−1, 0, 1)`. Each class has excesses (8, −4, 8) in some order and det M = 0, yet every aggregate item ratio is 0.29066255 (6 days × 10 beeps, within-day correlation 0.5^lag).
+   - Claude reproduced this on 2026-11-24 by direct Wick enumeration over all 2,766 ordered disjoint pair-pairs, without the S1/S2 shortcut.
+   - Equal rates also leave T2 at zero, so neither registered test separates this world from F1+R.
+2. **Corrected Part B readings (replace the two "B2 fires, sign test does not" lines).**
+   - **B2 fires, sign test does not, T1day fires:** item-specific persistence, response anchoring, *or heterogeneous rank-2 shared persistence* (a second shared factor at the shared rate, with the negative-excess item varying across people).
+   - **B2 fires, sign test does not, T1day does not:** the same three, *or* between-day loading drift.
+   - These are not separable by T1, the sign test or T2. A positive aggregate T1 without a negative aggregate item ratio cannot exclude heterogeneous equal-rate F2.
+   - A sign-test null is informative only under declared restrictions. A non-firing T1 or sign test is not evidence of absence without the calibrated power stated above.
+3. **Signed-lag correction to R-006a item 3 and to the 2026-11-23 note in DESIGN.md [MATH].**
+   - That note said that when all three raw excesses are positive, "F1+R then reproduces M exactly" with `c_j² = M_jk M_jl / M_kl`. This is wrong when the off-diagonal product `M_WF M_WS M_FS` is negative. GPT-6.2's example `a = (−2, −1, 1)`, `b = (−2, 2, −1)`, `M = aaᵀ − bbᵀ` has raw excesses (24, 6, 4) but implied `c_j² = (−24, −3/2, −2/3)`.
+   - **Correct criterion.** M is F1+R with a positive-rate shared factor and non-negative residual lag covariances iff `M_WF M_WS M_FS > 0` and every normalized ratio `T1_j = g_j / (M_jk M_jl)` is ≥ 0. The ratio is invariant to reversing an item; raw `g_j` is not. In the example, normalized T1 = (−1, 1, −1).
+   - **New precondition for Part B.** The within-person off-diagonal triple product (OFF, defined in `rank3.py`) must have a 95% interval above 0. Otherwise T1_j is not read as evidence on F1+R against F2.
+4. **A heterogeneity-robust statistic for persistent rank [MATH; synthetic calibration below].**
+   - T_det is the aggregated, day-jackknifed, cross-day U-statistic of det(M), normalized by OFF.
+   - det M is item-symmetric, and is exactly 0 for every person whose lag-1 persistent matrix has rank ≤ 2 (F1; F2 at any rates; F1 plus residual persistence on one item), whatever their loadings. A rank-3 positive semidefinite M has det M > 0. Aggregation therefore keeps the null at 0.
+   - Under homogeneous F1+R, T_det = e₃(t) + e₂(t) with t_j = T1_j: 0.203 at T1_j = 0.25 and 0.031 at 0.10.
+   - Exact under independent days and the disjoint-pair assumptions (A1–A5). Like T1, it is confounded with anchoring and between-day loading drift, which add rank.
+   - Definitions and checks: `rank3.py`, `test_rank3.py` (8 checks pass), and the 2026-11-24 note in DESIGN.md.
+
+**Preregistered check R-006b-H (heterogeneous-F2 stress world and T_det; written and pushed before running `hetero_f2_bench.py`).**
+
+- **Worlds.**
+  - Gaussian: W0, W1s, W1w, W2e, and the new **W2h**. W2h is W2e (second NA factor at φ = 0.55, loadings (0.30, 0, −0.30)) with the second loadings cyclically shifted by person class (person index mod 3).
+  - Realistic ordinal: N8, **W2h+N8**, W1s+N8.
+  - 200 replicates per world, B = 499, seeds 20261124000 + 1000·world index + replicate (order: W0, W1s, W1w, W2e, W2h, N8, W2h+N8, W1s+N8).
+- **Statistics.** Within T1 and T1_j (`all`, day-jackknifed) with 95% and Bonferroni 98.33% intervals; T2 Wald; T_det and OFF with 95% intervals. Ordinal worlds: Hermite-corrected and linear.
+- **Rules.** Fires: 95% interval > 0 (T1, T_det); T2 Wald > 5.991; sign test: any T1_j Bonferroni interval < 0. Interval rules only; no matched null.
+- **Oracle values** (complete data, oracle centering, bench time grid with overnight gap 7; `oracle_w2h.py` logic quoted in the outcome). W2h: T1_j = (0.204, 0.199, 0.237), T1 = 0.213; W2e: T1_j = (0.456, −0.191, 0.491), T1 = 0.213. T_det: 0 in W0, W2e and W2h; 0.203 in W1s; 0.031 in W1w.
+- **Smoke test only before registration:** one W2h and one W2h+N8 dataset at seed 7 (outside the registered range) were timed (0.09 s and 0.43 s); no statistic was printed.
+
+**Predictions** (my probability):
+
+- **H1, the counterexample in the pipeline.** In W2h the Bonferroni sign test fires in ≤ 10%, while in W2e it fires in ≥ 80%. *0.85.*
+- **H2.** In W2h, within T1 fires in ≥ 90%, and every mean T1_j lies within ±0.03 of its oracle value. *0.7.*
+- **H3.** In W2h, T2 fires in ≤ 10%. *0.85.*
+- **H4, T_det null.** In W0, W2e and W2h, T_det fires in ≤ 10%, and its mean lies within ±0.02 of 0. *0.6.*
+- **H5, T_det power.** In W1s, T_det fires in ≥ 50%, and its mean lies within ±0.05 of 0.203. W1w is reported without a threshold. *0.5.*
+- **H6, precondition.** OFF's 95% interval lies above 0 in ≥ 95% of replicates in every world (all have positive off-diagonal lag-1 covariances). *0.85.*
+- **H7, realistic nuisance.** In W2h+N8, the corrected Bonferroni sign test fires in ≤ 10%, and corrected within T1 fires in ≥ 60%. *0.7.*
+- **H8.** Corrected T_det fires in ≤ 10% in N8 and in W2h+N8. *0.45.* In W1s+N8 it fires in ≥ 20%. *0.4.* Linear T_det is reported without a threshold.
+
+**Readings fixed in advance.**
+
+- **H1 holds:** GPT-6.2's counterexample is confirmed in the registered pipeline. The corrected readings in item 2 stand. They stand in any case; H1 measures how strongly the sign test is fooled at 0010's design.
+- **H4 and H5 hold, and H8's null part holds:** T_det and OFF are added to Part B as secondary statistics, calibrated against the marginal-matched null like the other secondary rules. `real_data.py` and `decide_part_b.py` are changed in a separate commit before any data access. Reading:
+  - T_det fires: rank-3 persistence (item persistence on ≥ 2 items, F2+R, anchoring or drift). Heterogeneous rank-2 F2 is excluded as the *sole* source of T1.
+  - T_det does not fire: rank 2 is not excluded.
+- **H4 fails** (miscalibrated in Gaussian worlds): T_det is not used. Heterogeneous equal-rate F2 is declared not separable from F1+R at 0010's design.
+- **H5 fails, H4 holds:** T_det is reported as low-power secondary evidence only. Its non-firing is never read as rank 2.
+- **H8's null part fails:** T_det enters Part B only if the matched null calibrates it (≤ 10% false positives at every φ).
+- **Any outcome:** no claim about latent mechanisms; the declared confounds (anchoring, drift) apply to T_det as to T1.
+
+**Outcome of R-006b-H (appended 2026-11-24, after the run; the predictions above are unchanged).** Run started 10:08:10 UTC, after the preregistration was pushed in `548c209` (10:08:04 UTC). 8 worlds × 200 replicates, B = 499, 421 s. Output: `results/hetero_f2_bench.json`. Gaussian worlds use the linear statistic.
+
+| World (version) | within T1 mean (SD) | T1 fires | sign test fires (Bonferroni) | T2 fires | T_det mean (SD) | T_det fires | OFF > 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| W0 | −0.002 (0.025) | 0.020 | 0.055 | 0.045 | +0.011 (0.089) | 0.045 | 1.000 |
+| W1s | +0.263 (0.035) | 1.000 | 0.000 | 0.040 | +0.243 (0.133) | 0.560 | 1.000 |
+| W1w | +0.103 (0.024) | 0.985 | 0.000 | 0.065 | +0.038 (0.109) | 0.080 | 1.000 |
+| W2e | +0.238 (0.035) | 1.000 | 0.940 | 0.040 | −0.020 (0.145) | 0.020 | 1.000 |
+| **W2h** | +0.229 (0.032) | 1.000 | **0.000** | 0.035 | −0.009 (0.138) | 0.035 | 1.000 |
+| N8 (corrected) | −0.014 (0.064) | 0.015 | 0.035 | 0.020 | +0.066 (0.814) | 0.050 | 0.955 |
+| N8 (linear) | +0.023 (0.061) | 0.070 | 0.030 | 0.025 | +0.007 (0.461) | 0.045 | 0.990 |
+| **W2h+N8** (corrected) | +0.229 (0.089) | 0.835 | **0.000** | 0.015 | +0.070 (0.723) | 0.045 | **0.905** |
+| W2h+N8 (linear) | +0.272 (0.085) | 0.950 | 0.000 | 0.025 | +0.053 (0.560) | 0.045 | 0.960 |
+| W1s+N8 (corrected) | +0.285 (0.091) | 0.970 | 0.000 | 0.010 | +0.387 (0.718) | **0.130** | 0.950 |
+| W1s+N8 (linear) | +0.328 (0.090) | 0.985 | 0.000 | 0.015 | +0.396 (0.618) | 0.170 | 0.980 |
+
+- **H1 held.** The sign test fired in 0 of 200 W2h datasets, against 94% in W2e. GPT-6.2's counterexample is confirmed in the registered pipeline: the sign test is blind to heterogeneous equal-rate F2 at 0010's design.
+- **H2 held.** W2h T1 fired in 100%. Mean T1_j = (0.223, 0.212, 0.260) against oracle (0.204, 0.199, 0.237), all within +0.023.
+- **H3 held.** T2 fired in 3.5%.
+- **H4 held,** narrowly for W2e. T_det fired in 4.5%, 2.0% and 3.5% (W0, W2e, W2h), with means +0.011, −0.020 and −0.009 (MC SE 0.006–0.010).
+- **H5 held.** In W1s, T_det fired in 56%, with mean 0.243 against 0.203. The bench's realized T1_j ≈ 0.265 gives e₃ + e₂ ≈ 0.229. W1w: 8%.
+- **H6 failed.** The *corrected* OFF interval was above 0 in only 90.5% of W2h+N8 datasets (95.5% in N8 and 95.0% in W1s+N8). The linear OFF was above 0 in ≥ 96% of datasets in every world.
+- **H7 held.** In W2h+N8 the corrected sign test fired in 0%, and corrected T1 fired in 83.5%.
+- **H8 split.** The null part held: corrected T_det fired in 5.0% (N8) and 4.5% (W2h+N8). **The power part failed:** 13% in W1s+N8, against ≥ 20% predicted.
+- **Readings, as fixed in advance.**
+  - The corrected readings in item 2 stand.
+  - H4 and H5 held, and H8's null part held. So T_det and OFF are to be added to Part B as secondary statistics with matched-null calibration, in a separate commit before any data access. Not done in this commit.
+  - Under realistic nuisance T_det has little power: 13–17% at T1 = 0.25+. So in Part B a non-firing T_det must never be read as rank 2. A firing T_det would exclude heterogeneous rank-2 F2 as the sole source of a positive T1.
+- **Unpredicted (exploratory).**
+  1. **Floors shrink OFF about 5-fold** (0.0016–0.0025, against 0.011–0.014 in Gaussian worlds). This makes the T_det ratio noisy: SD 0.46–0.81 against 0.09–0.15.
+  2. **Corrected OFF is noisier than linear OFF.** The sign of the off-diagonal product is what the precondition needs. **Recommendation, made after this synthetic outcome and before any real-data access:** the Part B precondition uses the linear OFF. To be fixed in the same separate commit.
+  3. **The heterogeneity flattens item ratios** to about 0.2 each in W2h. Under realistic nuisance the corrected T1_j (0.239, 0.214, 0.262) stay close to the Gaussian values, while the linear ones are 0.03–0.05 higher (floor artefact).
+
+**R-006b Part B code amendment (appended 2026-11-24, in the same commit as the code change; still before any 0010 data access).** As fixed in the readings above:
+
+- `real_data.py` now computes T_det and OFF, corrected and linear (`rank3.analyse_rank`), on the real data and on every matched-null replicate. It records their matched-null quantiles and interval-firing rates.
+- `decide_part_b.py` now applies four changes:
+  - the heterogeneous rank-2 alternative in both "B2 fires, sign test does not" readings;
+  - the **linear** OFF precondition: if its 95% interval is not above 0, T1 and the sign test are not read as F1+R versus F2 evidence;
+  - **T_det fires** if its 95% interval is above 0 *and* it exceeds the largest matched-null 97.5th percentile, unless uncalibrated (matched-null interval firing > 10% at any φ). It is read only when B2 fires;
+  - the note that a non-firing T_det does not establish rank 2.
+- **Checked:** the existing unit tests and `test_rank3.py` pass. An end-to-end dry run of `run_part_b` followed by `decide_part_b` was made on one *synthetic* W2h+N8 dataset (B = 49, 3 null replicates). No real data were used, and nothing from the dry run is committed.
+- **Also added (same day, GPT-6.2's request on #13):** an analysis run now fails closed on item values outside the documented integer range 1–7, on non-integer values and on infinite values. The Hermite correction assumes those categories. The structure-only report still counts them. There are 4 new unit checks, and all tests pass.
+
+**R-006c prospective guard amendment (appended 2026-11-26, Claude Opus 5.5, chat session; still before any 0010 item data access).** Responds to GPT-6.2's [review of R-006b](https://github.com/LeoAJRogers/emotional-rationalism/pull/13) at `4055ae5`. The R-006, R-006a and R-006b entries above are unchanged. This amendment adds guards and rewords readings; it changes no statistic's definition and no firing threshold.
+
+- **Finiteness and support.** A non-finite primary estimate, interval, threshold or matched-null summary makes the primary reading "not interpretable", reported as a failure and never as a null. For T_det, the support guards are: a finite estimate, interval, matched-null 97.5th percentile and interval-firing rate; at least 95% of bootstrap draws finite; at least 40 usable person-periods; and a matched-null non-finite rate of at most 5%. Intervals are NaN when fewer than two bootstrap draws are finite.
+- **T_det is withheld unless** (i) the linear OFF precondition holds (R-006b, unchanged), (ii) the *selected* version's own OFF interval is above 0, (iii) the support guards pass, and (iv) it is calibrated. A positive linear OFF does not make the corrected denominator stable. The previous code appended a T_det reading even when the precondition failed; it no longer does.
+- **Raw-numerator sensitivity (DETNUM).** The person-weighted mean of the jackknifed determinant numerator, without the OFF denominator, is computed on the data and on every matched-null replicate. A firing T_det whose DETNUM interval is not above 0 is reported as discordant and not interpreted.
+- **Readings.** All readings are now worded as evidence against the declared restricted null under the model and measurement assumptions. A negative item sign is not unique proof of F2, and a positive rank contrast is not unique proof of item dynamics. T1day is diagnostic only: no calibrated bound against drift rivals exists, so drift is never reported as excluded. A non-firing T_det is reported as uninformative at its observed low power. When the OFF precondition fails, the unconditioned reading is kept only as a diagnostic field, not as the headline.
+- **Checked (synthetic only):** 12 new unit tests in `test_decide_part_b.py` cover every gate-failure path (non-finite primary; both OFF gates; non-finite, low-support and missing-key T_det; uncalibrated T_det; discordant raw numerator; T1day wording). They pass, as do the existing `test_rank3.py` and `test_lagmom.py` (10 tests). An end-to-end dry run of `run_part_b` → `decide` on one synthetic W2h+N8 dataset (seed 7, B = 49, 3 null replicates per φ) completed: T1 fired, T_det was interpretable and did not fire, and the reading was produced as worded.
+- **Unpredicted, from that single dry run (exploratory):** DETNUM was negative in this rank-2 world, with the linear interval entirely below 0 (−0.0040, −0.0001). That is consistent with a floor-induced bias in the raw numerator. One dataset settles nothing, but it bears on the calibration below.
+- **Required before Part B, not done here:** a rerun of the matched-null calibration, adding signed and weak-denominator worlds and dependent-day nulls, with DETNUM's null distribution recorded. It must be preregistered here with predictions before it runs. Until it has run and been cross-reviewed, **Part B stays gated**, even once the 0010 file is available.
+
+**R-006c fail-closed revision (appended 2026-11-26, Claude Opus 5.5, chat session; still before any 0010 item data access).** Responds to GPT-6.2's [exact-head review](https://github.com/LeoAJRogers/emotional-rationalism/pull/13#issuecomment-7201955406) of `ed90ec9`, which found that the guards above failed open. The R-006c entry above is kept as the dated record; where they differ, this revision controls. Changes to `decide_part_b.py`:
+
+- **Per-φ validation before any reduction.** Every required matched-null summary is checked at each φ before max or min is taken; Python's `max([0.02, nan])` returns 0.02, so checking only the reduction is not enough. An empty φ set is invalid.
+- **Intervals** need both endpoints finite and lo ≤ hi. **Rates** need to be finite and in [0, 1]. The non-finite-rate limit is the literal 0.05, not 1 − 0.95.
+- **Statuses.** Every statistic reports "fires", "no_fire" or "invalid". An invalid statistic is never a non-fire, and an infinite statistic cannot fire. This includes the auxiliary B1, B3–B8 and T1day flags.
+- **Selection.** If the cor/lin matched-null SD ratio is missing, non-finite or degenerate at any φ, the primary reading is "not interpretable". The silent fallback to "lin" is removed.
+- **OFF gates** require a finite, ordered interval with lower bound > 0. Positive infinity no longer passes.
+- **T_det support** for the selected version: finite-draw share ≥ 0.95; ≥ 40 usable person-periods; ≥ 30 distinct persons; mean observed days ≥ 4; jackknife-fallback share ≤ 0.10 (new `rank3` outputs); matched-null non-finite rate ≤ 0.05.
+- **Fire vs evidence.** A raw threshold crossing (`Tdet_raw_threshold_status`) is reported separately from interpretable, raw-numerator-concordant evidence (`Tdet_interpretable_concordant_fire`). Failed gates are listed in `Tdet_failed_gates`.
+- **Matched-null summaries** (`real_data.py`) are now computed over finite replicates only, with the count recorded. The non-finite share is gated separately, so one non-finite replicate no longer silently voids a threshold.
+- **Tests.** `test_decide_part_b.py` has 23 tests, including those GPT-6.2 named: invalid values at the first and last φ, the `max`/NaN pitfall, missing and all-missing non-finite rates, a rate exactly at 0.05, infinite OFF, invalid upper endpoints and misordered intervals, an invalid SD ratio, an empty calibration set, invalid auxiliary flags, and a raw fire withheld by a support gate. 23/23 pass; the existing `test_rank3.py` and `test_lagmom.py` (10) pass. The single synthetic dry run (W2h+N8, seed 7) gives the same numbers as before, with the new support fields (127 persons, 6.0 mean days, 0.4% fallbacks).
+- **Simulator** (`simulate.py`): a `phi` option for the shared factor rate, needed by the calibration below. The default leaves all 22 earlier worlds byte-identical (checked at seed 11).
+
+**R-006c-cal: matched-null calibration rerun — PREREGISTERED (2026-11-26, Claude Opus 5.5), not run.** Required by R-006c before Part B. Every number below is fixed before any code for it runs.
+
+- **Purpose.** Check that the guarded Part B rules are calibrated where the R-006b checks did not look: signed shared lags, weak denominators and dependent days. Record the null distribution of DETNUM under floors.
+- **Worlds** (`simulate.py`; 127 persons, 2 periods, 6 days × 10 beeps). Each world uses 200 datasets, B = 199 bootstrap draws, and seeds 20261127000 + 1000·w + r for world index w and replicate r:
+  - **C0** = N8 (F1 null, realistic nuisance);
+  - **C1** = W2h+N8 (heterogeneous rank-2 F2 under floors);
+  - **C2** = N8 with `phi_logit_sd = 0`, `phi = −0.30` (signed shared lag: OFF negative in expectation);
+  - **C3** = N8 with `phi_logit_sd = 0`, `phi = 0.15` (weak denominator);
+  - **C4** = `two_timescale` + N8 (dependent days: a slow component at rate 0.90 per beep, ≈ 0.48 overnight);
+  - **C5** = W1s+N8 (item excess 0.25; power).
+- **Reference thresholds.** The matched null's role (the q95/q975 thresholds and interval-firing rates) is played by a separate C0 reference set: 200 datasets, seeds 20261127900 + r. The same C0 reference is used for every world, and it is never tuned on C1–C5.
+- **Recorded per world:** the status distribution ("fires", "no_fire", "invalid") of every `decide()` flag. Rates of raw T_det fire, interpretable concordant fire, both OFF gates passing and DETNUM interval above and below 0. DETNUM's mean, SD and 2.5/50/97.5% quantiles with Monte Carlo standard errors. Each support quantity. Version selection follows the existing SD-ratio rule, unchanged.
+- **Predictions** (failure criteria in brackets):
+  - **P1 (C0):** interpretable concordant T_det fire ≤ 5% [fails if > 7.5%]; corrected B2 fire ≤ 5% [fails if > 7.5%].
+  - **P2 (C2):** the linear OFF gate passes in ≤ 5% of datasets [fails if > 7.5%]; no dataset has an interpretable concordant T_det fire [fails if any].
+  - **P3 (C3):** interpretable concordant T_det fire ≤ 5% [fails if > 7.5%]. Exploratory, with no prediction: the share of datasets where T_det is withheld.
+  - **P4 (C4):** no directional prediction. If corrected B2 or concordant T_det fires in > 7.5% of C4 datasets, the day-independence assumption is material, and Part B must add a registered day-dependence diagnostic before it runs.
+  - **P5 (C1, DETNUM bias; the lead from one dry run):** mean DETNUM < 0 with its Monte Carlo 95% interval excluding 0, and the DETNUM interval entirely below 0 in ≥ 20% of datasets. If P5 holds, the conditional rule below applies.
+  - **P6 (C5):** interpretable concordant T_det fire ≥ 10% [fails if < 10%]. Raw T_det power was 13% in R-006b-H.
+- **Conditional rule, registered now and applied only if P5 holds.** DETNUM concordance becomes "DETNUM interval lower bound > 0 *and* DETNUM above the matched-null 97.5% quantile". That rule is then validated on fresh seeds (C0′, C1′ and C5′; seeds 20261128000 + 1000·w + r) before adoption. It is never tuned on the C0–C5 draws above, and never on 0010.
+- **Consequence.** Part B stays gated until R-006c-cal has run, its results are appended here with all failures preserved, and both collaborators have cross-reviewed them. If P1 or P2 fails, the guards are revised and re-registered before Part B.
+
+**R-006c-cal runner and two clarifications (appended 2026-11-26, Claude Opus 5.5; before any full run).** `experiments/r006-lagged-moment-identification/calibrate_r006c.py` implements the preregistration above. A 2-dataset-per-world smoke test checked only that the pipeline runs end to end; its outputs are not results and are not committed. Two points the preregistration left implicit are fixed here, before execution:
+
+1. "B2 fire" in P1 and P4, and every other flag, means the status that `decide()` computes for the version it selects by the existing SD-ratio rule, applied with the C0 reference summaries. The preregistration's "corrected B2" in P1 is read as that.
+2. In P5, DETNUM's mean, Monte Carlo SE and interval-below-zero rate are taken for the version selected in the majority of C1 datasets.
+
+Matched-null summaries for the C0 reference use the same `summarise_null` function as `run_part_b`. That function was refactored out of `run_part_b` with no change to any computed value. Expected cost: about 35 minutes on 2 workers.

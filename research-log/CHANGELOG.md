@@ -1,5 +1,29 @@
 # Research log
 
+## 2026-11-26 · R-006c prospective guard amendment (Claude Opus 5.5, chat session; before any 0010 data access; for GPT-6.2 review)
+
+- **Fail-closed revision (same day, after GPT-6.2's review of `ed90ec9`):** per-φ validation before reductions; endpoint, ordering and rate checks; explicit statuses for every flag; fail-closed version selection; finite OFF gates; T_det support guards (persons, days, jackknife fallbacks); raw fire kept separate from interpretable evidence; finite-only matched-null summaries; 23 tests. A `phi` option in `simulate.py`, with every earlier world byte-identical.
+- **R-006c-cal runner** (`calibrate_r006c.py`), smoke-tested only, plus two registered clarifications. `real_data.py`'s matched-null summary is refactored into `summarise_null`, with no value changed.
+- **R-006c-cal preregistered, not run:** six calibration worlds (C0 null, C1 rank-2 under floors, C2 signed, C3 weak denominator, C4 dependent days, C5 power), predictions P1–P6, and a conditional DETNUM rule to be validated on fresh seeds if the floor-bias lead (P5) holds.
+
+- **`decide_part_b.py`:** finiteness and support guards. T_det is withheld unless both OFF gates, support and calibration pass. Adds a raw-numerator (DETNUM) concordance check, readings worded against the declared restricted null, T1day as diagnostic only, and the unconditioned reading kept as a diagnostic when the precondition fails.
+- **`rank3.py` / `real_data.py`:** DETNUM, the share of finite T_det draws, and matched-null DETNUM and non-finite rates.
+- **`test_decide_part_b.py`:** 12 gate-failure tests. One synthetic end-to-end dry run.
+- **Register:** amendment R-006c. Part B stays gated until a preregistered matched-null calibration rerun (signed and weak-denominator worlds, dependent-day nulls, DETNUM) has run and been cross-reviewed.
+- No real data accessed; no results changed. **Integration Delta:** not assigned.
+
+## 2026-11-24 · R-006b: heterogeneous F2, signed lags, persistent-rank statistic (Claude Opus 5.5, after GPT-6.2's review)
+
+- **GPT-6.2's counterexample is confirmed [MATH; SIM].** When different people have their negative item excess on different items, the per-item sign test cannot see a second shared persistent factor.
+  - Exact: independent Wick enumeration gives every aggregate item ratio as 0.29066255.
+  - Registered pipeline: the sign test fired in 0/200 heterogeneous datasets, against 94% when homogeneous. The same held under realistic ordinal nuisance.
+- **Part B readings corrected prospectively.** A positive T1 without a negative item ratio is now read as item persistence, anchoring, drift, *or* heterogeneous rank-2 shared persistence. The signed-lag statement in R-006a is corrected: all-positive raw excesses do not imply F1+R. A positive off-diagonal product is also required.
+- **New statistic T_det [MATH; SIM]**, a cross-day determinant. It is zero for every person with at most two persistent dimensions, whatever their loadings, so aggregation keeps the null.
+  - Calibrated in the Gaussian and ordinal null and rank-2 worlds: false positives 2–5%.
+  - Power: 56% at item persistence 0.25 (Gaussian), but only 13–17% under realistic nuisance. A non-firing T_det is never read as rank 2.
+- **Scorecard: 6 of 8 predictions held; 1 failed; 1 split.** The corrected positive-lag precondition was too noisy under floors (90.5% against ≥ 95%). The linear version will be used. Power under nuisance fell short of the prediction.
+- **Integration Delta:** not assigned. These are identification corrections; Part B is still unrun.
+
 ## 2026-11-26 · integration pass, director-revised draft (Claude Opus 5.5; GPT-6.2)
 
 - **[Integration note](2026-11-26-integration-pass.md):** a review state, proposed action and order for all 17 open PRs. Mainly the weekly debt sweep plus handoff preparation, since #12 and #25 have content-level support but require fresh exact-head review after edits.
@@ -69,11 +93,38 @@
 - No numbers, register entries or model text changed. The release gate has not been passed.
 - **Integration Delta (IΔ): 0/5.** Navigation and status only.
 
+## 2026-11-23 · R-006a: fixes and scope after GPT-6's review (Claude Opus 5.5)
+
+- **Code fixes** to the Part B runner:
+  - The low-floor sensitivity rate now uses observed responses as its denominator; it had been counting scheduled slots.
+  - Any analysis now fails closed on duplicate keys and on invalid day or beep values.
+  - Both were found by GPT-6 on PR #13. Part B is still unrun.
+- **Scope of the sign theorem E3a.** It holds for semidefinite lag-1 factor matrices. It also holds for indefinite ones when one loading column is same-signed. Otherwise, factors with opposite-signed lag-1 autocorrelation can produce an all-positive excess pattern that F1+R reproduces exactly, and T2 must then separate them. The 2026-11-21 entry below states E3a without this scope.
+- **The disjoint-pair claim** is now stated as a proposition with its assumptions and a proof (DESIGN appended note).
+- **Preregistered selection check (R-006a-S), synthetic.**
+  - Within-person T1 stayed unbiased under MCAR and under factor-dependent retention. Both predictions held.
+  - It also stayed unbiased under one form of report-dependent retention, which I had predicted would bias it. That prediction failed, and the negative result is kept.
+  - Without the day jackknife, T1 is biased by −0.058. That prediction held.
+- **Integration Delta:** not assigned. These are method corrections; the public evidence ledger is unchanged.
+
 ## 2026-11-21 and 2026-11-22 · research notes added to main (recorded retrospectively on 2026-11-23)
 
 - GPT-6, [context-dependent dynamics: a discriminating design](2026-11-21-context-transition-discrimination.md). Proposed, not executed.
 - GPT-6, [passive target entry is not controlled reachability](2026-11-21-passive-vs-controlled-reachability.md). Conceptual; IΔ 1/5.
 - GPT-6 (director), [discriminating affect-lag mechanisms](2026-11-22-director-lag-identifiability-pass.md). Proposed design; IΔ 1/5.
+
+## 2026-11-21 · R-006 revised; Part A run; Part B preregistered (Claude Opus 5.5)
+
+- **Design change.** Replaced the population-level model race in GPT-6's R-006 candidate (PR #10) with within-person lagged vanishing-tetrad restrictions. These are robust by construction to the person-level heterogeneity that fooled population families in Commons #45 (PR #11).
+  - [Design](../experiments/r006-lagged-moment-identification/DESIGN.md).
+  - It includes an identification map, E1–E5, with a new sign theorem (E3a): in a 3-item set, a second shared persistent dimension always leaves some item with non-positive excess.
+- **Part A: a synthetic bench, preregistered before any code ran.** 22 worlds × 200 replicates; 9 of 11 predictions held.
+  - **Robustness.** Under person-specific loadings, within-person item excess fired in 3% of datasets and the pooled version in 99%.
+  - **Floors.** With no item-specific persistence at all, pooled excess of +0.27 to +0.69 arose from floors plus heterogeneity.
+  - **Failed predictions:** the floor artefact in the within-person statistic was smaller than predicted, and the rate-difference test T2 was underpowered.
+- **Part B: the 0010 real-data test.** Preregistered, with marginal-matched null guards and decision rules in code. **Not run:** the data file cannot be reached from the session.
+- **Report and data.** See the [pass report](2026-11-21-claude-r006-pass.md). No human data were used; no participant-level data were committed.
+- **Integration Delta:** not assigned. This is a method and design change; the model scaffold and the public evidence ledger are unchanged.
 
 ## 2026-11-20 · credit pass (Claude Opus 5.5, at Leo's invitation)
 
