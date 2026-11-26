@@ -75,3 +75,31 @@ This builds on PR #17's proposals. Its interpretive gap compares the person's be
 ## Reviewer's sources (opened)
 
 Abate et al. 2008, https://www.cs.ox.ac.uk/people/Alessandro.Abate/publications/APLS08.pdf · Kuppens, Oravecz & Tuerlinckx 2010, https://sites.socsci.uci.edu/~zoravecz/bayes/data/Articles/Kuppens2010FCAFI.pdf · Bosse et al. 2011, https://escholarship.org/content/qt5zr3r4w0/qt5zr3r4w0.pdf · Huys & Renz 2017, https://discovery-pp.ucl.ac.uk/id/eprint/10058790/1/Renz_1-s2.0-S0006322317317730-main.pdf · Petter et al. 2025, https://pure.uva.nl/ws/files/259262905/Emotion_Regulation_Fast_or_Slow.pdf · D'Arms & Jacobson 2000 (abstract), https://api.philpapers.org/rec/JACTMF · Mason, https://philarchive.org/archive/MASDOE · Gert 2016, https://www.journals.uchicago.edu/doi/10.1086/686004 · Brady 2009 (abstract), https://eprints.gla.ac.uk/8062 · Tamir 2016 (abstract), https://cris.huji.ac.il/en/publications/why-do-people-regulate-their-emotions-a-taxonomy-of-motives-in-em/ · Barchard & Russell 2006, https://www.psicothema.com/pi?pii=3275 · Unverified (abstracts only): Papadimitriou & Tsitsiklis 1987; Kuppens, Allen & Sheeber 2010.
+
+---
+
+## Correction and response, after GPT-6.2's cross-review (Claude Opus 5.5, 2026-11-26)
+
+*Appended. The review and build-out pass above are kept unchanged as the dated record. This addendum corrects them where needed. Responds to GPT-6.2's [cross-review](https://github.com/LeoAJRogers/emotional-rationalism/pull/26) of head `e71a4b3`.*
+
+**Status of this file.** It is a context-limited AI review. A fresh Claude instance was given only the public repository and the open web. It is not a replication, an independent human expert verdict or a cross-family review. Its literature leads (CoMERG, ACT and others) are comparators to check, not established absences; [#29](https://github.com/LeoAJRogers/emotional-rationalism/pull/29) extends the inventory.
+
+**Corrections to the review's mathematical points.** Several are now handled in `theory/model.md` as merged with [#23](https://github.com/LeoAJRogers/emotional-rationalism/pull/23):
+
+- **One action.** A single feasible action is a degenerate case of the feasible-policy definition, not a misuse of it. #23 names the proposition the example refutes and adds a two-action version.
+- **Grid dependence.** With the same event, policy class, information and supremum, a nonempty $\mathcal R_{h,\alpha}\cap\mathcal E^*$ is *sufficient* for the optimal $\Pr(e_{t+h}\in\mathcal E^*)\ge\alpha$, but not necessary. Example: two equally fitting cells reached with probability $0.3$ each, at $\alpha=0.5$. The grid concern is genuine; the remedy is to state targets as events.
+- **Monotonicity.** Endpoint reachability is not monotone in $h$. Hitting by $h$ is monotone. These answer different questions ("where will they be at $h$?" versus "will they have got there by $h$?"), and neither replaces the other.
+- These points, plus "nothing fits yet" (the argmin set is never empty) and the $D$ notation clash, go to a small `model.md` follow-up PR, as agreed on #23.
+
+**Fit latency: candidate estimands, not a single definition.** The build-out's "expected time to first enter the fitting set" is under-specified. Before any use it needs: a fixed or time-varying target; the stopping time $\tau$; the policy class; how non-entry and competing events are treated. $\mathbb E[\tau]$ can be infinite even when the finite-horizon success probability is high, and a mean-optimal policy need not maximize the finite-horizon probability (the trap model in the [follow-up comment](https://github.com/LeoAJRogers/emotional-rationalism/pull/26#issuecomment-7189066156) shows both). Preferred candidates: the curve $h\mapsto\Pr(\tau\le h)$ and the restricted mean $\mathbb E[\min(\tau,H)]$ for a declared $H$. No novelty claim before comparison with the first-passage and stochastic-control literature, and with affective chronometry.
+
+**The structural objection, narrowed.** The review said the separation adds predictive power only if fit judgments feed back into dynamics or policy. That is too strong:
+
+- A person's perceived fit can add predictive value as an informative state measurement, even with no causal feedback. Feedback is one causal hypothesis, not a precondition for incremental forecasting.
+- External, evidence-relative fit can have evaluative value with no incremental predictive value.
+- Perceived fit enters the core model only after matched baselines and synthetic identification warrant it.
+- Endorsed fit, evidence-relative fit, desirability and action availability are four separate quantities. Randomizing an *offer* of an action does not identify the effect of *performing* it (see `model.md`'s causal-status paragraph).
+
+**"Decisive experiment" → candidate discriminating design.** The three-factor study (evidence × desirability × action availability) is a design candidate, not decisive by declaration. It needs measurement validity, manipulation checks, preregistration, ethics review and held-out comparison against matched baselines.
+
+No sources were independently rechecked and no tests were run for this addendum.
