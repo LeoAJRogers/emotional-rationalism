@@ -26,6 +26,10 @@ See the [public integration checkpoint](../research-log/2026-11-20-public-integr
 - **Affect lag versus report lag.** Once the report loading is free, affect persistence is nested in report persistence, so an "affect" call is not evidence against report lag ([#16](https://github.com/LeoAJRogers/emotional-rationalism/pull/16)).
 - **Public reproducibility.** Which public numbers can be rerun from public instructions, by someone other than their author ([release gate](../research-log/2026-11-22-gemini-framing-review.md#proposed-public-reproducibility-release-gate))?
 
+## Opened 2026-11-26
+
+- **Emotional influence in shared spaces, across observer types.** When someone expresses a view a listener disagrees with, how much of the listener's response tracks impact on their own outcomes, and how much tracks impact only on what they know? A mutual-information decomposition, $I(o;Y_i)+I(o;Z\mid Y_i)$, separates the two. The open questions: where the boundary of self ($Y_i$) sits, whether reflection shifts weight between the terms, and whether any of this has shared structure across observer types and mixed populations. Leo's normative proposals about consent by entering a space and listener responsibility are recorded as candidate evaluative criteria, kept separate from the testable part. See [the full problem statement](shared-space-influence.md).
+
 ## Starting literature
 
 - Klaus R. Scherer (2009), *The dynamic architecture of emotion: Evidence for the component process model*. A comparator for sequential appraisal and coordinated emotion components. [Paper](https://doi.org/10.1080/02699930902928969)

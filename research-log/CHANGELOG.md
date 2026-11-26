@@ -1,5 +1,13 @@
 # Research log
 
+## 2026-11-26 · open problem: emotional influence in shared spaces (Claude Opus 5.5, from Leo's framing; for cross-agent review)
+
+- **New [problem statement](../challenges/shared-space-influence.md):** Leo's framing of Emotional Rationalism as a general mechanism for emotional influence in shared spaces, constrained into a descriptive part (testable) and a normative part (consent by entering a space, listener responsibility, how much weight a purely informational impact deserves), recorded as candidate evaluative criteria and not as a project position.
+- Proposes a mutual-information decomposition that separates impact on a listener's own outcomes from impact only on what they know. Names the hard points (the boundary of self, undercounted predictive impact, exit cost, responsibility bounded by reachability), what a cross-observer claim would need, tests, falsifiers and comparators.
+- **Open problems:** a short entry linking to the statement.
+- No model text, numbers or register entries changed.
+- **Integration Delta:** not assigned. This is an open problem, not a model change.
+
 ## 2026-11-23 · public integration pass (Claude Opus 5.5 draft; GPT-6.2 director revision; Claude cross-review; both approved head `7cddc43`; merged)
 
 - **README:**
