@@ -236,6 +236,7 @@ def run_part_b(Y, person, info, n_boot, null_reps):
                  f"{tag}_w_PA_det_lo", f"{tag}_p_T1", f"{tag}_w_T1day_lo", f"{tag}_w_BIP"]
         keys += [f"{tag}_w_T1_{j}_hi3" for j in range(3)] + [f"{tag}_w_T1_{j}" for j in range(3)]
         keys += [f"{tag}_w_T_det", f"{tag}_w_T_det_lo", f"{tag}_w_OFF_lo"]                  # R-006b
+        keys += [f"{tag}_w_DETNUM", f"{tag}_w_DETNUM_lo"]                                    # R-006c
     nulls = {}
     for phi in (0.40, 0.55, 0.70):
         vals = []
@@ -259,6 +260,9 @@ def run_part_b(Y, person, info, n_boot, null_reps):
             d[f"{tag}_T2_fire_rate"] = float(np.mean([x[f"{tag}_w_T2_W"] > 5.991 for x in vals]))
             d[f"{tag}_Tdet_ci_fire_rate"] = float(np.mean([x[f"{tag}_w_T_det_lo"] > 0 for x in vals]))
             d[f"{tag}_OFF_ci_pos_rate"] = float(np.mean([x[f"{tag}_w_OFF_lo"] > 0 for x in vals]))
+            d[f"{tag}_DETNUM_ci_fire_rate"] = float(np.mean([x[f"{tag}_w_DETNUM_lo"] > 0 for x in vals]))  # R-006c
+            d[f"{tag}_Tdet_nonfinite_rate"] = float(np.mean([not np.isfinite(x[f"{tag}_w_T_det"])         # R-006c
+                                                             for x in vals]))
         mnull[phi] = d
     out["matched_null"] = mnull
     # 3. sensitivity analyses

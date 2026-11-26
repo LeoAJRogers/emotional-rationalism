@@ -78,16 +78,23 @@ def t_det(LM, person, n_persons, counts, cache=None):
     pn = lm.person_sums(w * np.where(ok, det, 0.0), person, ok, n_persons)
     pd = lm.person_sums(w * np.where(ok, off, 0.0), person, ok, n_persons)
     pw = lm.person_sums(w, person, ok, n_persons)
-    est = {"T_det": pn.sum() / pd.sum(), "OFF": pd.sum() / pw.sum()}
     with np.errstate(invalid="ignore", divide="ignore"):
-        draws = {"T_det": (counts @ pn) / (counts @ pd), "OFF": (counts @ pd) / (counts @ pw)}
+        est = {"T_det": pn.sum() / pd.sum(), "OFF": pd.sum() / pw.sum(),
+               # R-006c: the raw (unnormalized) determinant numerator, a sensitivity check that does
+               # not divide by the possibly unstable OFF denominator
+               "DETNUM": pn.sum() / pw.sum()}
+        draws = {"T_det": (counts @ pn) / (counts @ pd), "OFF": (counts @ pd) / (counts @ pw),
+                 "DETNUM": (counts @ pn) / (counts @ pw)}
     return est, draws, int(ok.sum())
 
 
 def analyse_rank(Y, person, discrete, n_boot=499, seed=0):
     """T_det and OFF for one dataset, in the same versions as lagmom.analyse
     ('cor' and 'lin' if discrete, else 'lin'). Keys: {tag}_w_T_det(_lo/_hi), {tag}_w_OFF(_lo/_hi).
-    Added for Part B by amendment R-006b (2026-11-24), before any 0010 data access."""
+    Added for Part B by amendment R-006b (2026-11-24), before any 0010 data access.
+    R-006c (2026-11-26, before any 0010 data access): also {tag}_w_DETNUM(_lo/_hi), the raw
+    determinant numerator, and {tag}_w_T_det_finite_frac; intervals are NaN when fewer than two
+    bootstrap draws are finite, so downstream code reports "not interpretable" instead of failing."""
     person = np.asarray(person)
     n_persons = int(person.max()) + 1
     counts = lm.boot_counts(n_persons, n_boot, np.random.default_rng(seed))
@@ -96,8 +103,14 @@ def analyse_rank(Y, person, discrete, n_boot=499, seed=0):
     for tag, correct in modes:
         LM = lm.LagMoments(Y, lm.NA_IDX, discrete, lags=(1,), correct=correct, jk=True)
         est, draws, n_ok = t_det(LM, person, n_persons, counts)
-        for k in ("T_det", "OFF"):
-            lo, hi = lm.ci(draws[k])
+        for k in ("T_det", "OFF", "DETNUM"):
+            d = draws[k]
+            if np.isfinite(d).sum() >= 2:
+                lo, hi = lm.ci(d)
+            else:
+                lo, hi = float("nan"), float("nan")
             out[f"{tag}_w_{k}"], out[f"{tag}_w_{k}_lo"], out[f"{tag}_w_{k}_hi"] = float(est[k]), lo, hi
         out[f"{tag}_n_pp_det"] = n_ok
+        # R-006c: share of bootstrap draws with a finite T_det (a near-zero denominator gives inf/nan)
+        out[f"{tag}_w_T_det_finite_frac"] = float(np.isfinite(draws["T_det"]).mean())
     return out

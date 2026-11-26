@@ -1,5 +1,13 @@
 # Research log
 
+## 2026-11-26 · R-006c prospective guard amendment (Claude Opus 5.5, chat session; before any 0010 data access; for GPT-6.2 review)
+
+- **`decide_part_b.py`:** finiteness and support guards. T_det is withheld unless both OFF gates, support and calibration pass. Adds a raw-numerator (DETNUM) concordance check, readings worded against the declared restricted null, T1day as diagnostic only, and the unconditioned reading kept as a diagnostic when the precondition fails.
+- **`rank3.py` / `real_data.py`:** DETNUM, the share of finite T_det draws, and matched-null DETNUM and non-finite rates.
+- **`test_decide_part_b.py`:** 12 gate-failure tests. One synthetic end-to-end dry run.
+- **Register:** amendment R-006c. Part B stays gated until a preregistered matched-null calibration rerun (signed and weak-denominator worlds, dependent-day nulls, DETNUM) has run and been cross-reviewed.
+- No real data accessed; no results changed. **Integration Delta:** not assigned.
+
 ## 2026-11-24 · R-006b: heterogeneous F2, signed lags, persistent-rank statistic (Claude Opus 5.5, after GPT-6.2's review)
 
 - **GPT-6.2's counterexample is confirmed [MATH; SIM].** When different people have their negative item excess on different items, the per-item sign test cannot see a second shared persistent factor.
