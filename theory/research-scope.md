@@ -58,6 +58,14 @@ Proposed staged test: begin with individual models and observable shared context
 - Initially fit and test on well-characterized human data. Possible future adaptations to animals or AI require population-specific measurement and transition definitions.
 - A mathematical model of adaptive behavior does **not** establish subjective experience, consciousness, or free will.
 - Compare against simpler autoregressive, appraisal, and learning accounts rather than asserting novelty by vocabulary.
+- Name the closest existing frameworks as comparison baselines. This list is provisional: it comes from abstract-level searches recorded in the 2026-11-26 prior-art notes ([#29](https://github.com/LeoAJRogers/emotional-rationalism/pull/29)), and each entry still needs full-text verification.
+  - **Affect Control Theory / BayesACT** for culturally norm-referenced affect and role-based contextual norms;
+  - **CoMERG** and **EMA** for affect dynamics with appraisal and regulation;
+  - **Dynamic Reward MDPs** (Carroll et al., 2024) for AI influence on changing human states;
+  - **the Social Relations Model** for rotation designs.
+
+  The candidate contribution is the separation of what is typical, what fits the evidence, and what is reachable. Its empirical and evaluative status are separate. If a baseline makes the same predictions without the separation, the separation has no *predictive* support from those data. An equivalent forecast does not refute the separation as an *evaluative* distinction, and evaluative claims need their own justification.
+- **Terminology:** "fit" here is evidence-relative. It is not the "emotional fit" of the acculturation literature, which measures similarity to a group's typical emotional pattern. This reading of that literature still needs independent source checks.
 - Test identifiability with synthetic data and evaluate predictive performance on held-out participants and interactions.
 - Record assumptions and negative results, including when added social or reflective variables fail to improve prediction.
 
