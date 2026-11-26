@@ -68,6 +68,25 @@ Whether reflection moves a person's response toward the fitting one is a separat
 5. **Responsibility (B2) and reachability.** Reachability bounds claims about which affective responses are *achievable*. It does not establish a duty or assign blame. Responsibility for one's own feasible regulation also does not transfer responsibility for another participant's conduct.
 6. **Exposure cost moves both ways.** A response that fits the situation can lower the cost of staying, when an informational impact draws only the response it warrants. It can also raise that cost. An accurate threat appraisal can make leaving more valuable. Fitting responses therefore do not systematically widen the set of spaces worth staying in.
 
+## Authenticity and partially controllable signals
+
+**Leo's framing (2026-11-26).** Observers interpret one another, and that interpretation has to run through observable tells, because no one has direct access to another's reasoning. In humans, physiological responses shape judgments about whether someone is being authentic. Some people can manipulate those signals. The key condition: *a signal of internal state is informative only if it is not fully controllable.* A fully controllable signal can be perfectly manipulated.
+
+**A formal statement (Claude's suggestion).** Write an expressed signal as $o = g(\text{internal state}) + \text{strategic component}$. The less of $o$ the sender can set at will, the more $o$ reveals about the internal state, even when the sender's and listener's interests diverge. This links to existing results:
+
+- When signals are fully controllable and costless (cheap talk), their informativeness depends on how well the sender's and listener's incentives align (Crawford and Sobel, 1982).
+- When signals are partly involuntary or costly to fake, they can stay informative despite conflicting interests. See costly-signalling theory (Spence, 1973; Zahavi's handicap principle) and Frank's (1988) account of emotions as hard-to-fake commitment signals.
+
+Partial controllability is one route to informative signals. Cost of faking is another: a fully controllable signal can still be informative if faking it is expensive.
+
+**Constraints.**
+
+- **Human accuracy is limited.** Meta-analytic evidence (Bond and DePaulo, 2006) suggests people detect deception from behaviour only slightly better than chance. Tells may carry less information than observers believe, and confidence is a poor guide to accuracy.
+- **Tells vary across people and cultures.** Display rules, neurodivergence and individual physiology mean the same tell can mean different things. Judgments of authenticity from tells can be systematically unfair to people whose signals differ from the observer's expectations.
+- **Each observer type has its own tells.** Which signals are involuntary depends on the observer's mechanism. This fits the split between shared structure and type-specific mechanism in part A.
+
+**Implication for AI observers (Claude's suggestion).** An AI's expressed outputs are generated, so they can be fully controllable. By Leo's condition, an AI's *expressed* emotion-like signals would then reveal little about its internal states. The analogue of a physiological tell would be a channel the system cannot fully set at will, such as interpretability measurements of internal activations. Such a channel would make AI signals informative in the way human physiology partly is, and it would be harder to manipulate than outputs. Whether such measurements track anything worth calling an internal state is open. As in the requirements below, they are operational variables, not evidence of experience.
+
 ## Requirements for an observer-general claim
 
 Each of the following is a hypothesis to specify and test, not an established property.
@@ -126,6 +145,8 @@ These are listed from Claude's general knowledge and have not been independently
 - Crawford and Sobel (1982), *Strategic Information Transmission*: how informative communication can be depends on incentive alignment.
 - Nowak (2006), *Five Rules for the Evolution of Cooperation*, and Axelrod (1984): structural conditions for cooperation.
 - Fudenberg and Maskin (1986), the folk theorem for repeated games: the equilibrium-selection obstacle.
-- Robert Frank, *Passions Within Reason* (1988): emotions as commitment devices.
+- Robert Frank, *Passions Within Reason* (1988): emotions as commitment devices and hard-to-fake signals.
+- Spence (1973) and Zahavi's handicap principle: costly signalling.
+- Bond and DePaulo (2006): meta-analysis of human deception-detection accuracy.
 - Allport (1954) and Pettigrew and Tropp (2006): intergroup contact.
 - Gross (1998) and the reappraisal literature already listed in [open problems](open-problems.md): reflection as regulation.
