@@ -58,6 +58,14 @@ Proposed staged test: begin with individual models and observable shared context
 - Initially fit and test on well-characterized human data. Possible future adaptations to animals or AI require population-specific measurement and transition definitions.
 - A mathematical model of adaptive behavior does **not** establish subjective experience, consciousness, or free will.
 - Compare against simpler autoregressive, appraisal, and learning accounts rather than asserting novelty by vocabulary.
+- Name the closest existing frameworks as baselines (provisional list; see the 2026-11-26 prior-art notes):
+  - **Affect Control Theory / BayesACT** for culturally norm-referenced affect and role-based contextual norms;
+  - **CoMERG** and **EMA** for affect dynamics with appraisal and regulation;
+  - **Dynamic Reward MDPs** (Carroll et al., 2024) for AI influence on changing human states;
+  - **the Social Relations Model** for rotation designs.
+  
+  ER's candidate contribution is the separation of what is typical, what fits the evidence, and what is reachable. Where a baseline makes the same predictions without that separation, the separation is not supported.
+- **Terminology:** "fit" here is evidence-relative. It is not the cross-cultural "emotional fit" of the acculturation literature, which measures similarity to a group's average emotional pattern.
 - Test identifiability with synthetic data and evaluate predictive performance on held-out participants and interactions.
 - Record assumptions and negative results, including when added social or reflective variables fail to improve prediction.
 
