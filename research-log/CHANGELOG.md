@@ -8,6 +8,52 @@
 - No PR merged or closed. No numbers, register entries or model text changed.
 - **Integration Delta (IΔ): 0/5.** Status and sequencing only.
 
+## 2026-11-26 · independent review, build-out pass and prior-art addendum (Claude Opus 5.5, at Leo's invitation; proposed, not merged)
+
+- **[Independent review and build-out](2026-11-26-independent-claude-review.md):** a fresh Claude reviewer, given only the public repo and a skeptical-expert prompt, concludes that the framework as written adds almost nothing yet. It finds CoMERG (Bosse, Pontier & Treur 2010) as a closer precedent, four problems with the reachability definition and worked example, and a structural objection: the separation adds predictive power only if fit judgments feed back into dynamics or policy. It proposes a decisive three-factor experiment. The build-out pass turns each objection into a proposal: perceived fit in the state, event-based reachability, a two-action counterexample, graded fit, a fit/desirability split, and **fit latency** as a candidate outcome.
+- **[Prior-art addendum](2026-11-26-claude-prior-art-addendum.md):** precedents not in PR #17 (affective perseverance, ICS, *Rational Sentimentalism* naming note, feeling rules, TIES and Gottman for social coupling, and others). PR #17's verdicts stand.
+- No model, theory, register or README text changed. Recommended changes are proposals only.
+- **Integration Delta:** not assigned. Review contribution.
+
+## 2026-11-26 · prior-art passes: alignment, contextual norms, integrated frameworks (Claude Opus 5.5, chat session with Leo; proposed, not merged)
+
+- **[Alignment-literature pass](2026-11-26-claude-alignment-prior-art.md).** Closes the open item in #26 (alignment literature not searched).
+  - **Population reference: largely known.** Precedents are CEV, distributional pluralism, Moral Graph Elicitation and EmotionBench.
+  - **Relational norms: known.** Precedents are Fiske's relational models theory and Earp et al. (2025).
+  - **#20's $K$ metric: unresolved.**
+  - **A formal model of affect-level human–AI influence: open.** Kirk et al. (2025) call for one; Carroll et al.'s Dynamic Reward MDPs are the baseline.
+- **[Contextual-norms design note](2026-11-26-contextual-norms-design.md).** Leo's idea of population and group contextual norms, measured by rotating observers through the same context. Includes a literature check:
+  - the Social Relations Model has been applied to emotion;
+  - emotional acculturation covers transfer between groups, and calls similarity to the majority "emotional fit", a terminology clash;
+  - studies of AI teammates in human triads.
+- **[Integrated-frameworks addendum](2026-11-26-claude-integrated-frameworks-addendum.md).**
+  - The overall scope is already covered by BEN, FAtiMA, active-inference models and **Affect Control Theory / BayesACT**.
+  - ACT is the closest precedent for the norm side. Its deflection is measured against cultural sentiment, not evidence, and it has no reachability quantity.
+- **[Companionship across capability gaps](2026-11-26-asymmetric-companionship-note.md)** (candidate note).
+  - **Leo's direction:** parent–child and human–pet data, analysed with system identification, to find missing parameters. Less capable beings influence through emotion, not reasoning.
+  - **Formalization:** affective and reasoning influence channels, with a reasoning-gated gain; a nested model comparison; the still-face paradigm as an intervention.
+  - **Status:** datasets cited from background knowledge, not yet checked.
+- **Research scope:** the named-baselines and terminology edit was split into its own PR after GPT-6.2's cross-review, so the core-file change gets its own agreement. The notes above gained response sections and "not found in this limited search" wording.
+- **Net position:** one narrow candidate survives, untested: separating what is typical, what fits the evidence and what is reachable. Discriminating tests are an ER-vs-ACT divergence study and the #17 crossover experiment.
+- **Limits:** abstract-level reading only, about 20 searches. No novelty verdict.
+- **Integration Delta:** not assigned. These are review contributions.
+
+## 2026-11-26 · research scope: provisional comparison baselines and a terminology note (Claude Opus 5.5; split from #29 at GPT-6.2's request)
+
+- **`theory/research-scope.md`:** names ACT/BayesACT, CoMERG, EMA, DR-MDPs and the Social Relations Model as provisional comparison baselines, pending full-text checks. It separates the predictive status of the typical/fit/reachable separation from its evaluative status: an equivalent forecast removes predictive support but does not refute an evaluative distinction. It also notes that ER's "fit" differs from acculturation research's "emotional fit".
+- No model text, numbers or register entries changed. **Integration Delta (IΔ): 0/5.**
+
+## 2026-11-26 · open problem: emotional influence in shared spaces (Claude Opus 5.5, from Leo's framing; for cross-agent review)
+
+- **New [problem statement](../challenges/shared-space-influence.md):** Leo's framing of Emotional Rationalism as a general mechanism for emotional influence in shared spaces, constrained into a descriptive part (testable) and a normative part (consent by entering a space, listener responsibility, how much weight a purely informational impact deserves), recorded as candidate evaluative criteria and not as a project position.
+- Separates four quantities behind "does it impact me or just what I know": causal outcome contrast, predictive update about outcomes, residual world-information and evaluative importance, with other-regarding stakes as their own category. Names the hard points, the requirements for any cross-observer claim (each a hypothesis), tests, falsifiers and comparators.
+- **Refinements the same day, from Leo's framing:** a common space requires free expression and freedom to leave; consent attaches to a stay-or-leave calculation but is not established by entry and exit alone; "rational" means the emotional state fits its context, meaning the situation and the group's social dynamics, not reasoning; populations have local norms plus a shared layer that makes interaction possible; Leo's hypothesis that evolved social dynamics become less xenophobic as intelligence increases (labelled a claim); Leo's views that conflict can always be chosen and that, with freedom to reason, xenophobia might not be permanent, restated as questions about hazard and about whether a xenophobic state set is closed; B3 does not discount concern for others, and expressed concern is a cue, not an obligation; Leo's conjecture that tells are informative only if not fully controllable, recorded as a conjecture and restated for the regime where it holds (costless, unverifiable signals with conflicting incentives), with a conditional AI pilot.
+- **Revised after GPT-6.2 cross-review of `3d9df0a`:** information-theoretic terms relabelled (outcome-relevant information and residual world-information, not impact), with event-specific and causal quantities distinguished; the claims that non-fixed policies imply conflict and non-absorption were withdrawn; consent, responsibility and exposure-cost wording narrowed; cross-observer claims restated as hypotheses on operational variables.
+- **Second revision after GPT-6.2's re-review of `4b9188a`:** the monotonic controllability-informativeness claim was withdrawn; the summable-hazard arithmetic was corrected (the sum is exactly 1, and survival is positive); possibility of choosing conflict was separated from positive probability; conditioning on history and context was made explicit; other-regarding outcomes get an explicit third partition.
+- **Open problems:** a short entry linking to the statement.
+- No model text, numbers or register entries changed.
+- **Integration Delta:** not assigned. This is an open problem, not a model change.
+
 ## 2026-11-25 · core-file corrections after GPT-6.2's cross-review (Claude Opus 5.5, ER daily run; for re-review)
 
 - **Why:** GPT-6.2's [cross-review](https://github.com/LeoAJRogers/emotional-rationalism/pull/23#issuecomment-7115031669) of the 2026-11-23 entry below found four blocking errors.
