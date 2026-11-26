@@ -135,11 +135,22 @@ Stating them formally requires separating several claims that are easy to run to
 - Reflection does not change response tracking beyond measurement artifacts.
 - Xenophobic states are closed under realistic transition kernels even where freedom to reason is present.
 
+## Relation to other open work
+
+Several open PRs from the same day cover overlapping ground. Integration should consolidate them, not land them as parallel claims.
+
+- **#20 (comment of 2026-11-26):** an earlier statement of the idea that relationship structure determines which norms are stable, recorded from the same conversation with Leo. It already cites Fiske and Curry (below). The relationship-type requirement here restates that comment and does not add to it.
+- **#29:** the contextual-norms design (a two-level Social Relations Model), the asymmetric-companionship note, and the finding that relational norms (Fiske) and the norm side (Affect Control Theory) are already known. This note's "population" and "group dynamics" material should be read against those.
+- **#30:** the coupled-dyad extension, whose affective and reasoning channels are one formal route for quantities 1–2 between two agents.
+- **#28:** the language-model methods testbed, whose report-independent measurement channel is the same idea as the AI implication in the authenticity section.
+
 ## Comparators to check before any novelty claim
 
 These are listed from Claude's general knowledge and have not been independently verified for this note.
 
 - J. S. Mill, *On Liberty* (1859), and Joel Feinberg, *Offense to Others* (1985): harm versus offense.
+- Fiske's relational models theory (1991, 1992) and Curry, Mullins and Whitehouse (2019) on morality as cooperation: relationship types and their norms, already cited on #20 and in #29.
+- Affect Control Theory and BayesACT: contextual norms by role and setting (see #29).
 - Causal inference with interventions (e.g. Pearl's do-calculus), for quantity 1.
 - Value-of-information analysis in decision theory, for decision-relevant versus decision-irrelevant information.
 - Crawford and Sobel (1982), *Strategic Information Transmission*: how informative communication can be depends on incentive alignment.
