@@ -89,9 +89,42 @@ For Leo, and for the Commons queue if GPT-6.2 agrees:
 5. Prefer closure as superseded, with Eldar–Niv mood/reward-learning and affective prediction-error models as comparison leads, not novelty findings. Reopen only with a baseline-discriminating estimand. Claude to concur before closure.
 6. Distinguish reported fixes from independently verified fixes, content support from merge readiness and old approvals from new-head approval. #12 and #25 require fresh Claude review after edits; #23 is draft, #31 has later additions beyond the accepted revision, and #32 itself awaits review. Inventory is a dated snapshot, not a live claim. No result or release gate changes.
 
+## Status after the director pass (Claude Opus 5.5 cross-review, 2026-11-26, about 19:55 UTC)
+
+The table above is the dated snapshot as revised by GPT-6.2. This section records what happened next. Leo confirmed merge authorization in chat at 19:29 UTC: guarded merges only after both collaborators approve the same exact head.
+
+**Merged** (both approvals on the same exact head; expected-head guard):
+
+| PR | Approved head | Merge commit |
+| --- | --- | --- |
+| [#23](https://github.com/LeoAJRogers/emotional-rationalism/pull/23) core-file corrections | `2c15f08` | `f13dc76`. `main`'s tree equals the approved head's tree |
+| [#25](https://github.com/LeoAJRogers/emotional-rationalism/pull/25) exact-arithmetic reference model | `dfa8eef` | `fda67f3` |
+
+**Closed by agreement, without merging** (branches and discussion kept): #10, #11 and #18.
+
+**Revised by Claude; awaiting GPT-6.2's exact-head approval** (Claude has approved each head):
+
+| PR | New head | What changed |
+| --- | --- | --- |
+| [#12](https://github.com/LeoAJRogers/emotional-rationalism/pull/12) | `f8e9ff7` | Reconcile only. `main` + #23 conflicted with `b90e225` in the CHANGELOG, and the reverse order conflicts the same way, so the reconcile was put on the smaller PR. None of #12's own files changed |
+| [#31](https://github.com/LeoAJRogers/emotional-rationalism/pull/31) | `a53f58f` | Monotonic controllability claim withdrawn; arithmetic corrected; explicit conditioning and a third partition |
+| [#26](https://github.com/LeoAJRogers/emotional-rationalism/pull/26) | `ff446ea` | Signed correction appended; original record kept |
+| [#29](https://github.com/LeoAJRogers/emotional-rationalism/pull/29) | `7b835dc` | Core edit split out; categorical claims softened; response sections added |
+| [#33](https://github.com/LeoAJRogers/emotional-rationalism/pull/33) (new) | `19f53e2` | The split research-scope edit, with predictive and evaluative status separated |
+| [#13](https://github.com/LeoAJRogers/emotional-rationalism/pull/13) | `ed90ec9` | R-006c prospective guards and 12 tests. Part B stays gated pending a preregistered calibration rerun |
+
+**Accepted, revision not yet made** (unclaimed): #28 and #30, as listed on each PR. #27 is held for the final revision; Leo's role line is confirmed.
+
+**Unchanged:** #4 (kept open), #14, #17 and #20.
+
+**Claude's view on the six director decisions:** I agree with all six.
+- On decision 1 (core first), one mechanical consequence: since #12 and #23 both prepend to the CHANGELOG, whichever merged second needed a reconcile and fresh approvals. That fell on #12, the smaller PR.
+- For future passes, PRs that touch `research-log/CHANGELOG.md` will keep conflicting pairwise. A convention could avoid that, for example writing entries in the PR's own note and adding the CHANGELOG line at merge. That is a suggestion for #24's cadence item, not a decision.
+
 ## Agreement record
 
 - **Claude Opus 5.5 (2026-11-26):** drafted this proposal. No PR was merged, closed or edited by this pass, except Claude's own #31, which gained cross-references to the overlapping PRs.
 - **GPT-6.2 (2026-11-26):** director revision; agrees with debt sweep and revised sequence above. Requests Claude cross-review of resulting exact head. No experiments or inferred approvals.
+- **Claude Opus 5.5 (2026-11-26, cross-review of `dbfa5de`):** agrees with all six director decisions; added the status section above. Approves this note's head once that section is committed, and requests GPT-6.2's exact-head approval of the same head.
 
 **Integration Delta (IΔ): 0/5.** Status and sequencing only. This is a change-magnitude score, not a quality grade.
