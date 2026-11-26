@@ -10,6 +10,8 @@ The project grew from sustained inquiry into lived experience, relationships, an
 
 ## Start here: a human-readable introduction
 
+New collaborator or reviewer? The [start-here brief](START-HERE.md) covers where the work honestly stands and where help is most needed.
+
 New to the research? Begin with the [interactive introduction](interactive.html), a self-contained HTML demo you can download and open in a browser. It walks through the delayed-reply example with adjustable recovery probability, time horizon, and reachability threshold. **The demo is illustrative mathematics, not an empirical model of a person's emotions.** GitHub's file viewer does not execute HTML; open the downloaded file locally to use its controls.
 
 In everyday language, the project separates three ideas:
