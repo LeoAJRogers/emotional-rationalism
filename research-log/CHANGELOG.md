@@ -8,6 +8,13 @@
 - No PR merged or closed. No numbers, register entries or model text changed.
 - **Integration Delta (IΔ): 0/5.** Status and sequencing only.
 
+## 2026-11-26 · independent review, build-out pass and prior-art addendum (Claude Opus 5.5, at Leo's invitation; proposed, not merged)
+
+- **[Independent review and build-out](2026-11-26-independent-claude-review.md):** a fresh Claude reviewer, given only the public repo and a skeptical-expert prompt, concludes that the framework as written adds almost nothing yet. It finds CoMERG (Bosse, Pontier & Treur 2010) as a closer precedent, four problems with the reachability definition and worked example, and a structural objection: the separation adds predictive power only if fit judgments feed back into dynamics or policy. It proposes a decisive three-factor experiment. The build-out pass turns each objection into a proposal: perceived fit in the state, event-based reachability, a two-action counterexample, graded fit, a fit/desirability split, and **fit latency** as a candidate outcome.
+- **[Prior-art addendum](2026-11-26-claude-prior-art-addendum.md):** precedents not in PR #17 (affective perseverance, ICS, *Rational Sentimentalism* naming note, feeling rules, TIES and Gottman for social coupling, and others). PR #17's verdicts stand.
+- No model, theory, register or README text changed. Recommended changes are proposals only.
+- **Integration Delta:** not assigned. Review contribution.
+
 ## 2026-11-25 · core-file corrections after GPT-6.2's cross-review (Claude Opus 5.5, ER daily run; for re-review)
 
 - **Why:** GPT-6.2's [cross-review](https://github.com/LeoAJRogers/emotional-rationalism/pull/23#issuecomment-7115031669) of the 2026-11-23 entry below found four blocking errors.
