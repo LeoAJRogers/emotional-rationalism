@@ -251,8 +251,16 @@ def run_part_b(Y, person, info, n_boot, null_reps):
         d = {"n": len(vals)}
         for k in keys:
             v = np.array([x[k] for x in vals], float)
-            d[k + "_mean"], d[k + "_sd"] = float(np.mean(v)), float(np.std(v, ddof=1))
-            d[k + "_q025"], d[k + "_q95"], d[k + "_q975"] = (float(np.quantile(v, q)) for q in (0.025, 0.95, 0.975))
+            # R-006c: summaries over finite replicates only; the share of non-finite replicates is
+            # recorded and gated separately (decide_part_b: <= 0.05), and fewer than 2 finite gives NaN
+            fv = v[np.isfinite(v)]
+            d[k + "_n_finite"] = int(fv.size)
+            if fv.size >= 2:
+                d[k + "_mean"], d[k + "_sd"] = float(np.mean(fv)), float(np.std(fv, ddof=1))
+                d[k + "_q025"], d[k + "_q95"], d[k + "_q975"] = (float(np.quantile(fv, q)) for q in (0.025, 0.95, 0.975))
+            else:
+                for suf in ("_mean", "_sd", "_q025", "_q95", "_q975"):
+                    d[k + suf] = float("nan")
         for tag in ("cor", "lin"):
             d[f"{tag}_T1_ci_fire_rate"] = float(np.mean([x[f"{tag}_w_T1_lo"] > 0 for x in vals]))
             d[f"{tag}_anyneg3_rate"] = float(np.mean([any(x[f"{tag}_w_T1_{j}_hi3"] < 0 for j in range(3))

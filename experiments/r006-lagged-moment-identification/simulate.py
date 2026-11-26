@@ -23,6 +23,8 @@ BASE = dict(
     f2_phi=None,              # second NA factor rate (None = absent)
     f2_load=(0.30, 0.00, -0.30),
     f2_hetero=False,          # R-006b: person p gets f2_load cyclically shifted by p % 3 (no extra RNG draws)
+    phi=None,                 # R-006c calibration: shared factor rate override (None = PHI; may be <= 0 only
+                              # with phi_logit_sd = 0); default keeps every earlier world byte-identical
     load_sd=0.0,              # person-specific loading log-SD
     day_load_sd=0.0,          # person-item-day loading log-SD
     phi_logit_sd=0.0,         # person-specific inertia (logit scale SD)
@@ -106,9 +108,12 @@ def simulate(cfg, seed, n_persons=N_PERSONS, return_latent=False):
     period = np.tile(np.arange(N_PERIODS), n_persons)
 
     # person-level parameters (shared by both periods)
-    phi_p = PHI * np.ones(n_persons)
+    phi0 = PHI if cfg.get("phi") is None else float(cfg["phi"])
+    phi_p = phi0 * np.ones(n_persons)
     if cfg["phi_logit_sd"] > 0:
-        phi_p = expit(logit(PHI) + cfg["phi_logit_sd"] * rng.standard_normal(n_persons))
+        if not 0 < phi0 < 1:
+            raise ValueError("phi_logit_sd > 0 needs 0 < phi < 1")
+        phi_p = expit(logit(phi0) + cfg["phi_logit_sd"] * rng.standard_normal(n_persons))
     phi = phi_p[person]
     lam = np.tile(LAM, (MP, 1))
     if cfg["load_sd"] > 0:

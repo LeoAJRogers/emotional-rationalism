@@ -55,14 +55,21 @@ def ustat3(LM, elems):
         return num / den
 
 
-def det_and_off(LM, cache=None):
-    """Day-jackknifed per person-period det_m and off_m, shape (M,) each."""
+def det_and_off(LM, cache=None, fallback=None):
+    """Day-jackknifed per person-period det_m and off_m, shape (M,) each.
+    R-006c: if `fallback` (a bool array of shape (M,)) is given, it is OR-ed in place with the
+    person-periods where any of the six U-statistic jackknifes fell back to the full-data value."""
     cache = {} if cache is None else cache
 
     def jk_u(elems):
         key = ("u3",) + tuple(sorted(elems))
         if key not in cache:
             cache[key] = LM.jackknife(ustat3(LM, tuple(sorted(elems))))
+            fb_now = getattr(LM, "jk_fallback", None)
+            cache[key + ("fb",)] = (np.zeros(np.shape(cache[key]), bool) if fb_now is None
+                                    else np.asarray(fb_now, bool).copy())
+        if fallback is not None:
+            np.logical_or(fallback, cache[key + ("fb",)], out=fallback)
         return cache[key]
 
     det = sum(c * jk_u(el) for c, el in DET_TERMS)
@@ -70,11 +77,18 @@ def det_and_off(LM, cache=None):
     return det, off
 
 
-def t_det(LM, person, n_persons, counts, cache=None):
-    """Point estimate and bootstrap draws for T_det and for the precondition OFF (mean off_m)."""
-    det, off = det_and_off(LM, cache)
+def t_det(LM, person, n_persons, counts, cache=None, with_support=False):
+    """Point estimate and bootstrap draws for T_det and for the precondition OFF (mean off_m).
+    with_support=True (R-006c) also returns support summaries; the default keeps the R-006b
+    three-value return used by hetero_f2_bench.py."""
+    fb = np.zeros(LM.M, bool)
+    det, off = det_and_off(LM, cache, fallback=fb)
     w = LM.n_pairs1.astype(float)
     ok = LM.keep & np.isfinite(det) & np.isfinite(off) & (LM.n_days >= 3)
+    # R-006c support summaries for the decision rule
+    support = {"n_persons_det": int(np.unique(np.asarray(person)[ok]).size),
+               "mean_days_det": float(LM.n_days[ok].mean()) if ok.any() else float("nan"),
+               "jk_fallback_frac_det": float(fb[ok].mean()) if ok.any() else float("nan")}
     pn = lm.person_sums(w * np.where(ok, det, 0.0), person, ok, n_persons)
     pd = lm.person_sums(w * np.where(ok, off, 0.0), person, ok, n_persons)
     pw = lm.person_sums(w, person, ok, n_persons)
@@ -85,6 +99,8 @@ def t_det(LM, person, n_persons, counts, cache=None):
                "DETNUM": pn.sum() / pw.sum()}
         draws = {"T_det": (counts @ pn) / (counts @ pd), "OFF": (counts @ pd) / (counts @ pw),
                  "DETNUM": (counts @ pn) / (counts @ pw)}
+    if with_support:
+        return est, draws, int(ok.sum()), support
     return est, draws, int(ok.sum())
 
 
@@ -93,7 +109,8 @@ def analyse_rank(Y, person, discrete, n_boot=499, seed=0):
     ('cor' and 'lin' if discrete, else 'lin'). Keys: {tag}_w_T_det(_lo/_hi), {tag}_w_OFF(_lo/_hi).
     Added for Part B by amendment R-006b (2026-11-24), before any 0010 data access.
     R-006c (2026-11-26, before any 0010 data access): also {tag}_w_DETNUM(_lo/_hi), the raw
-    determinant numerator, and {tag}_w_T_det_finite_frac; intervals are NaN when fewer than two
+    determinant numerator, {tag}_w_T_det_finite_frac, and support summaries {tag}_n_persons_det,
+    {tag}_mean_days_det and {tag}_jk_fallback_frac_det (revised 2026-11-26 after GPT-6.2's review); intervals are NaN when fewer than two
     bootstrap draws are finite, so downstream code reports "not interpretable" instead of failing."""
     person = np.asarray(person)
     n_persons = int(person.max()) + 1
@@ -102,7 +119,7 @@ def analyse_rank(Y, person, discrete, n_boot=499, seed=0):
     modes = [("cor", True), ("lin", False)] if discrete else [("lin", False)]
     for tag, correct in modes:
         LM = lm.LagMoments(Y, lm.NA_IDX, discrete, lags=(1,), correct=correct, jk=True)
-        est, draws, n_ok = t_det(LM, person, n_persons, counts)
+        est, draws, n_ok, support = t_det(LM, person, n_persons, counts, with_support=True)
         for k in ("T_det", "OFF", "DETNUM"):
             d = draws[k]
             if np.isfinite(d).sum() >= 2:
@@ -111,6 +128,8 @@ def analyse_rank(Y, person, discrete, n_boot=499, seed=0):
                 lo, hi = float("nan"), float("nan")
             out[f"{tag}_w_{k}"], out[f"{tag}_w_{k}_lo"], out[f"{tag}_w_{k}_hi"] = float(est[k]), lo, hi
         out[f"{tag}_n_pp_det"] = n_ok
+        for k, v in support.items():
+            out[f"{tag}_{k}"] = v
         # R-006c: share of bootstrap draws with a finite T_det (a near-zero denominator gives inf/nan)
         out[f"{tag}_w_T_det_finite_frac"] = float(np.isfinite(draws["T_det"]).mean())
     return out

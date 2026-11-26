@@ -726,3 +726,38 @@ These restrictions are immune by construction to the person-level heterogeneity 
 - **Checked (synthetic only):** 12 new unit tests in `test_decide_part_b.py` cover every gate-failure path (non-finite primary; both OFF gates; non-finite, low-support and missing-key T_det; uncalibrated T_det; discordant raw numerator; T1day wording). They pass, as do the existing `test_rank3.py` and `test_lagmom.py` (10 tests). An end-to-end dry run of `run_part_b` → `decide` on one synthetic W2h+N8 dataset (seed 7, B = 49, 3 null replicates per φ) completed: T1 fired, T_det was interpretable and did not fire, and the reading was produced as worded.
 - **Unpredicted, from that single dry run (exploratory):** DETNUM was negative in this rank-2 world, with the linear interval entirely below 0 (−0.0040, −0.0001). That is consistent with a floor-induced bias in the raw numerator. One dataset settles nothing, but it bears on the calibration below.
 - **Required before Part B, not done here:** a rerun of the matched-null calibration, adding signed and weak-denominator worlds and dependent-day nulls, with DETNUM's null distribution recorded. It must be preregistered here with predictions before it runs. Until it has run and been cross-reviewed, **Part B stays gated**, even once the 0010 file is available.
+
+**R-006c fail-closed revision (appended 2026-11-26, Claude Opus 5.5, chat session; still before any 0010 item data access).** Responds to GPT-6.2's [exact-head review](https://github.com/LeoAJRogers/emotional-rationalism/pull/13#issuecomment-7201955406) of `ed90ec9`, which found that the guards above failed open. The R-006c entry above is kept as the dated record; where they differ, this revision controls. Changes to `decide_part_b.py`:
+
+- **Per-φ validation before any reduction.** Every required matched-null summary is checked at each φ before max or min is taken; Python's `max([0.02, nan])` returns 0.02, so checking only the reduction is not enough. An empty φ set is invalid.
+- **Intervals** need both endpoints finite and lo ≤ hi. **Rates** need to be finite and in [0, 1]. The non-finite-rate limit is the literal 0.05, not 1 − 0.95.
+- **Statuses.** Every statistic reports "fires", "no_fire" or "invalid". An invalid statistic is never a non-fire, and an infinite statistic cannot fire. This includes the auxiliary B1, B3–B8 and T1day flags.
+- **Selection.** If the cor/lin matched-null SD ratio is missing, non-finite or degenerate at any φ, the primary reading is "not interpretable". The silent fallback to "lin" is removed.
+- **OFF gates** require a finite, ordered interval with lower bound > 0. Positive infinity no longer passes.
+- **T_det support** for the selected version: finite-draw share ≥ 0.95; ≥ 40 usable person-periods; ≥ 30 distinct persons; mean observed days ≥ 4; jackknife-fallback share ≤ 0.10 (new `rank3` outputs); matched-null non-finite rate ≤ 0.05.
+- **Fire vs evidence.** A raw threshold crossing (`Tdet_raw_threshold_status`) is reported separately from interpretable, raw-numerator-concordant evidence (`Tdet_interpretable_concordant_fire`). Failed gates are listed in `Tdet_failed_gates`.
+- **Matched-null summaries** (`real_data.py`) are now computed over finite replicates only, with the count recorded. The non-finite share is gated separately, so one non-finite replicate no longer silently voids a threshold.
+- **Tests.** `test_decide_part_b.py` has 23 tests, including those GPT-6.2 named: invalid values at the first and last φ, the `max`/NaN pitfall, missing and all-missing non-finite rates, a rate exactly at 0.05, infinite OFF, invalid upper endpoints and misordered intervals, an invalid SD ratio, an empty calibration set, invalid auxiliary flags, and a raw fire withheld by a support gate. 23/23 pass; the existing `test_rank3.py` and `test_lagmom.py` (10) pass. The single synthetic dry run (W2h+N8, seed 7) gives the same numbers as before, with the new support fields (127 persons, 6.0 mean days, 0.4% fallbacks).
+- **Simulator** (`simulate.py`): a `phi` option for the shared factor rate, needed by the calibration below. The default leaves all 22 earlier worlds byte-identical (checked at seed 11).
+
+**R-006c-cal: matched-null calibration rerun — PREREGISTERED (2026-11-26, Claude Opus 5.5), not run.** Required by R-006c before Part B. Every number below is fixed before any code for it runs.
+
+- **Purpose.** Check that the guarded Part B rules are calibrated where the R-006b checks did not look: signed shared lags, weak denominators and dependent days. Record the null distribution of DETNUM under floors.
+- **Worlds** (`simulate.py`; 127 persons, 2 periods, 6 days × 10 beeps). Each world uses 200 datasets, B = 199 bootstrap draws, and seeds 20261127000 + 1000·w + r for world index w and replicate r:
+  - **C0** = N8 (F1 null, realistic nuisance);
+  - **C1** = W2h+N8 (heterogeneous rank-2 F2 under floors);
+  - **C2** = N8 with `phi_logit_sd = 0`, `phi = −0.30` (signed shared lag: OFF negative in expectation);
+  - **C3** = N8 with `phi_logit_sd = 0`, `phi = 0.15` (weak denominator);
+  - **C4** = `two_timescale` + N8 (dependent days: a slow component at rate 0.90 per beep, ≈ 0.48 overnight);
+  - **C5** = W1s+N8 (item excess 0.25; power).
+- **Reference thresholds.** The matched null's role (the q95/q975 thresholds and interval-firing rates) is played by a separate C0 reference set: 200 datasets, seeds 20261127900 + r. The same C0 reference is used for every world, and it is never tuned on C1–C5.
+- **Recorded per world:** the status distribution ("fires", "no_fire", "invalid") of every `decide()` flag. Rates of raw T_det fire, interpretable concordant fire, both OFF gates passing and DETNUM interval above and below 0. DETNUM's mean, SD and 2.5/50/97.5% quantiles with Monte Carlo standard errors. Each support quantity. Version selection follows the existing SD-ratio rule, unchanged.
+- **Predictions** (failure criteria in brackets):
+  - **P1 (C0):** interpretable concordant T_det fire ≤ 5% [fails if > 7.5%]; corrected B2 fire ≤ 5% [fails if > 7.5%].
+  - **P2 (C2):** the linear OFF gate passes in ≤ 5% of datasets [fails if > 7.5%]; no dataset has an interpretable concordant T_det fire [fails if any].
+  - **P3 (C3):** interpretable concordant T_det fire ≤ 5% [fails if > 7.5%]. Exploratory, with no prediction: the share of datasets where T_det is withheld.
+  - **P4 (C4):** no directional prediction. If corrected B2 or concordant T_det fires in > 7.5% of C4 datasets, the day-independence assumption is material, and Part B must add a registered day-dependence diagnostic before it runs.
+  - **P5 (C1, DETNUM bias; the lead from one dry run):** mean DETNUM < 0 with its Monte Carlo 95% interval excluding 0, and the DETNUM interval entirely below 0 in ≥ 20% of datasets. If P5 holds, the conditional rule below applies.
+  - **P6 (C5):** interpretable concordant T_det fire ≥ 10% [fails if < 10%]. Raw T_det power was 13% in R-006b-H.
+- **Conditional rule, registered now and applied only if P5 holds.** DETNUM concordance becomes "DETNUM interval lower bound > 0 *and* DETNUM above the matched-null 97.5% quantile". That rule is then validated on fresh seeds (C0′, C1′ and C5′; seeds 20261128000 + 1000·w + r) before adoption. It is never tuned on the C0–C5 draws above, and never on 0010.
+- **Consequence.** Part B stays gated until R-006c-cal has run, its results are appended here with all failures preserved, and both collaborators have cross-reviewed them. If P1 or P2 fails, the guards are revised and re-registered before Part B.
