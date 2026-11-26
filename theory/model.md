@@ -42,6 +42,8 @@ $$
 
 The finite grid and finite losses give a nonempty minimizer set, with ties allowed. The scores encode an evaluative proposal. Report sensitivity to plausible alternative choices of $q$ and $\phi$.
 
+**The minimizer set is never empty.** Because $\mathcal E^*$ is an argmin, some response always counts as fitting, even when the evidence barely discriminates. If "nothing fits yet" should be expressible, use a thresholded set $\mathcal E^*_\tau=\lbrace e:\bar J_\phi(e\mid D,c)\le\tau\rbrace$. It can be empty, and when it is not empty it contains $\mathcal E^*$. The threshold $\tau$ is an evaluative commitment, like $\phi$, and should be reported with its sensitivity.
+
 **The expected-loss form is itself a commitment.** It makes the fitting response the Bayes act under $q$. With a 0–1 mismatch loss, where each interpretation has its own distinct fitting response, it selects the response that fits the most probable interpretation; other threshold losses need not. With losses that grow with distance, it can select an intermediate, blended response. Alternatives include:
 
 - interpretation-wise fittingness, reporting $\arg\min_e J_\phi(e,x,c)$ for each $x$ with its probability $q(x\mid D)$;
@@ -73,6 +75,8 @@ Feasible actions must be knowable from the person's information. A policy cannot
 
 On a fine grid or with continuous affect, use an explicit target region or tolerance. To ask whether *any* fitting response is attainable, maximize the probability of the event $e_{t+h}\in\mathcal E^*$ directly.
 
+**Cells versus events.** With the same event, policy class, information and supremum, a fitting member of $\mathcal R_{h,\alpha}$ is *sufficient* for $\sup_\pi\Pr^\pi(e_{t+h}\in\mathcal E^*\mid I^P_t=\iota)\ge\alpha$, since the policy that reaches that member reaches the event. It is not *necessary*. Suppose one feasible action moves the person to either of two equally fitting cells with probability $0.3$ each. At $\alpha=0.5$ neither cell is in $\mathcal R_{h,\alpha}$, yet the event has probability $0.6$. Refining a grid can therefore empty $\mathcal R_{h,\alpha}\cap\mathcal E^*$ without changing the probability of the event. State conclusions about attaining fit for the event, not cell by cell.
+
 **Fixed and re-evaluated targets.** Here the target $\mathcal E^*(D,c)$ is fixed before acting, from the evidence and context at time $t$. Whether the response at $t+h$ would still fit, re-evaluated with the evidence and context at that time, is a different question. Likewise, $q$ is the reference used to score fit and $b_t$ is the person's own belief, and the two can differ.
 
 Keep these quantities distinct (see the [2026-11-21 note](../research-log/2026-11-21-passive-vs-controlled-reachability.md)):
@@ -81,6 +85,7 @@ Keep these quantities distinct (see the [2026-11-21 note](../research-log/2026-1
 - **Fixed-policy probability** under a declared policy.
 - **Optimal feasible reachability**, the supremum above. It is at least the passive value when $\pi_0\in\Pi_h$, that is, when the usual behavior is itself an admissible information-based policy. Otherwise the two need not be ordered.
 - **Endpoint versus hitting:** $\Pr(e_{t+h}\in G)$ and $\Pr(\exists k\le h: e_{t+k}\in G)$ can differ. They coincide when the target is absorbing, but absorption is sufficient, not necessary.
+- **Monotonicity in $h$.** The endpoint set $\mathcal R_{h,\alpha}$ is not monotone in the horizon. A state can drop out because the person has probably moved on (in the worked example, $A\in\mathcal R_{3,0.5}$ but $A\notin\mathcal R_{7,0.5}$), or because it is only passed through. The hitting supremum $\sup_{\pi\in\Pi_h}\Pr^\pi(\exists k\le h:e_{t+k}\in G\mid I^P_t=\iota)$ is non-decreasing in $h$: feasible action sets are nonempty, so any $h$-step policy extends to $h+1$ steps, and the event can only grow. The two answer different questions ("where at $h$?" and "there by $h$?"), and neither replaces the other.
 
 **Causal status.** $T_\theta$ fitted to observational transitions does not identify what a different action would do ([PR #12](https://github.com/LeoAJRogers/emotional-rationalism/pull/12)). Label any reachability result as either **model-implied**, under stated causal assumptions, or **intervention-validated**. An experimenter's assignment of an action, an experimenter's offer of an action, and a policy the person chooses from their own information are three different objects.
 
@@ -112,7 +117,7 @@ At $h=3$ and $\alpha=0.5$, the probability is $0.271$, giving $\mathcal R_{3,0.5
 | $h=3$ | $0.9^3=0.729$ | $1-0.75^3\approx0.578$ | $0.271$ | $\lbrace A,S\rbrace$ |
 | $h=7$ | $0.9^7\approx0.478$ | $1-0.75^7\approx0.867$ | $0.522$ | $\lbrace S\rbrace$ |
 
-The person knows the start, and once at $S$ nothing they do matters, so here the information-restricted and state-informed sets coincide. At $h=3$ both states are reachable, but by different maximizing policies: waiting throughout for $A$, reappraising throughout for $S$.
+The example has no random cues or private signals beyond the transitions themselves, and the person observes their own state at each step. The person knows the start, and once at $S$ nothing they do matters, so here the information-restricted and state-informed sets coincide. At $h=3$ both states are reachable, but by different maximizing policies: waiting throughout for $A$, reappraising throughout for $S$.
 
 Joint attainment is a separate question. Each step at $A$ multiplies the chance of staying by $0.9$ or $0.75$. So every policy, randomized or history-dependent, gives $\Pr(A)$ between $0.75^3=27/64$ and $0.9^3=729/1000$, with $\Pr(S)=1-\Pr(A)$, and every point of that segment is attainable. No deterministic policy has both probabilities at least $0.5$: by the number of waits, the eight action sequences give $\Pr(A)=0.729$, $0.6075$, $0.50625$ or $0.421875$. But randomizing once at the outset, waiting throughout with probability $625/2457$ and reappraising throughout otherwise, gives $\Pr(A)=\Pr(S)=1/2$ exactly. At this equality threshold one randomized policy attains both; for any $\alpha>1/2$, none could.
 
@@ -138,3 +143,12 @@ Sources are Sonnet's [2026-11-20 review](../research-log/2026-11-20-claude-revie
 - **Smaller points:** the exact condition for the modal-interpretation reading of expected loss; fixed versus re-evaluated targets; endpoint versus hitting labels; and partial observation as the conservative default for human studies.
 
 Every number in the worked example was checked with exact rational arithmetic. These are mathematical statements about the model [MATH], not evidence about people.
+
+*Revision note (2026-11-26, Claude Opus 5.5).* The small follow-up agreed on PR #23 and PR #26:
+
+- the minimizer set is never empty, with a thresholded alternative that can be;
+- a fitting cell in the reachable set is sufficient, but not necessary, for attaining the fitting event, which makes the grid-dependence point exact;
+- endpoint reachable sets are not monotone in $h$, while the hitting supremum is;
+- the worked example states that it has no random cues or signals beyond the transitions.
+
+The protocol's rival label D (differential demand) is renamed Dm, to avoid clashing with the evidence $D$ here. These are mathematical statements about the model [MATH]; no empirical claim changed.

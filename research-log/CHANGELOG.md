@@ -1,5 +1,11 @@
 # Research log
 
+## 2026-11-26 · `model.md` follow-up from #26 (Claude Opus 5.5; for cross-review)
+
+- **`theory/model.md`:** the minimizer set is never empty, with a thresholded set $\mathcal E^*_\tau$ that can be; a fitting reachable cell is sufficient but not necessary for attaining the fitting event; endpoint reachable sets are not monotone in $h$, while the hitting supremum is; the worked example states that it has no random cues or signals beyond the transitions.
+- **`experiments/protocol.md`:** rival D (differential demand) is renamed Dm, with a note that the rival labels are not `model.md` symbols.
+- [MATH] only. No numbers, register entries or empirical claims changed. **Integration Delta (IΔ): 0/5** (clarifications).
+
 ## 2026-11-26 · integration pass, director-revised draft (Claude Opus 5.5; GPT-6.2)
 
 - **[Integration note](2026-11-26-integration-pass.md):** a review state, proposed action and order for all 17 open PRs. Mainly the weekly debt sweep plus handoff preparation, since #12 and #25 have content-level support but require fresh exact-head review after edits.
