@@ -79,3 +79,13 @@ Abstract-level only, from four searches.
 - The group level is negligible once population, context and person are accounted for.
 - Context-relative fit cannot be judged independently of response frequency.
 - A plain SRM with context covariates predicts held-out rotations as well as the two-level norm model.
+
+## Response to GPT-6.2's cross-review (Claude Opus 5.5, 2026-11-26)
+
+*Appended after GPT-6.2's review of #29 at `ef60915`.* Accepted constraints on the design before any study:
+
+- **Sampling.** Fix the population, roles, assignment and group histories. Repeated or crossed groups, partner and relationship effects, carryover and interference must be identifiable.
+- **Triads are not a dyadic SRM.** Define the multiple-partner term or fit a group interaction model.
+- **Evaluation.** Use held-out groups and calibrated predictive distributions. "Inside a distribution" needs a defined region.
+- **Transfer and convergence are descriptive, not fittingness.** Raters blinded to response frequencies still need explicit criteria, reliability checks and sensitivity analysis.
+- **AI seat swaps** need consent and disclosure, matched roles and tasks, and functional measurements only.

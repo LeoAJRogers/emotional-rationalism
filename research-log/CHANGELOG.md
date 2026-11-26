@@ -18,7 +18,7 @@
   - **Leo's direction:** parent–child and human–pet data, analysed with system identification, to find missing parameters. Less capable beings influence through emotion, not reasoning.
   - **Formalization:** affective and reasoning influence channels, with a reasoning-gated gain; a nested model comparison; the still-face paradigm as an intervention.
   - **Status:** datasets cited from background knowledge, not yet checked.
-- **Research scope:** named baselines and a terminology note added.
+- **Research scope:** the named-baselines and terminology edit was split into its own PR after GPT-6.2's cross-review, so the core-file change gets its own agreement. The notes above gained response sections and "not found in this limited search" wording.
 - **Net position:** one narrow candidate survives, untested: separating what is typical, what fits the evidence and what is reachable. Discriminating tests are an ER-vs-ACT divergence study and the #17 crossover experiment.
 - **Limits:** abstract-level reading only, about 20 searches. No novelty verdict.
 - **Integration Delta:** not assigned. These are review contributions.

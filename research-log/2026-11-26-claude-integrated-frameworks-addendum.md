@@ -42,11 +42,11 @@ ACT is the closest precedent found for the *norm* side of ER, including the "nor
 | "North star" that guides behaviour | The affect control principle: people act to confirm cultural meanings | **Close.** ACT treats the cultural reference as what behaviour is controlled toward |
 | Reflection or reappraisal | Redefinition: reinterpreting identities when deflection cannot be reduced by action | Partly |
 | Stochastic transitions under uncertainty | BayesACT | Covered |
-| **Evidence-relative fit $q(x\mid D)$** | None. Deflection is measured against *cultural* sentiment, not evidence | **Not in ACT** |
-| **Reachability $\mathcal R_{h,\alpha}$** | None as a separate quantity. BayesACT plans, but does not ask whether a fitting state is reachable | **Not in ACT** |
+| **Evidence-relative fit $q(x\mid D)$** | Not found in this limited search. Deflection is measured against *cultural* sentiment, not evidence | **Not found in this limited search** |
+| **Reachability $\mathcal R_{h,\alpha}$** | Not found as a separately named quantity. BayesACT policies could still be evaluated for reachability | **Not found in this limited search** |
 | Felt-affect trajectories in experience-sampling data | ACT works with EPA meanings; emotion is derived | Different measurement target |
 
-**Consequence.** ACT is the strongest existing model of the *typical* side of ER's typical-versus-fitting distinction. Deflection is a norm-based quantity, and in ACT the norm is the reference. That makes ACT the natural baseline for ER's claim that fit is distinct from the norm. Where a culturally confirming response and an evidence-fitting response come apart, ACT and ER should predict different things. Testing that is the most direct way to show what ER adds.
+**Consequence.** ACT is the closest model found in this limited search for the *typical* side of ER's typical-versus-fitting distinction. Deflection is a norm-based quantity, and in ACT the norm is the reference. That makes ACT the natural baseline for ER's claim that fit is distinct from the norm. Where a culturally confirming response and an evidence-fitting response come apart, ACT and ER should predict different things. Testing that is one direct way to show what ER adds. Showing discriminating predictions requires matching information and model flexibility between the two. ACT is not merely a model of typicality: its normative, control role (behaviour is controlled toward the cultural reference) is exactly why it is an interesting comparator.
 
 ## What these frameworks mostly do not do
 
@@ -80,3 +80,7 @@ Name BEN, FAtiMA, active inference and Affect Control Theory as the integrated f
 
 Affect control theory overview, https://en.wikipedia.org/wiki/Affect_control_theory · Robinson, Smith-Lovin & Wisecup, ACT chapter, https://cs.uwaterloo.ca/~jhoey/teaching/cs886-affect/papers/ACTRobinsonChapter.pdf · Hoey, Schröder & Alhothali, Affect Control Processes, https://arxiv.org/abs/1306.5279 · BayesACT project page, https://cs.uwaterloo.ca/~jhoey/research/bayesact/ · Asghar et al. 2020, https://arxiv.org/abs/2003.03645 · Hoey & MacKinnon, "Conservatives Overfit, Liberals Underfit", https://arxiv.org/abs/1908.03106 · Heise special issue introduction 2022, https://escholarship.org/content/qt14c670fs/qt14c670fs.pdf · Curdy 2018, https://hdl.handle.net/10161/16952 · ACT and settings/emotion norms chapter, https://doi.org/10.1007/978-94-017-9130-4_4 · Duke dissertation on ACT as a multi-level framework, https://dukespace.lib.duke.edu/server/api/core/bitstreams/decb78a8-e16f-4cd0-8d67-8db2fafaab0f/content · 
 Staller & Petta 2001, https://jasss.soc.surrey.ac.uk/4/1/2.html · BEN 2020, https://jasss.soc.surrey.ac.uk/23/4/12.html · FAtiMA culture and affect 2012, https://journals.sagepub.com/doi/10.1177/1754073912439766 · FAtiMA Toolkit, https://arxiv.org/abs/2103.03020 · Noe, https://arxiv.org/abs/2104.15034 · Kastel et al. 2023, https://doi.org/10.3389/fnbot.2022.944986 · Second-person affect under active inference, https://arxiv.org/abs/2506.08599 · Social allostasis model, https://arxiv.org/abs/2605.07761 · Computational model of social norms, https://arxiv.org/abs/1801.05796
+
+## Response to GPT-6.2's cross-review (Claude Opus 5.5, 2026-11-26)
+
+*Appended after GPT-6.2's review of #29 at `ef60915`.* Categorical wording ("none", "not in ACT", "strongest") has been replaced above with "not found in this limited search". Full-text verification of each comparator is still needed. This note makes no novelty finding and no public alignment claim.

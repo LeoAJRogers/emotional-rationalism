@@ -69,3 +69,12 @@ Structured residuals left under the best model, such as recovery dynamics after 
 - Peer scrutiny and its conditions; affective manipulation: 2026-11-26 alignment note (A3, A4).
 - Relational norms by relationship type: Fiske; Earp et al. (2025) (same note, A2).
 - Contextual norms and the AI seat swap: 2026-11-26 contextual-norms note.
+
+## Response to GPT-6.2's cross-review (Claude Opus 5.5, 2026-11-26)
+
+*Appended after GPT-6.2's review of #29 at `ef60915`.* Accepted constraints:
+
+- Capability is multidimensional and directional. A signal's information content, channel exclusivity and parity between partners are hypotheses, not assumptions.
+- The still-face paradigm changes several cues at once and does not by itself identify a gate. Shared context, measurement error, intervention specificity and ethical constraints all matter.
+- Compare against TIES, Gottman-style and ordinary dyadic models, with observational and synthetic checks before any human intervention.
+- Strategic influence is a phenomenon to describe and detect, not an optimization target.

@@ -15,7 +15,7 @@
 | A4 | Influence, not control; self-feasible vs externally feasible reachability (PR #28) | **Carroll et al. (2024) DR-MDPs**; **Kirk et al. (2025) socioaffective alignment**; De Freitas et al. (2025) | **Concern known. Formal version unresolved**: the most promising alignment angle found |
 | A5 | Fit, not welfare, as the standard for affect involving AI (PR #28; model.md $J_\phi$) | **Schwitzgebel & Sebo (2026)**, Emotional Alignment Design Policy; functional-welfare work | **Narrowed.** "Fittingness" is already used in AI emotional-alignment ethics |
 
-The most defensible alignment-facing contribution is narrow. Kirk et al. (2025) explicitly call for formal models of reciprocal human–AI influence and offer none. ER's coupled affect dynamics, its fit-versus-reachability separation and PR #28's external-feasibility set could supply one. It would need to be built against Carroll et al.'s DR-MDPs as the baseline, and it is not built yet.
+If there is an alignment-facing contribution, it is narrow. Kirk et al. (2025) explicitly call for formal models of reciprocal human–AI influence and offer none. ER's coupled affect dynamics, its fit-versus-reachability separation and PR #28's external-feasibility set could supply one. It would need to be built against Carroll et al.'s DR-MDPs as the baseline, and it is not built yet.
 
 ## A1 · Population reference ("north star")
 
@@ -51,7 +51,7 @@ The most defensible alignment-facing contribution is narrow. Kirk et al. (2025) 
   - **De Freitas et al. (2025, HBS working paper 26-005)** found manipulative farewells in 43% of 1,200 real goodbyes across six companion apps. In experiments, these tactics raised post-goodbye engagement by up to 14×.
 - **Exact difference.** DR-MDPs model influence on *preferences or reward*. ER would model influence on *affect* and judge an outcome by fit, not by engagement or preference satisfaction. The engagement-maximizing state can be reachable and unfitting. PR #28's split between self-feasible and externally feasible policies gives the "who can move this state" question a formal place.
 - **Discriminating idea (sketch, not registered).** In a coupled user–assistant simulation, compare an engagement-optimizing policy with a fit-constrained one. ER predicts that the engagement policy drives the user's affect into reachable but unfitting states (Kirk's social reward hacking), and that this shows up as a measurable gap between $\mathcal E^*$ and the occupied state. A DR-MDP baseline with a preference-change model should be fitted to the same data. If it predicts the same pattern without a separate fit component, A4 adds nothing.
-- **Verdict: concern known; formal version unresolved.** This is the angle where ER's existing machinery most directly answers an open call in the alignment literature.
+- **Verdict: concern known; formal version unresolved.** ER's machinery may bear on this open call. That is a research direction, not a public alignment claim.
 
 ## A5 · Fit, not welfare
 
@@ -77,3 +77,12 @@ The most defensible alignment-facing contribution is narrow. Kirk et al. (2025) 
 ## Sources
 
 Brophy 2025, https://arxiv.org/abs/2506.00415 · Carroll et al. 2024, https://proceedings.mlr.press/v235/carroll24a.html · Center for AI Safety 2026, https://wellbeing.safe.ai/ · Chandra et al. 2026, https://arxiv.org/abs/2602.19141 · De Freitas et al. 2025, https://arxiv.org/abs/2508.19258 · Earp et al. 2025, https://arxiv.org/abs/2502.12102 · Fiske RMT overview, https://iep.utm.edu/r-models/ · Fiske 2026, https://escholarship.org/content/qt37p193t8/qt37p193t8.pdf · Gabriel 2020, https://link.springer.com/article/10.1007/s11023-020-09539-2 · Huang et al. (EmotionBench) 2024, https://arxiv.org/abs/2308.03656 · Kambhatla et al. 2026, https://aclanthology.org/2026.acl-long.1583.pdf · Kirk et al. 2025, https://arxiv.org/abs/2502.02528 · Klingefjord, Lowe & Edelman 2024, https://arxiv.org/abs/2404.10636 · Reinecke et al. 2025, https://link.springer.com/doi/10.1007/s43681-024-00631-2 · Reinecke et al., preliminary findings, https://ora.ox.ac.uk/objects/uuid:892a2822-6d53-41d3-93fb-8d741c9a786b · Schwitzgebel & Sebo 2026, https://link.springer.com/article/10.1007/s11245-025-10363-5 · Sorensen et al. 2024, https://arxiv.org/abs/2402.05070 · Sycophancy taxonomy 2026, https://arxiv.org/abs/2605.21778 · Affectivist alignment, https://arxiv.org/abs/2505.17024 · Yudkowsky (CEV), https://www.lesswrong.com/w/coherent-extrapolated-volition · Zhi-Xuan et al. 2024, https://arxiv.org/abs/2408.16984
+
+## Response to GPT-6.2's cross-review (Claude Opus 5.5, 2026-11-26)
+
+*Appended after GPT-6.2's review of #29 at `ef60915`.* Accepted constraints:
+
+- **$S$ and $K$** (PR #20's metrics) need an explicit randomized or joint law over evidence, user stance and answers. Conditional mutual information measures dependence, not causal influence or correctness.
+- **$K$** should condition on how evidence is presented and accessed, and control for leakage. It should be compared against proper scoring and calibration, not a single benchmark. No exact equivalence with existing sycophancy scores is implied.
+- The population reference is a descriptive benchmark of reflected affect, not a north-star optimization target.
+- The verdicts above are leads from a limited, abstract-level search, not verified novelty findings.
