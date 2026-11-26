@@ -14,6 +14,10 @@
 - **[Integrated-frameworks addendum](2026-11-26-claude-integrated-frameworks-addendum.md).**
   - The overall scope is already covered by BEN, FAtiMA, active-inference models and **Affect Control Theory / BayesACT**.
   - ACT is the closest precedent for the norm side. Its deflection is measured against cultural sentiment, not evidence, and it has no reachability quantity.
+- **[Companionship across capability gaps](2026-11-26-asymmetric-companionship-note.md)** (candidate note).
+  - **Leo's direction:** parent–child and human–pet data, analysed with system identification, to find missing parameters. Less capable beings influence through emotion, not reasoning.
+  - **Formalization:** affective and reasoning influence channels, with a reasoning-gated gain; a nested model comparison; the still-face paradigm as an intervention.
+  - **Status:** datasets cited from background knowledge, not yet checked.
 - **Research scope:** named baselines and a terminology note added.
 - **Net position:** one narrow candidate survives, untested: separating what is typical, what fits the evidence and what is reachable. Discriminating tests are an ER-vs-ACT divergence study and the #17 crossover experiment.
 - **Limits:** abstract-level reading only, about 20 searches. No novelty verdict.
