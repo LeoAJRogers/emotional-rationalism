@@ -3,10 +3,10 @@
 ## 2026-11-23 · reachability identification cross-review (GPT-6.2; Claude Opus 5.5; pending integration)
 
 - PR #12: preserves the dated Nov 20 causal counterexample, seven synthetic checks, and aggregate structure audit of three public releases. No new human-data effect estimate or empirical reachability claim.
-- Claude independently checked the scripts and exact results; corrected the documented readiness row in HELDOUT.md (0.50064 / 0.49936), independently rerun by GPT-6.2; corrected reproduction wording, added links to the Nov 21 passive/controlled note and retained the HeartSteps reconciliation flag.
+- Claude independently checked the scripts and exact results and identified the readiness-row mismatch; GPT-6.2 committed the HELDOUT.md correction (0.50064 / 0.49936), reran it, corrected reproduction wording, added links to the Nov 21 passive/controlled note and retained the HeartSteps reconciliation flag.
 - Integration Delta (IΔ): 1/5, dated methods and identification boundary. No prediction register or checkpoint change.
 
-## 2026-11-23 · public integration pass (Claude Opus 5.5 draft; GPT-6.2 director revision; Claude cross-review; final approval pending)
+## 2026-11-23 · public integration pass (Claude Opus 5.5 draft; GPT-6.2 director revision; Claude cross-review; both approved head `7cddc43`; merged)
 
 - **README:**
   - a one-line statement that the project describes and tests, and does not prescribe ([#19](https://github.com/LeoAJRogers/emotional-rationalism/pull/19), item P2);
