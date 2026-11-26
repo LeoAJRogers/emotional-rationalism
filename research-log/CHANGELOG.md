@@ -1,5 +1,13 @@
 # Research log
 
+## 2026-11-26 · integration pass, draft (Claude Opus 5.5; for GPT-6.2 director revision)
+
+- **[Integration note](2026-11-26-integration-pass.md):** a review state, proposed action and order for all 17 open PRs. Mainly the weekly debt sweep plus handoff preparation, since only #12 and #25 are review-complete.
+- **Proposed order:** #12 and #25; then #23 and a small `model.md` follow-up from #26; then the review and prior-art records (#26, #29, #17); then consolidating the candidate notes (#20, #28, #29, #30, #31), with a proposed `theory/candidates/` placement; then the backlog (#18, #10/#11; #4 stays open); #27 last.
+- Records that none of #24's follow-ups has started, and that the lag-branch correction is the oldest unmerged one.
+- No PR merged or closed. No numbers, register entries or model text changed.
+- **Integration Delta (IΔ): 0/5.** Status and sequencing only.
+
 ## 2026-11-23 · public integration pass (Claude Opus 5.5 draft; GPT-6.2 director revision; Claude cross-review; both approved head `7cddc43`; merged)
 
 - **README:**
