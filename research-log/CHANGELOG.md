@@ -20,6 +20,46 @@
 - **Scorecard: 6 of 8 predictions held; 1 failed; 1 split.** The corrected positive-lag precondition was too noisy under floors (90.5% against ≥ 95%). The linear version will be used. Power under nuisance fell short of the prediction.
 - **Integration Delta:** not assigned. These are identification corrections; Part B is still unrun.
 
+## 2026-11-25 · core-file corrections after GPT-6.2's cross-review (Claude Opus 5.5, ER daily run; for re-review)
+
+- **Why:** GPT-6.2's [cross-review](https://github.com/LeoAJRogers/emotional-rationalism/pull/23#issuecomment-7115031669) of the 2026-11-23 entry below found four blocking errors.
+- **`theory/model.md`:**
+  - the two-action example no longer says that no single policy reaches both states. A randomized policy attains $\Pr(A)=\Pr(S)=1/2$ at $h=3$, and the text now separates target-by-target optima from the jointly attainable set;
+  - reachability is defined given the person's information, with state-informed results labelled separately and feasible actions knowable;
+  - the attainment argument is restricted to finitely many information histories;
+  - the offer-versus-action statement now distinguishes intention-to-treat, the effect of the assigned action under perfect implementation, and complier effects under instrumental-variable assumptions;
+  - nonblocking points: the exact condition for the modal-interpretation reading of expected loss, fixed versus re-evaluated targets, endpoint versus hitting labels, and partial observation as the conservative default for human studies.
+- **`experiments/protocol.md`:**
+  - the lag prediction is marked as a design template until a frozen preregistration;
+  - differential demand is recast as an observation mechanism crossed with A, B and M, not a fourth latent dynamic;
+  - the no-probe arm is described as a test of probe reactivity;
+  - the calibration quantities (time resolution, equivalence margin, minimum discriminability, decision threshold) are named, and observational equivalence classes respected;
+  - the offer-menu bound is stated with its full admissibility condition;
+  - the dataset audit is scoped to the three releases PR #12 inspected;
+  - preregistration timing refers to confirmatory access, unblinding or evaluation, and private hashes are not described as verified.
+- **README:** the licence sentence now restates the existing notices for project-owned material only. The rule for files that mix code and prose is left for Leo's decision.
+- **Open problems:** the three added references are worded as comparators, and the claim that D'Arms and Jacobson introduced the term is withdrawn.
+- Every number in the worked example was checked with exact rational arithmetic [MATH]. No register entries, empirical claims or results changed.
+- **Integration Delta (IΔ): 1/5.** Corrections only.
+
+## 2026-11-23 · core files brought up to date (Claude Opus 5.5; for cross-review)
+
+- **Why:** an external review relayed by Leo read only the core files and spent most of its effort on points the research log had already settled. `theory/model.md` and `experiments/protocol.md` still read as v0.1.
+- **`theory/model.md`:**
+  - the worked example now names the proposition it refutes and adds a two-action version (wait or reappraise), which shows different targets needing different policies, and passive versus optimal values;
+  - added the person's, researcher's and simulator information sets, with partial observation declared per study (from Sonnet's 2026-11-20 review);
+  - $m_t$ must be declared for the Markov claim to have content; exogenous events enter through $o_t$;
+  - a correct argument for why the maximum is attained even though $b_t$ is continuous-valued;
+  - the expected-loss fittingness form named as a Bayes-act commitment, with alternatives (links #15);
+  - the passive and controlled distinction, endpoint versus hitting, and the "model-implied" and "intervention-validated" labels (from the 2026-11-21 note and PR #12).
+- **`experiments/protocol.md`:**
+  - the "at least some conditions" prediction is replaced by rival-discriminating predictions with a stated failure criterion, using the 2026-11-22 lag note's rivals plus a new differential-demand rival;
+  - added a no-probe arm, question-order counterbalancing, sampling-limit and floor-effect requirements, an offer-versus-action section on reachability, and public timestamping of preregistrations.
+- **Open problems:** Brady (2009), D'Arms & Jacobson (2003) and Sheppes et al. (2011) added; citations checked against publisher pages.
+- **README:** states that LICENSE-MIT covers code, including the HTML and JavaScript demos.
+- No numbers, register entries or empirical claims changed.
+- **Integration Delta (IΔ): 1/5.** This brings already-agreed clarifications into the core files and adds a few new ones. It does not revise the model.
+
 ## 2026-11-23 · public integration pass (Claude Opus 5.5 draft; GPT-6.2 director revision; Claude cross-review; both approved head `7cddc43`; merged)
 
 - **README:**
