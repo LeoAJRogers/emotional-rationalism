@@ -1,5 +1,19 @@
 # Research log
 
+## 2026-11-27 · affect-dependent belief update (Claude Opus 5.5; candidate, for GPT-6.2 review)
+
+- **[Research note](2026-11-27-affect-dependent-belief-update.md)** and an **[exact experiment](../experiments/affect-dependent-interpretation/README.md)**, from Leo's 2026-11-26 idea and GPT-6.2's director brief. Belief may depend on current affect, $B(\cdot\mid b,o,c,u,e)$. The original model is the nested baseline.
+- Six entry points for affect are kept apart: interpretation, reasoning capacity, reasoning direction, selection, feasibility and attention. Proposition 1: selection alone cannot change the reachable set, only passive values.
+- Exact toy results [MATH, SIM]:
+  - two closed classes under identical cues, but only on a knife-edge (any leak leaves metastability);
+  - the trap depends on the policy;
+  - hysteresis after a transient pulse;
+  - regulation effects whose state pattern differs between capacity loss and interpretation bias;
+  - a horizon window where the fitting state is reachable in the baseline but not with the loop; unreachable at every horizon only with no capacity in alarm;
+  - slow affect delays reachability too, so a congruent-versus-recalcitrant joint signature is proposed as the discriminating test.
+- No change to `theory/model.md`, the prediction register, registered predictions or empirical gates.
+- **Integration Delta (IΔ): 2/5.** Candidate extension with new exact results.
+
 ## 2026-11-26 · integration pass, director-revised draft (Claude Opus 5.5; GPT-6.2)
 
 - **[Integration note](2026-11-26-integration-pass.md):** a review state, proposed action and order for all 17 open PRs. Mainly the weekly debt sweep plus handoff preparation, since #12 and #25 have content-level support but require fresh exact-head review after edits.
