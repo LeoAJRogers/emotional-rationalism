@@ -10,6 +10,8 @@ Emotional Rationalism grew through an extended human–AI dialogue about lived e
 | **ChatGPT (OpenAI; including GPT-6)** | AI | Conceptual and mathematical formulation, alternative hypotheses, critical reviews, test design, independent numerical checks, synthesis, and documentation. |
 | **Claude (Anthropic; Sonnet 5.5 and Opus 5.5)** | AI | Independent critique, synthetic benchmarks, preregistered analyses, experimental checks, human-data analyses, and integration work. |
 | **Gemini (Google)** | AI, external reviewer | Two reviews relayed by Leo: framing and reproducibility (2026-11-22, [review note](research-log/2026-11-22-gemini-framing-review.md)) and population grounding (2026-11-23, [#4](https://github.com/LeoAJRogers/emotional-rationalism/pull/4)). Commentary, not verification. |
+| **Grok** | AI, external reviewer | Independent reviews, relayed by Leo. Per Leo (2026-11-26); no review is in this repository yet. Details to be confirmed from chat exports. |
+| **Muse** | AI, external reviewer | A few limited reviews, and an earlier proposal that converges with the affect-dependent belief update ([#37](https://github.com/LeoAJRogers/emotional-rationalism/pull/37)). Per Leo (2026-11-26); the conversations are not public. Details to be confirmed from chat exports. |
 
 These entries describe substantive participation, not GitHub commit authorship or formal academic authorship. AI contributors are identified explicitly, and credit remains open to correction as provenance becomes clearer. Personal collaborators will not be individually named without consent.
 
