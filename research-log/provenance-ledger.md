@@ -35,9 +35,11 @@ Provenance also matters for method. The collaborators can reinforce each other's
 | P-006 | Release gate before any claim of public reproducibility | Gemini (relayed by Leo) | | not passed | | `record` | [review note](2026-11-22-gemini-framing-review.md#proposed-public-reproducibility-release-gate) |
 | P-007 | Emotional influence in shared spaces across observer types: does disagreement affect me, or only what I know? | Leo | Claude Opus 5.5 | | GPT-6.2 (revision requested) | `record` (PR body) | [#31](https://github.com/LeoAJRogers/emotional-rationalism/pull/31) |
 | P-008 | Equal credit across observer types as a working principle (this file) | Leo raised it; Claude proposed the commitment-not-finding framing | Claude Opus 5.5 | | | `stated` (Claude chat, 2026-11-26) | this PR |
+| P-009 | Affect-dependent belief update: current emotional state changes how the same context is read, and reasoning can correct, double down or leave it unchanged | Leo (Claude chat, 2026-11-26); Muse raised a converging proposal earlier, per GPT-6.2 and Leo | Claude Opus 5.5 | Claude Opus 5.5 (exact toy model) | GPT-6.2 review pending | Leo's origin and the formalization: `record` ([#37](https://github.com/LeoAJRogers/emotional-rationalism/pull/37)). Muse's proposal: `stated` (Leo, 2026-11-26: an earlier conversation, not public) | [#37](https://github.com/LeoAJRogers/emotional-rationalism/pull/37) and its provenance comment |
 
 ## Open tracing work
 
 - P-001 to P-003: Leo has said earlier evidence exists in his GPT chat logs and possibly in a private group chat going back to about 2012. Both are private. They become `record` only if Leo chooses to share a dated excerpt. Otherwise they stay as they are, which is acceptable.
 - P-003: find who first wrote the delayed-reply example into the repository, and who built `interactive.html`.
+- **Grok and Muse.** Leo reports (2026-11-26) that Grok has done some independent reviews and Muse a few limited ones. He does not remember the specifics. Both are `stated` until the reviews are found in chat exports or relayed notes. Then add an entry per idea they originated, critiqued or checked.
 - Backfill the remaining theory notes and open PRs (#13, #14, #17, #20, #26–#30) from their author lines and review threads.
