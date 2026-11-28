@@ -405,3 +405,54 @@ The checks:
 - **P5** decides nothing about R-006's claims. It only informs which sensitivity statistic would suit Part B, a denominator guard or a person-trimmed T1. Either would be registered separately, if at all.
 
 **Outcome:** *(to be appended after the run)*
+
+**Outcome (appended 2026-11-28, after the run; the prediction text above is unchanged).** The run took 2,072 s on two cores, with CPython 3.13.18, NumPy 2.5.3 and SciPy 1.18.1. Per-replicate values and the summary are in `experiments/r006-cross-implementation/results/n3h_parity.json`.
+
+- **P1 held.** #13's stored N3h rows regenerate: 200/200 in both versions, point estimates and 95% intervals, with matching seeds.
+- **P2 held.** #14's stored N3h summary regenerates exactly:
+  - 2 fires and 8 linear fires;
+  - the mean (−0.07830577067017014) and SD (0.2634538143690911) are bit-identical;
+  - the linear mean agrees within 1.3e-18.
+- **P3 failed on its count and held on its mechanism.**
+  - Linear parity: 400/400, with a largest difference of 4.2e-15.
+  - Corrected parity: **388/400**, short of the 390 predicted. That is 193 on #13's data and 195 on #14's, with a largest difference of 0.0084.
+  - All 12 exceptions come from the Newton cap. With #13's solver capped at 40 iterations, the two estimators agree within tolerance on 400/400.
+  - At 50 iterations, #13 matches its own 200-iteration result within 2.1e-14 on all 400 datasets. So #13's solves have converged, and #14's 40-iteration solves have not, in 12 datasets.
+- **P4 failed in part.** For corrected T1, either estimator gives the same distributions. Comparing #14's simulated data with #13's:
+  - **Median:** −0.1047 against −0.0501. The difference is −0.055, with 95% CI [−0.087, −0.009]. Failed.
+  - **KS:** D = 0.14, p = 0.040. Failed.
+  - **10%-trimmed mean:** the difference is −0.038, with CI [−0.082, +0.006]. Held.
+  - **Pearson kurtosis:** 12.6 and 33.1, both above 8. Held.
+  - For linear T1 nothing differs: the median CI is [−0.046, +0.016] and the KS p = 0.27.
+- **P5 held.**
+  - Spearman(|T1 − median|, denominator) = −0.34 on #13's data and −0.40 on #14's.
+  - In the 5% most extreme replicates, the median denominator is 53 (#13) and 89 (#14), against 121 and 124 overall.
+  - The single-person rival was weak: Spearman 0.03 and 0.17.
+
+**Decisions applied**
+
+- **P3 branch: cause located.**
+  - It is #14's 40-iteration Newton cap, not a difference in definitions. Under the rule, corrected T1 is not yet reproduced across implementations at the published code. That changes once #14 raises its cap or adds a convergence check, since with the caps aligned, parity is exact on 400/400.
+  - The effect cannot explain the mean discrepancy: it is at most 12 × 0.0084 / 200 ≈ 0.0005.
+  - R-006c's linear-primary exception already covers the heavy-floor regime where the effect appeared: the corrected SD is 0.26–0.34 against 0.11–0.12 linear, a ratio above 1.5. #13's own solver converged on all 400 datasets. No new Part B guard is required. A convergence flag in #13's solver remains a cheap option.
+- **P4 branch: the prescribed simulator comparison finds no difference.**
+  - `sim_marginals.py`, with 500 seeds per simulator and 22 statistics, chosen after the run, so exploratory. It compares:
+    - completeness by period;
+    - category shares;
+    - the spread of floor rates across person-periods;
+    - the share of person-periods at a floor rate of 95% or more;
+    - lag-1 autocorrelation for each item;
+    - cross-item correlations at lags 0 and 1.
+  - Every |z| is below 1.6.
+  - So no simulator difference was found. The median shift is most likely sampling variation, but that is not yet shown. The fresh-seed replication below tests it.
+
+**Follow-up R-006d-r (registered after the run above and before the replication)**
+
+- **Test.** `experiments/r006-cross-implementation/fresh_seeds.py`: corrected T1 with #13's estimator on replicates 200–799 of each simulator, 600 each, with new seeds by each branch's own rule.
+  - It uses lag 1 only. For T1 that is bit-identical to lags 0–3, checked on two datasets.
+- **Prediction.** The median difference (#14's data minus #13's) has a 95% bootstrap interval that includes 0, and a point estimate within ±0.025.
+- **Decision.**
+  - If it holds, the shift in replicates 0–199 was sampling variation, and #14's "not matching sampling distributions" has no support.
+  - If the interval excludes 0 again, the simulators differ in something the 22 marginals miss. A seed-level investigation follows.
+
+**Outcome of R-006d-r:** *(to be appended after the run)*
