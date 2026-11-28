@@ -1,0 +1,109 @@
+{
+  "scope": "Independent T1-only synthetic calibration; six declared worlds; NO human data; 200 replicates per world; 199 person-bootstrap draws",
+  "date": "2026-11-21",
+  "seed": "100000*(index_in_[W0,N3,N3h,N8,W1s+N8,W1w+N8]+1)+rep with rep=0..199",
+  "source": "experiments/r006-independent-validation/calibrate_t1_independent.py",
+  "data": {
+    "W0": {
+      "n": 200,
+      "fires": 4,
+      "rate": 0.02,
+      "mean": -0.004150692141481641,
+      "sd": 0.023634005686198195,
+      "ci95_wilson": [
+        0.007804426416349465,
+        0.05028708690582644
+      ]
+    },
+    "N3": {
+      "n": 200,
+      "fires": 3,
+      "rate": 0.015,
+      "mean": -0.017621992982812237,
+      "sd": 0.05682946041560115,
+      "ci95_wilson": [
+        0.00511423779325831,
+        0.04316572879269026
+      ],
+      "linear_fires": 12,
+      "linear_mean": 0.018362208399289846
+    },
+    "N3h": {
+      "n": 200,
+      "fires": 2,
+      "rate": 0.01,
+      "mean": -0.07830577067017014,
+      "sd": 0.2634538143690911,
+      "ci95_wilson": [
+        0.002746658133544435,
+        0.0357217617161768
+      ],
+      "linear_fires": 8,
+      "linear_mean": 0.0018334700587987341
+    },
+    "N8": {
+      "n": 200,
+      "fires": 5,
+      "rate": 0.025,
+      "mean": -0.010192151352765699,
+      "sd": 0.060799154225450645,
+      "ci95_wilson": [
+        0.010724719651761264,
+        0.05717834040664198
+      ],
+      "linear_fires": 12,
+      "linear_mean": 0.027590849457742882
+    },
+    "W1s+N8": {
+      "n": 200,
+      "fires": 193,
+      "rate": 0.965,
+      "mean": 0.27214654807000804,
+      "sd": 0.08517961046457002,
+      "ci95_wilson": [
+        0.9295293884777092,
+        0.9829444579914328
+      ],
+      "linear_fires": 199,
+      "linear_mean": 0.3098694432838541
+    },
+    "W1w+N8": {
+      "n": 200,
+      "fires": 58,
+      "rate": 0.29,
+      "mean": 0.08908508077068449,
+      "sd": 0.07109325236116319,
+      "ci95_wilson": [
+        0.23154025607067882,
+        0.3563747810077731
+      ],
+      "linear_fires": 116,
+      "linear_mean": 0.12870309662037865
+    },
+    "N6": {
+      "n": 200,
+      "fires": 186,
+      "rate": 0.93,
+      "mean": 0.08749457151897491,
+      "sd": 0.02666602392248634,
+      "ci95_wilson": [
+        0.8859451911438936,
+        0.9578478281716571
+      ],
+      "interpretation": "Non-item-memory day-loading drift; spurious mechanism signal under broken loading-stability assumption"
+    },
+    "N7": {
+      "n": 200,
+      "fires": 200,
+      "rate": 1,
+      "mean": 0.24890345734156497,
+      "sd": 0.023693294378129847,
+      "ci95_wilson": [
+        0.9811546736227335,
+        1
+      ],
+      "interpretation": "Non-item-memory response anchoring; observational mechanism confound"
+    }
+  },
+  "scope_note": "Initial six worlds are a T1 calibration subset. Two additional adversarial no-item-memory worlds (N6 day-varying loadings; N7 response anchoring) intentionally violate fixed-loading/independent-response assumptions and should not be counted as nominal F1 nulls."
+}
