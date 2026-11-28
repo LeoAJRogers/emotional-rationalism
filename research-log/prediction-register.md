@@ -356,3 +356,52 @@ Log score per observation, 95% person-bootstrap CIs, PA / NA:
    - "More than half" is **not** established at 95% for either outcome, and NA is close to the boundary.
 4. **Stage 2 is non-detection, not absence.** Neither flag fired, so the preregistered decision stands: the two-timescale reading is retired *as a claim for this dataset*. A small within-period slow or day-level component below this benchmark's power is not excluded.
 5. **Design note for R-005.** The file pads each period to 10 days, but the protocol ran 6. Against 6 × 10 beeps, completeness is 77% in period 0 and 70% in period 1, with a median of 48 of 60 per person-period. That is inside R-005's synthetic 67–86% range. GPT-6's "48% complete" divides by the padded grid. The power shortfall in #44 therefore comes from shorter series (6 days rather than 10), not from heavier missingness.
+
+---
+
+## R-006d · 2026-11-28 · Claude Opus 5.5 (scheduled ER daily run)
+
+**Where this entry sits.** R-006, its amendments R-006a to R-006c and R-006c-cal live on ER #13's branch, not on `main`. This entry is on `claude/2026-11-28-r006-n3h-parity`, branched from `main` at `da9e1d6`, so that its commit predates the run. Whoever integrates #13 can move it after R-006c-cal.
+
+**Claim under test (methods; synthetic only).** Claude's 2026-11-23 reply on #14: the N3h corrected-T1 mean difference between #13 (−0.0263, SD 0.3389, n = 200) and #14 (−0.0783, SD 0.2635, n = 200) is sampling variation in a heavy-tailed distribution, not an implementation difference. #14's report calls the two "not matching sampling distributions".
+
+**Known before writing**
+
+- From the published summaries alone, a Welch z for the mean difference is −1.71 (two-sided p ≈ 0.09).
+- #13's N3h corrected distribution, from the 11-23 reply: median −0.050, 10%-trimmed mean −0.049, minimum −1.41, maximum +2.92, Pearson kurtosis 32.
+- A code reading of both branches, before this entry:
+  - For the three NA items, the N3h data-generating processes match in distribution.
+  - The two estimators match term by term, with one exception. #14's Newton solve stops after 40 iterations and checks convergence within each leave-one-day-out version. #13's stops after 50 and checks across all versions together.
+  - The bootstrap count (199 against 499) does not enter the point estimate.
+- A two-replicate smoke test on world N3, not N3h: both estimators agree on the same data to 4e-14, and #13's stored N3 values regenerate at printed precision. **No N3h quantity was computed before this entry was pushed.**
+
+**Test.** `experiments/r006-cross-implementation/n3h_parity.py`, in this commit, run once on N3h.
+
+- 200 replicates per simulator, with the seeds each branch used: #13 uses 1,200,000 + rep and #14 uses 300,000 + rep.
+- Both code trees are imported unmodified from `git archive` exports of #13 at `8bf4650` and #14 at `358abdd`.
+- Every dataset is analysed by both estimators, corrected and linear.
+
+The checks:
+
+- **E0a.** #13's stored N3h `w_T1` values (corrected and linear), with their 95% intervals, regenerate at their printed five-significant-figure precision.
+- **E0b.** #14's stored N3h summary regenerates: fires, mean, SD, linear fires and linear mean.
+- **E1, estimator parity.** |T1(#13) − T1(#14)| on the same dataset, with tolerance max(1e-8, 1e-8·|T1|). #13's estimator is also run with its solver capped at 40 and at 200 iterations.
+- **E2, distributions.** #14's simulated data against #13's, under each estimator. Medians and 10%-trimmed means, each with a two-sample bootstrap 95% interval (10,000 resamples, seed 20261128); Welch z; two-sample KS test.
+- **E3, tail mechanism.** Across replicates, the Spearman correlation between |T1 − median| and the pooled denominator, and between |T1 − median| and the largest single person's share of the numerator's absolute mass.
+
+**Predictions**
+
+- **P1 (E0a).** 200/200 for both versions, point estimates and intervals. Named risk: a change in NumPy's random streams since 11-21.
+- **P2 (E0b).** Exact: 2 fires and 8 linear fires, and the mean, SD and linear mean equal to the stored floats within 1e-9.
+- **P3 (E1).** Linear parity in 400/400 datasets. Corrected parity in at least 390/400. Any exceptions come from Newton solves that have not converged, and capping #13's solver at 40 iterations removes them.
+- **P4 (E2).** For corrected T1, under either estimator, the 95% intervals for the median difference and for the trimmed-mean difference both include 0, and the KS p-value exceeds 0.05. Both samples have Pearson kurtosis above 8.
+- **P5 (E3).** This is the 11-23 conjecture, now held with low confidence. An extreme T1 goes with a small pooled denominator: Spearman(|T1 − median|, denominator) ≤ −0.2 in both simulators' data. The rival is single-person dominance: the correction can inflate one person's numerator and denominator together. That would show as Spearman(|T1 − median|, top-person share) ≥ +0.2, with the denominator not small.
+
+**Counts against / decision rule**
+
+- **P3 and P4 hold.** The discrepancy is sampling variation. #14's sentence should then read "no detected difference; the two estimators agree to 1e-8 on the same datasets". For the release inventory (#39), R-006 T1 under N3h counts as reproduced across implementations, dataset by dataset. No R-006 claim changes.
+- **P3 fails.** I locate the first intermediate quantity that differs and report it on #13 and #14 as a parity defect. R-006 T1 is then not reproduced across implementations until it is fixed. If the cause is Newton non-convergence, I check whether R-006c's linear-primary exception for unstable corrected statistics already covers the affected datasets. If it does not, a guard for unconverged solves is preregistered before any Part B run.
+- **P3 holds and P4 fails.** The simulators differ in distribution. I compare their floor rates, completeness and lag-1 autocorrelations to find where.
+- **P5** decides nothing about R-006's claims. It only informs which sensitivity statistic would suit Part B, a denominator guard or a person-trimmed T1. Either would be registered separately, if at all.
+
+**Outcome:** *(to be appended after the run)*
