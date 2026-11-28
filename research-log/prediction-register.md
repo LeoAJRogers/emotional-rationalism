@@ -456,3 +456,23 @@ The checks:
   - If the interval excludes 0 again, the simulators differ in something the 22 marginals miss. A seed-level investigation follows.
 
 **Outcome of R-006d-r:** *(to be appended after the run)*
+
+**Outcome of R-006d-r (appended 2026-11-28, after the run; nothing above is edited).** **Held.** The results are in `experiments/r006-cross-implementation/results/n3h_fresh_seeds.json`.
+
+- On 600 fresh replicates per simulator, the median difference (#14's data minus #13's) is **+0.018**, with 95% CI [−0.005, +0.042]. Its sign is reversed from replicates 0–199.
+- The 10%-trimmed-mean difference is +0.022, with CI [−0.001, +0.044]. KS p = 0.12.
+- The means also reversed: −0.081 (#13's simulator) against −0.055 (#14's).
+- **Pooled over replicates 0–799**, with #13's estimator on both:
+
+  | Simulator | Median | Mean | KS p | Welch z | Pearson kurtosis | Min |
+  | --- | --- | --- | --- | --- | --- | --- |
+  | #13 | −0.0726 | −0.067 | 0.47 | 0.27 | 252 | −9.3 |
+  | #14 | −0.0725 | −0.061 | | | 141 | −8.0 |
+
+  (KS p and Welch z compare the two simulators.)
+
+**Decision applied.** The shift in replicates 0–199 was sampling variation. #14's "not matching sampling distributions" has no support.
+
+- Under N3h, the corrected T1 is so heavy-tailed that means and SDs from 200 replicates are unstable summaries. The SD for replicates 200–799 was 0.47–0.54, against 0.26–0.34 for 0–199. Medians are stable at about −0.07.
+- Combined with P3, one numerical difference remains between the implementations: #14's Newton cap, which is small. Nothing else differs.
+- **Recommendation, not a registered rule:** for ordinal worlds with heavy floors, report corrected-T1 medians alongside means.
